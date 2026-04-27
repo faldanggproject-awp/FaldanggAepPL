@@ -1,13 +1,59 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
-    <title>Faldangg.aep | Price List</title>
+    
+    <!-- Judul & Meta Dasar -->
+    <title>Faldangg.aep | Video Editor Price List</title>
+    <meta name="description" content="Jasa editing video profesional oleh Faldangg.aep. Transform Your Footage From Raw To Wow." />
+    
+    <!-- Open Graph / Facebook (Agar preview link di WA/IG keren) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://faldanggaeppl.online/" />
+    <meta property="og:title" content="Faldangg.aep | Video Editor Price List" />
+    <meta property="og:description" content="Daftar harga dan layanan editing video profesional. Kualitas visual terbaik!." />
+    <meta property="og:image" content="https://faldanggaeppl.online/og-image.jpg" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="Faldangg.aep | Video Editor Price List" />
+    <meta property="twitter:description" content="Transform Your Footage From Raw To Wow." />
+
+    <!-- Google Fonts: Plus Jakarta Sans (Font Premium) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            },
+          },
+        },
+      }
+    </script>
+
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      /* Mencegah scroll horizontal yang tidak diinginkan */
+      body {
+        overflow-x: hidden;
+      }
+    </style>
   </head>
   <body>
+    <!-- Wadah utama untuk aplikasi React -->
     <div id="root"></div>
+    
+    <!-- Memanggil file logika website kamu -->
     <script type="module" src="/App.jsx"></script>
   </body>
 </html>
