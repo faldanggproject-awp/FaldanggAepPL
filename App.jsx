@@ -99,9 +99,9 @@ const App = () => {
   ];
 
   const faqs = [
-    { q: "Berapa lama proses pengerjaannya?", a: "Proses pengerjaan biasanya selesai dalam 2-3 hari kerja tergantung antrian." },
-    { q: "Bagaimana cara mengirim file mentahnya?", a: "Anda bisa mengirimkan file Raw melalui Google Drive, WeTransfer, atau Dropbox. Pastikan akses link dibuka untuk publik." },
-    { q: "Apakah sudah termasuk revisi?", a: "Ya, setiap paket sudah termasuk kuota revisi gratis sesuai deskripsi paket." }
+    { q: "Berapa lama proses pengerjaannya?", a: "Proses pengerjaan biasanya selesai dalam 2-3 hari kerja ya brow." },
+    { q: "Bagaimana cara mengirim file mentahnya?", a: "Anda bisa mengirimkan file Raw melalui Google Drive, WeTransfer, atau Dropbox. Pastikan akses link dibuka untuk publik ya Brow." },
+    { q: "Apakah sudah termasuk revisi?", a: "Ya, setiap paket sudah termasuk kuota revisi Minor gratis sesuai deskripsi paket." }
   ];
 
   const toggleFaq = (index) => {
@@ -118,7 +118,7 @@ const App = () => {
             <span className={`font-bold text-xl tracking-tight transition-colors ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
               Faldangg<span className="text-violet-500">.aep</span>
             </span>
-            <span className={`text-[10px] uppercase tracking-wider font-semibold transition-colors ${isDarkMode ? 'text-violet-400' : 'text-slate-400'}`}>Video Editor</span>
+            <span className={`text-[10px] uppercase tracking-wider font-semibold transition-colors ${isDarkMode ? 'text-violet-400' : 'text-slate-400'}`}>Video Editor & Motion Graphics Designer</span>
           </div>
           
           <div className="flex items-center space-x-4">
@@ -145,7 +145,7 @@ const App = () => {
           <span className="text-violet-500">From Raw To Wow</span>
         </h1>
         <p className={`text-lg md:text-xl mb-10 leading-relaxed max-w-2xl mx-auto transition-colors ${isDarkMode ? 'text-slate-400' : 'text-slate-600'}`}>
-          Jasa editing video profesional oleh <span className="font-semibold text-violet-500">Faldangg.aep</span>. Kami menghidupkan visi kreatif Anda dengan kualitas visual terbaik.
+          Jasa editing video Short-form content oleh <span className="font-semibold text-violet-500">Faldangg.aep</span> Kami menghidupkan visi kreatif Anda dengan kualitas visual Yang God Damn!.
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           <a href="#harga" className="bg-violet-600 text-white px-8 py-4 rounded-xl font-bold shadow-lg hover:scale-105 transition">Daftar Harga</a>
@@ -231,7 +231,7 @@ const App = () => {
           <a href={instagramUrl} target="_blank" rel="noopener noreferrer" className="p-5 bg-white/5 rounded-2xl hover:bg-violet-600 transition border border-white/10 text-white"><Instagram size={28} /></a>
           <a href={tiktokUrl} target="_blank" rel="noopener noreferrer" className="p-5 bg-white/5 rounded-2xl hover:bg-violet-600 transition border border-white/10 text-white"><TikTokIcon className="w-7 h-7" /></a>
         </div>
-        <p className="opacity-40 text-xs tracking-widest uppercase font-bold text-white">© 2024 Faldangg.aep. Crafted for the best.</p>
+        <p className="opacity-40 text-xs tracking-widest uppercase font-bold text-white">© 2026 Faldangg.aep Crafted for the best.</p>
       </footer>
 
       <style jsx>{`
