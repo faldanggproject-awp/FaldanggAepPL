@@ -5,9 +5,6 @@ import {
   Instagram, 
   ArrowRight,
   ArrowLeft, 
-  Trophy, 
-  Zap, 
-  Sparkles, 
   Video, 
   Star, 
   MessageCircle, 
@@ -15,18 +12,19 @@ import {
   Check, 
   Smartphone, 
   Briefcase, 
-  Tag,
-  Languages,
-  ChevronDown,
-  Layout,
-  Layers,
-  Clapperboard,
-  Tv,
-  Camera,
-  Activity
+  Tag, 
+  Languages, 
+  ChevronDown, 
+  Layout, 
+  Layers, 
+  Clapperboard, 
+  Tv, 
+  Camera, 
+  Activity, 
+  Zap // Menambahkan Zap yang sebelumnya tertinggal
 } from 'lucide-react';
 
-// --- KOMPONEN HELPER (IKON TIKTOK) ---
+// --- IKON TIKTOK ---
 const TikTokIcon = ({ className }) => (
   <svg 
     viewBox="0 0 24 24" 
@@ -42,17 +40,15 @@ const TikTokIcon = ({ className }) => (
 );
 
 const App = () => {
-  // --- STATE MANAGEMENT ---
+  // --- STATE ---
   const [currentPage, setCurrentPage] = useState('portfolio'); 
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [activeFilter, setActiveFilter] = useState('Semua');
   const [isScrolled, setIsScrolled] = useState(false);
-  const [langAbout, setLangAbout] = useState('ID'); // Hanya About Me yang bisa ganti bahasa
+  const [langAbout, setLangAbout] = useState('ID');
   const [activeFaq, setActiveFaq] = useState(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [currentTime, setCurrentTime] = useState(new Date());
 
-  // --- DATA KONFIGURASI ---
+  // --- DATA ---
   const whatsappNumber = "6287713907028";
   const profilePhoto = "https://drive.google.com/thumbnail?id=1dRhprhx18WX_HJgfa9zU5WGbqCWSW2Ko&sz=w1000";
   const categories = ['Semua', 'Video Editing', 'Motion Graphics', 'Lainnya'];
@@ -63,7 +59,7 @@ const App = () => {
     category: "Masterpiece", 
     isVertical: false, 
     videoUrl: "https://drive.google.com/file/d/1kyX7Ys0Fwah8dEGRRpgimfIcPy4KCiEE/preview", 
-    desc: "Kumpulan karya terbaik yang menggabungkan keahlian Motion Graphics, Video Editing, dan Visual Effects (VFX) tingkat tinggi."
+    desc: "Kumpulan karya terbaik yang menggabungkan keahlian Motion Graphics, Video Editing, dan Visual Effects (VFX)."
   };
 
   const projects = [
@@ -76,10 +72,10 @@ const App = () => {
     { id: 8, title: "Stream Overlay Design", category: "Motion Graphics", isVertical: false, videoUrl: "https://drive.google.com/file/d/1xgV2RXS0hSGP1Dfej8M68w84nH9yJd2W/preview", desc: "Motion Graphics overlay untuk streaming @HiddemGame Store (DummyProject)." },
     { id: 9, title: "Messi Smart Brain", category: "Motion Graphics", isVertical: false, videoUrl: "https://drive.google.com/file/d/1JMDnrv3YSL-0kJImd_Ad_oBTa1a7gKbo/preview", desc: "Motion Graphics Messi bermain bola dengan kecerdasan otaknya di lapangan." },
     { id: 10, title: "Wedding Invitations", category: "Motion Graphics", isVertical: true, videoUrl: "https://drive.google.com/file/d/1t_7pS0vVxNsRiir_7rDVnmGPUs49lG4A/preview", desc: "Undangan pernikahan untuk Gen-Z dengan Motion Graphics." },
-    { id: 11, title: "VFX Disappear Dunk", category: "Lainnya", isVertical: false, videoUrl: "https://drive.google.com/file/d/17I58XTHkoQ1EmylnVKKHFxX3n4ogC9RC/preview", desc: "VFX Basket: Orang menghilang lalu melakukan dunk seperti yang sering digunakan @dennysumargo." },
-    { id: 12, title: "Split Ball VFX", category: "Lainnya", isVertical: false, videoUrl: "https://drive.google.com/file/d/1bAwEDHVYzMhEwYrOO5LUdbsUfOVF8lVQ/preview", desc: "VFX Tembakan Basket: Satu bola menjadi tiga sebelum masuk ke ring." },
-    { id: 13, title: "Color Grading Power", category: "Lainnya", isVertical: true, videoUrl: "https://drive.google.com/file/d/17nj_Cfub9kc9T7Iqm92ptaFmJh-vVSFY/preview", desc: "Kekuatan Color Grading: Mengubah footage pagi menjadi suasana malam dengan efek visual." },
-    { id: 14, title: "Short Movie Trailer", category: "Lainnya", isVertical: false, videoUrl: "https://drive.google.com/file/d/18UtGI0K4x77KGJOdmqUuDPvrlOok5blS/preview", desc: "Trailer animasi untuk film pendek 'One More Day' @LenteraAnimation." },
+    { id: 11, title: "VFX Disappear Dunk", category: "Lainnya", isVertical: false, videoUrl: "https://drive.google.com/file/d/17I58XTHkoQ1EmylnVKKHFxX3n4ogC9RC/preview", desc: "VFX Basket: Orang menghilang lalu melakukan dunk." },
+    { id: 12, title: "Split Ball VFX", category: "Lainnya", isVertical: false, videoUrl: "https://drive.google.com/file/d/1bAwEDHVYzMhEwYrOO5LUdbsUfOVF8lVQ/preview", desc: "VFX Tembakan Basket: Satu bola menjadi tiga." },
+    { id: 13, title: "Color Grading Power", category: "Lainnya", isVertical: true, videoUrl: "https://drive.google.com/file/d/17nj_Cfub9kc9T7Iqm92ptaFmJh-vVSFY/preview", desc: "Mengubah footage pagi menjadi suasana malam dengan color grading." },
+    { id: 14, title: "Short Movie Trailer", category: "Lainnya", isVertical: false, videoUrl: "https://drive.google.com/file/d/18UtGI0K4x77KGJOdmqUuDPvrlOok5blS/preview", desc: "Trailer animasi untuk film pendek 'One More Day'." },
   ];
 
   const pricingPlans = [
@@ -87,8 +83,7 @@ const App = () => {
       title: "BASIC",
       icon: <Smartphone className="w-8 h-8 text-purple-400" />,
       price: "Rp 119rb",
-      features: ["Teks Tipografi", "Cutting & Pacing", "Efek Suara & Musik", "Motion Dasar", "Format Vertikal (9:16)", "Revisi 2x"],
-      popular: false
+      features: ["Teks Tipografi", "Cutting & Pacing", "Efek Suara & Musik", "Motion Dasar", "Format Vertikal (9:16)", "Revisi 2x"]
     },
     {
       title: "PREMIUM",
@@ -101,8 +96,7 @@ const App = () => {
       title: "BUSINESS",
       icon: <Briefcase className="w-8 h-8 text-amber-500" />,
       price: "Rp 249Rb",
-      features: ["Teks Tipografi", "Visual Effects (VFX)", "SFX Lanjutan", "Advanced Motion", "Cinematic Grading", "Request Resolusi", "Revisi 3x"],
-      popular: false
+      features: ["Teks Tipografi", "Visual Effects (VFX)", "SFX Lanjutan", "Advanced Motion", "Cinematic Grading", "Request Resolusi", "Revisi 3x"]
     }
   ];
 
@@ -112,21 +106,11 @@ const App = () => {
     { q: "Apakah sudah termasuk revisi?", a: "Ya, setiap paket sudah termasuk kuota revisi Minor gratis sesuai deskripsi paket." }
   ];
 
-  // --- LOGIC (SCROLL & TIME) ---
+  // --- LOGIC ---
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = (winScroll / height) * 100;
-      setScrollProgress(scrolled);
-    };
-    const timer = setInterval(() => setCurrentTime(new Date()), 1000);
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      clearInterval(timer);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const filteredProjects = activeFilter === 'Semua' 
@@ -138,42 +122,38 @@ const App = () => {
     window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(msg)}`, '_blank');
   };
 
-  const formatTimecode = (date) => date.toLocaleTimeString('en-GB', { hour12: false });
-
-  // --- RENDER UI ---
+  // --- RENDER ---
   return (
-    <div className="bg-[#050505] text-white min-h-screen selection:bg-purple-600 selection:text-white font-sans overflow-x-hidden relative text-left">
-      <div className="fixed inset-0 pointer-events-none opacity-[0.03] z-[100] grain-bg"></div>
+    <div className="bg-[#050505] text-white min-h-screen font-sans selection:bg-purple-600">
       
       {/* NAVBAR */}
-      <nav className={`fixed top-0 w-full z-[60] transition-all duration-300 ${isScrolled ? 'bg-black/95 backdrop-blur-md py-4 border-b border-white/5 shadow-2xl' : 'bg-transparent py-8'}`}>
-        <div className="absolute top-0 left-0 h-[2px] bg-purple-600 transition-all duration-150" style={{ width: `${scrollProgress}%` }}></div>
+      <nav className={`fixed top-0 w-full z-[60] transition-all duration-300 ${isScrolled ? 'bg-black/95 backdrop-blur-md py-4 border-b border-white/5' : 'bg-transparent py-8'}`}>
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-          <div className="flex items-center gap-4 cursor-pointer group" onClick={() => setCurrentPage('portfolio')}>
+          <div className="flex items-center gap-4 cursor-pointer" onClick={() => setCurrentPage('portfolio')}>
              <div className="w-10 h-10 bg-purple-600 flex items-center justify-center rounded-lg shadow-lg">
                 <Monitor size={20} className="text-white" />
              </div>
-             <div className="hidden sm:block text-left text-white">
-                <span className="text-lg font-black tracking-tighter block leading-none mb-1">FALDANGG<span className="text-purple-500">.AEP</span></span>
-                <span className="font-mono text-[8px] tracking-wider uppercase opacity-40 block text-left">Video Editor & Motion Designer</span>
+             <div className="hidden sm:block text-left">
+                <span className="text-lg font-black tracking-tighter block leading-none">FALDANGG<span className="text-purple-500">.AEP</span></span>
+                <span className="font-mono text-[8px] tracking-wider uppercase opacity-40 block">Video Editor & Motion Designer</span>
              </div>
           </div>
-          <div className="flex items-center gap-6 md:gap-12">
+          <div className="flex items-center gap-6 md:gap-10">
             {currentPage === 'portfolio' ? (
-              <div className="hidden lg:flex gap-10 font-mono text-[10px] tracking-[0.2em] uppercase text-white/50">
+              <div className="hidden lg:flex gap-8 font-mono text-[10px] tracking-[0.2em] uppercase text-white/50">
                 <a href="#hero" className="hover:text-purple-500 transition-colors">Beranda</a>
                 <a href="#about" className="hover:text-purple-500 transition-colors">Tentang</a>
                 <a href="#work" className="hover:text-purple-500 transition-colors">Karya</a>
-                <button onClick={() => setCurrentPage('prices')} className="hover:text-purple-500 font-bold tracking-widest text-white/40 transition-colors">Daftar Harga</button>
+                <button onClick={() => setCurrentPage('prices')} className="hover:text-purple-500 font-bold transition-colors">Daftar Harga</button>
               </div>
             ) : (
-              <button onClick={() => setCurrentPage('portfolio')} className="group flex items-center gap-3 text-white/50 hover:text-purple-500 transition-all">
-                <ArrowLeft size={14} /> <span className="font-mono text-[10px] font-black uppercase tracking-[0.4em]">Kembali</span>
+              <button onClick={() => setCurrentPage('portfolio')} className="flex items-center gap-2 text-white/50 hover:text-purple-500 transition-all uppercase text-[10px] font-bold tracking-widest">
+                <ArrowLeft size={14} /> Kembali
               </button>
             )}
             <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noopener noreferrer" 
-               className="group flex items-center gap-2 bg-white text-black px-6 py-2.5 rounded-sm font-mono text-[10px] font-bold uppercase tracking-widest hover:bg-green-500 hover:text-white transition-all shadow-lg active:scale-95">
-              <MessageCircle size={14} /> WhatsApp
+               className="bg-white text-black px-5 py-2 rounded-sm font-mono text-[10px] font-bold uppercase tracking-widest hover:bg-green-500 hover:text-white transition-all shadow-lg">
+              WhatsApp
             </a>
           </div>
         </div>
@@ -182,19 +162,10 @@ const App = () => {
       {currentPage === 'portfolio' ? (
         <div className="portfolio-view">
           {/* HERO */}
-          <section id="hero" className="relative min-h-screen flex items-center justify-center pt-20 px-6 text-center text-white">
-            <div className="absolute inset-10 border-white/5 pointer-events-none z-0 opacity-50">
-               <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-white/20"></div>
-               <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-white/20"></div>
-               <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-white/20"></div>
-               <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-white/20"></div>
-            </div>
+          <section id="hero" className="relative min-h-screen flex items-center justify-center pt-20 px-6 text-center">
             <div className="relative z-10 max-w-5xl mx-auto">
-              <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-purple-500/20 bg-white/5 backdrop-blur-md mb-8 shadow-xl">
-                 <div className="flex items-center gap-2 border-r border-white/10 pr-3">
-                    <div className="w-2 h-2 rounded-full bg-red-600 animate-pulse"></div>
-                    <span className="font-mono text-[9px] font-black text-white opacity-80 tracking-tighter uppercase">{formatTimecode(currentTime)}</span>
-                 </div>
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-purple-500/20 bg-white/5 mb-8 shadow-xl">
+                 <div className="w-2 h-2 rounded-full bg-red-600 animate-pulse shadow-[0_0_8px_rgba(220,38,38,0.8)]"></div>
                  <span className="font-mono text-[9px] sm:text-[10px] tracking-[0.1em] uppercase text-purple-400 font-black">FROM RAW TO WOW</span>
               </div>
               <h1 className="text-[14vw] sm:text-[12vw] md:text-[8vw] font-black leading-[0.82] tracking-tighter uppercase mb-6 italic drop-shadow-2xl">
@@ -206,26 +177,20 @@ const App = () => {
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16">
                  <a href="#work" className="bg-purple-600 hover:bg-purple-500 text-white px-10 py-4 rounded-sm font-bold uppercase text-[10px] tracking-[0.3em] transition-all flex items-center gap-3 active:scale-95 shadow-xl">Eksplorasi Karya <ArrowRight size={16} /></a>
-                 <button onClick={() => setCurrentPage('prices')} className="bg-white/5 hover:bg-white/10 text-white px-10 py-4 rounded-sm font-bold uppercase text-[10px] tracking-[0.3em] transition-all flex items-center gap-3 border border-white/10 active:scale-95"><Tag size={14} className="text-purple-500" /> Cek Harga</button>
+                 <button onClick={() => setCurrentPage('prices')} className="bg-white/5 hover:bg-white/10 text-white px-10 py-4 rounded-sm font-bold uppercase text-[10px] tracking-[0.3em] transition-all border border-white/10 active:scale-95">Cek Harga</button>
               </div>
               <div className="flex justify-center gap-12 sm:gap-24 py-8 border-y border-white/5">
-                <div className="text-center group"><span className="block text-2xl font-black italic tracking-tighter text-white group-hover:text-purple-500 transition-colors">50+</span><span className="text-[9px] font-mono uppercase tracking-widest text-white/30">Proyek Selesai</span></div>
-                <div className="text-center group"><span className="block text-2xl font-black italic tracking-tighter text-white group-hover:text-purple-500 transition-colors">2023</span><span className="text-[9px] font-mono uppercase tracking-widest text-white/30">Sejak Memulai</span></div>
-                <div className="text-center group"><span className="block text-2xl font-black italic tracking-tighter text-white group-hover:text-purple-500 transition-colors">100%</span><span className="text-[9px] font-mono uppercase tracking-widest text-white/30">Kepuasan</span></div>
+                <div className="text-center"><span className="block text-2xl font-black italic tracking-tighter text-white">50+</span><span className="text-[9px] font-mono uppercase tracking-widest text-white/30">Proyek Selesai</span></div>
+                <div className="text-center"><span className="block text-2xl font-black italic tracking-tighter text-white">2023</span><span className="text-[9px] font-mono uppercase tracking-widest text-white/30">Sejak Memulai</span></div>
+                <div className="text-center"><span className="block text-2xl font-black italic tracking-tighter text-white">100%</span><span className="text-[9px] font-mono uppercase tracking-widest text-white/30">Kepuasan</span></div>
               </div>
             </div>
           </section>
 
-          {/* MARQUEE */}
-          <div className="bg-white text-black py-4 overflow-hidden flex whitespace-nowrap border-y border-black font-black uppercase italic tracking-tighter text-sm sm:text-xl relative z-20">
-            <div className="animate-marquee inline-block">MOTION DESIGN • EDITING VIDEO • EFEK VISUAL • ANIMASI 2D • COLOR GRADING • CERITA SINEMATIK • &nbsp;</div>
-            <div className="animate-marquee inline-block">MOTION DESIGN • EDITING VIDEO • EFEK VISUAL • ANIMASI 2D • COLOR GRADING • CERITA SINEMATIK • &nbsp;</div>
-          </div>
-
-          {/* ABOUT ME SECTION (Bilingual Toggle) */}
+          {/* ABOUT */}
           <section id="about" className="py-32 px-6 bg-[#080808] text-left">
             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-20 items-center">
-              <div className="lg:col-span-7 text-left text-white">
+              <div className="lg:col-span-7">
                  <div className="flex items-center justify-between mb-12 border-b border-white/5 pb-6">
                    <div className="flex items-center gap-4">
                       <div className="w-2 h-8 bg-purple-600"></div>
@@ -235,11 +200,11 @@ const App = () => {
                      <Languages size={14} /> {langAbout}
                    </button>
                  </div>
-                 <div className="space-y-8 text-white/70 text-lg md:text-xl font-medium leading-relaxed mb-12 text-justify text-white">
+                 <div className="space-y-8 text-white/70 text-lg md:text-xl font-medium leading-relaxed mb-12 text-justify">
                     {langAbout === 'ID' ? (
-                      <p>Saya <span className="text-white font-black italic">Muhammad Fadlan Iskandar</span>, Video Editor & Motion Graphics Designer berbasis di Indonesia. Sejak 2023, saya telah mendedikasikan diri untuk mentransformasi setiap cuplikan video yang awalnya <span className="text-white font-bold underline decoration-purple-600 decoration-2 underline-offset-4 text-white text-left text-white">Raw (mentah)</span> menjadi karya visual yang memberikan kesan <span className="text-purple-500 font-black italic">"Wow"</span>.</p>
+                      <p>Saya <span className="text-white font-black italic">Muhammad Fadlan Iskandar</span>, Video Editor & Motion Graphics Designer berbasis di Indonesia. Sejak 2023, saya telah mendedikasikan diri untuk mentransformasi setiap cuplikan video yang awalnya <span className="text-white font-bold underline decoration-purple-600 decoration-2 underline-offset-4 text-white">Raw (mentah)</span> menjadi karya visual yang memberikan kesan <span className="text-purple-500 font-black italic">"Wow"</span>.</p>
                     ) : (
-                      <p>I am <span className="text-white font-black italic text-white text-left">Muhammad Fadlan Iskandar</span>, an Indonesia-based Video Editor & Motion Graphics Designer. Since 2023, I have dedicated myself to transforming every piece of <span className="text-white font-bold underline decoration-purple-600 decoration-2 underline-offset-4 text-white text-left text-white">Raw footage</span> into a visual masterpiece with a definitive <span className="text-purple-500 font-black italic text-left text-white">"Wow"</span> factor.</p>
+                      <p>I am <span className="text-white font-black italic text-white">Muhammad Fadlan Iskandar</span>, an Indonesia-based Video Editor & Motion Graphics Designer. Since 2023, I have dedicated myself to transforming every piece of <span className="text-white font-bold underline decoration-purple-600 decoration-2 underline-offset-4 text-white text-left text-white">Raw footage</span> into a visual masterpiece with a definitive <span className="text-purple-500 font-black italic">"Wow"</span> factor.</p>
                     )}
                  </div>
                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
@@ -251,76 +216,56 @@ const App = () => {
                       {name: 'Typography', icon: <Tv size={14}/>},
                       {name: 'Storytelling', icon: <Star size={14}/>}
                     ].map((item, i) => (
-                      <div key={i} className="flex items-center gap-3 p-4 bg-white/5 border border-white/5 rounded-sm hover:border-purple-600/50 hover:bg-purple-600/5 transition-all duration-300">
+                      <div key={i} className="flex items-center gap-3 p-4 bg-white/5 border border-white/5 rounded-sm hover:border-purple-600/50 transition-all duration-300">
                          <span className="text-purple-500">{item.icon}</span>
-                         <span className="text-[11px] font-bold uppercase tracking-widest text-white/60 text-left">{item.name}</span>
+                         <span className="text-[11px] font-bold uppercase tracking-widest text-white/60">{item.name}</span>
                       </div>
                     ))}
                  </div>
               </div>
-              <div className="lg:col-span-5 relative text-left">
-                 <div className="relative aspect-[4/5] rounded-sm overflow-hidden border border-white/10 grayscale hover:grayscale-0 transition-all duration-1000 bg-neutral-900 shadow-2xl group text-left">
-                    <img src={profilePhoto} alt="Fadlan" className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000 text-left text-left text-left" />
-                    <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent opacity-80 text-left"></div>
+              <div className="lg:col-span-5 relative">
+                 <div className="relative aspect-[4/5] rounded-sm overflow-hidden border border-white/10 grayscale hover:grayscale-0 transition-all duration-1000 bg-neutral-900 group">
+                    <img src={profilePhoto} alt="Fadlan" className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000" />
+                    <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent opacity-80"></div>
                     <div className="absolute bottom-6 left-6 text-white text-left">
-                      <p className="text-[10px] font-mono uppercase tracking-[0.4em] text-purple-500 mb-2 text-left">Profil Kreatif</p>
-                      <p className="text-2xl font-black italic uppercase tracking-tighter text-white text-left text-left">Fadlan Iskandar</p>
+                      <p className="text-[10px] font-mono uppercase tracking-[0.4em] text-purple-500 mb-2">Profil Kreatif</p>
+                      <p className="text-2xl font-black italic uppercase tracking-tighter">Fadlan Iskandar</p>
                     </div>
                  </div>
               </div>
             </div>
           </section>
 
-          {/* SHOWREEL */}
-          <section id="showreel" className="py-24 px-6 bg-black text-left">
-            <div className="max-w-7xl mx-auto">
-              <div className="mb-12 flex flex-col md:flex-row items-end justify-between gap-6 border-l-2 border-purple-600 pl-6 text-white">
-                <h2 className="text-4xl md:text-6xl font-black uppercase italic tracking-tighter text-left">THE MASTER REEL.</h2>
-              </div>
-              <div className="group relative aspect-video w-full rounded-sm overflow-hidden border border-white/5 bg-[#0a0a0a] cursor-pointer shadow-3xl text-left" onClick={() => setSelectedVideo(showreelData)}>
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 to-black flex items-center justify-center overflow-hidden">
-                   <Clapperboard size={120} className="text-white/5 transform -rotate-12 group-hover:scale-110 transition-transform duration-1000" />
-                </div>
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                   <div className="w-20 h-20 rounded-full border-2 border-white/20 flex items-center justify-center group-hover:bg-purple-600 group-hover:border-purple-600 transition-all duration-300 shadow-2xl text-center">
-                      <Play fill="white" size={28} className="ml-1 text-white" />
-                   </div>
-                   <span className="mt-6 font-mono text-[9px] tracking-[0.8em] uppercase text-white/40 group-hover:text-white transition-colors text-center">Mulai Tonton</span>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* ARCHIVE GRID */}
+          {/* WORK GRID */}
           <section id="work" className="py-32 px-6 border-t border-white/5 text-white text-left">
-            <div className="max-w-7xl mx-auto text-left text-left">
-              <div className="flex flex-col md:flex-row items-center justify-between mb-16 gap-8 text-white text-left">
-                <h2 className="text-5xl font-black uppercase italic tracking-tighter text-left text-white text-left">ARSIP.</h2>
-                <div className="flex flex-wrap justify-center gap-2 p-1.5 bg-white/5 rounded-sm text-left">
+            <div className="max-w-7xl mx-auto">
+              <div className="flex flex-col md:flex-row items-center justify-between mb-16 gap-8 text-white">
+                <h2 className="text-5xl font-black uppercase italic tracking-tighter text-left">ARSIP.</h2>
+                <div className="flex flex-wrap justify-center gap-2 p-1.5 bg-white/5 rounded-sm">
                   {categories.map((cat, idx) => (
-                    <button key={idx} onClick={() => setActiveFilter(cat)} className={`px-6 py-2 rounded-sm text-[9px] font-black uppercase tracking-widest transition-all ${activeFilter === cat ? 'bg-purple-600 text-white shadow-lg shadow-purple-600/20' : 'hover:bg-white/10 text-white/40'}`}>
+                    <button key={idx} onClick={() => setActiveFilter(cat)} className={`px-6 py-2 rounded-sm text-[9px] font-black uppercase tracking-widest transition-all ${activeFilter === cat ? 'bg-purple-600 text-white shadow-lg' : 'hover:bg-white/10 text-white/40'}`}>
                       {cat}
                     </button>
                   ))}
                 </div>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left text-white">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {filteredProjects.map((project) => (
-                  <div key={project.id} className="group relative aspect-[1.1/1] overflow-hidden border border-white/5 cursor-pointer rounded-sm bg-[#0a0a0a] shadow-xl text-left" onClick={() => setSelectedVideo(project)}>
-                    <div className={`absolute inset-0 z-0 bg-gradient-to-br transition-all duration-700 ${project.category === 'Video Editing' ? 'from-blue-950/40' : project.category === 'Motion Graphics' ? 'from-purple-950/40' : 'from-emerald-950/40'} to-black group-hover:opacity-60 text-left`}></div>
-                    <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] group-hover:opacity-[0.07] transition-opacity duration-700 text-left">
+                  <div key={project.id} className="group relative aspect-[1.1/1] overflow-hidden border border-white/5 cursor-pointer rounded-sm bg-[#0a0a0a] shadow-xl" onClick={() => setSelectedVideo(project)}>
+                    <div className={`absolute inset-0 z-0 bg-gradient-to-br transition-all duration-700 ${project.category === 'Video Editing' ? 'from-blue-950/40' : project.category === 'Motion Graphics' ? 'from-purple-950/40' : 'from-emerald-950/40'} to-black group-hover:opacity-60`}></div>
+                    <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] group-hover:opacity-[0.07] transition-opacity duration-700">
                        {project.category === 'Video Editing' ? <Clapperboard size={120} /> : project.category === 'Motion Graphics' ? <Layers size={120} /> : <Zap size={120} />}
                     </div>
-                    <div className={`w-full h-full flex flex-col items-start justify-end p-8 border-b-4 ${project.category === 'Video Editing' ? 'border-blue-500/20' : project.category === 'Motion Graphics' ? 'border-purple-500/20' : 'border-emerald-500/20'} group-hover:border-purple-500 transition-all duration-500 relative z-10 text-left`}>
+                    <div className="w-full h-full flex flex-col items-start justify-end p-8 border-b-4 border-white/5 group-hover:border-purple-500 transition-all duration-500 relative z-10">
                       <div className="w-full text-left text-white">
                         <div className="flex items-center gap-2 mb-3">
                            <div className={`w-1 h-1 rounded-full ${project.category === 'Video Editing' ? 'bg-blue-500' : project.category === 'Motion Graphics' ? 'bg-purple-500' : 'bg-emerald-500'}`}></div>
-                           <span className="text-[8px] font-mono uppercase tracking-[0.3em] opacity-40 text-left">{project.category}</span>
+                           <span className="text-[8px] font-mono uppercase tracking-[0.3em] opacity-40">{project.category}</span>
                         </div>
-                        <h4 className="text-white font-bold uppercase text-lg leading-tight tracking-tight group-hover:text-purple-400 transition-colors text-left">{project.title}</h4>
-                        <div className="mt-6 flex items-center gap-2 overflow-hidden text-white text-left text-left">
+                        <h4 className="text-white font-bold uppercase text-lg leading-tight tracking-tight group-hover:text-purple-400 transition-colors">{project.title}</h4>
+                        <div className="mt-6 flex items-center gap-2 overflow-hidden text-white">
                            <span className="h-[1px] w-6 bg-purple-500 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-700"></span>
-                           <span className="font-mono text-[8px] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity delay-100 text-left text-left">Buka Arsip</span>
+                           <span className="font-mono text-[8px] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity delay-100">Buka Arsip</span>
                         </div>
                       </div>
                     </div>
@@ -335,89 +280,72 @@ const App = () => {
             </div>
           </section>
 
-          <footer className="py-20 px-6 border-t border-white/5 text-center bg-black text-white">
-            <h2 className="text-6xl md:text-8xl font-black italic uppercase tracking-tighter mb-12 text-center">HUBUNGI SAYA.</h2>
-            <div className="flex justify-center gap-10 text-center">
-               <a href="https://www.instagram.com/faldangg.aep/" target="_blank" className="p-4 rounded-sm border border-white/5 hover:border-purple-600 hover:text-purple-500 hover:-translate-y-1 transition-all text-white shadow-xl text-center"><Instagram size={28} /></a>
-               <a href="https://www.tiktok.com/@fadlaniskandarpro" target="_blank" className="p-4 rounded-sm border border-white/5 hover:border-purple-600 hover:text-purple-500 hover:-translate-y-1 transition-all text-white shadow-xl text-center"><TikTokIcon className="w-7 h-7" /></a>
+          <footer className="py-20 px-6 border-t border-white/5 text-center bg-black">
+            <h2 className="text-6xl md:text-8xl font-black italic uppercase tracking-tighter mb-12 text-center text-white text-center">HUBUNGI SAYA.</h2>
+            <div className="flex justify-center gap-10 mb-12 text-white">
+               <a href="https://www.instagram.com/faldangg.aep/" target="_blank" rel="noreferrer" className="p-4 rounded-sm border border-white/5 hover:border-purple-600 transition-all"><Instagram size={28} /></a>
+               <a href="https://www.tiktok.com/@fadlaniskandarpro" target="_blank" rel="noreferrer" className="p-4 rounded-sm border border-white/5 hover:border-purple-600 transition-all"><TikTokIcon className="w-7 h-7" /></a>
             </div>
-            <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 font-mono text-[8px] uppercase tracking-[0.4em] opacity-20 text-white text-center">
+            <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 font-mono text-[8px] uppercase tracking-[0.4em] opacity-20 text-white">
               <span>© 2026 Muhammad Fadlan Iskandar — Faldangg.aep</span>
-              <div className="flex gap-8 text-white"><span>UTC+7 Depok</span><span>{whatsappNumber}</span></div>
+              <div className="flex gap-8"><span>UTC+7 Depok</span><span>{whatsappNumber}</span></div>
             </div>
           </footer>
         </div>
       ) : (
-        /* PRICES VIEW (PL) */
-        <div className="prices-page min-h-screen bg-[#050505] text-white text-left animate-fade-in">
-          <section className="pt-40 pb-32 px-6">
-            <div className="max-w-7xl mx-auto text-white text-left">
-              <div className="flex flex-col items-center text-center mb-20 text-white text-center">
-                 <div className="inline-flex items-center gap-3 px-4 py-2 bg-white/5 rounded-full border border-white/10 text-white/50 text-[10px] font-bold uppercase tracking-[0.4em] mb-6 shadow-xl text-left">
-                    <Tag size={14} className="text-purple-500" /> Panduan Investasi
-                 </div>
-                 <h2 className="text-6xl md:text-8xl font-black uppercase italic tracking-tighter mb-6 text-center text-white">HARGA.</h2>
-                 <p className="text-white/40 font-mono text-xs uppercase tracking-widest max-w-2xl leading-relaxed text-center text-white">
-                    Solusi visual profesional untuk menaikkan level konten Anda. Pilih paket yang paling sesuai dengan visi kreatif Anda.
-                 </p>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-40 text-white">
-                {pricingPlans.map((plan, i) => (
-                  <div key={i} className={`p-10 rounded-sm border transition-all duration-500 flex flex-col relative overflow-hidden text-left ${plan.popular ? 'border-purple-500 bg-[#111] shadow-2xl z-10 scale-105' : 'bg-white/5 border-white/5 opacity-80 hover:opacity-100'}`}>
-                    {plan.popular && <div className="absolute top-0 right-0 bg-gradient-to-r from-purple-600 to-rose-600 text-white text-[9px] font-black px-4 py-1 uppercase tracking-widest shadow-lg">Best Seller</div>}
-                    <div className="mb-8 text-white">{plan.icon} <h3 className={`text-3xl font-black italic mt-4 uppercase tracking-tighter ${plan.popular ? 'text-purple-400' : 'text-white'}`}>{plan.title}</h3></div>
-                    <div className="text-4xl font-black mb-4 tracking-tighter italic text-white text-left text-white">{plan.price}<span className="text-sm font-mono font-normal opacity-40 ml-2 text-white">Per Menit</span></div>
-                    <div className="space-y-4 mb-12 flex-grow text-white text-left">
-                      {plan.features.map((f, j) => (
-                        <div key={j} className="flex items-center gap-3 text-xs font-bold uppercase tracking-wider text-white text-left text-white text-left text-left"><Check size={14} className="text-purple-500" strokeWidth={4} /> {f}</div>
-                      ))}
-                    </div>
-                    <button onClick={() => handleOrder(plan.title)} className={`w-full py-5 rounded-sm font-black uppercase text-[11px] tracking-[0.3em] transition-all shadow-xl active:scale-95 ${plan.popular ? 'bg-purple-600 text-white hover:bg-purple-500' : 'bg-white/10 hover:bg-white/20 text-white'}`}>Pesan Sekarang</button>
-                  </div>
-                ))}
-              </div>
-              <div className="max-w-3xl mx-auto mt-32 text-white text-left">
-                <h2 className="text-4xl md:text-5xl font-black italic uppercase tracking-tighter text-center text-white mb-16">FAQ.</h2>
-                <div className="space-y-4 text-left text-white">
-                  {faqs.map((faq, index) => (
-                    <div key={index} className="rounded-sm border border-white/5 bg-[#0a0a0a] overflow-hidden transition-all shadow-lg text-left text-white">
-                      <button onClick={() => toggleFaq(index)} className="w-full px-8 py-6 flex items-center justify-between text-left group text-white">
-                        <span className="font-black italic uppercase tracking-widest text-sm text-white/80 group-hover:text-white transition-colors text-left text-white">{faq.q}</span>
-                        <ChevronDown className={`transition-transform duration-500 text-purple-500 ${activeFaq === index ? 'rotate-180' : ''}`} />
-                      </button>
-                      {activeFaq === index && <div className="px-8 pb-8 text-white/50 text-sm leading-relaxed font-medium text-left text-white">{faq.a}</div>}
-                    </div>
-                  ))}
+        /* PRICES VIEW */
+        <div className="prices-page min-h-screen pt-32 px-6">
+          <div className="max-w-7xl mx-auto text-center mb-20">
+             <div className="inline-flex items-center gap-3 px-4 py-2 bg-white/5 rounded-full border border-white/10 text-white/50 text-[10px] font-bold uppercase tracking-[0.4em] mb-6"><Tag size={14} className="text-purple-500" /> Panduan Investasi</div>
+             <h2 className="text-6xl md:text-8xl font-black uppercase italic tracking-tighter mb-6">HARGA.</h2>
+             <p className="text-white/40 font-mono text-xs uppercase tracking-widest max-w-2xl mx-auto leading-relaxed text-center">Pilih paket yang paling sesuai dengan visi kreatif Anda.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-40 max-w-7xl mx-auto">
+            {pricingPlans.map((plan, i) => (
+              <div key={i} className={`p-10 rounded-sm border transition-all duration-500 flex flex-col relative overflow-hidden text-left ${plan.popular ? 'border-purple-500 bg-[#111] shadow-2xl z-10 scale-105' : 'bg-white/5 border-white/5 opacity-80 hover:opacity-100'}`}>
+                {plan.popular && <div className="absolute top-0 right-0 bg-gradient-to-r from-purple-600 to-rose-600 text-white text-[9px] font-black px-4 py-1 uppercase tracking-widest shadow-lg">Best Seller</div>}
+                <div className="mb-8">{plan.icon} <h3 className={`text-3xl font-black italic mt-4 uppercase tracking-tighter ${plan.popular ? 'text-purple-400' : 'text-white'}`}>{plan.title}</h3></div>
+                <div className="text-4xl font-black mb-4 tracking-tighter italic">{plan.price}<span className="text-sm font-mono font-normal opacity-40 ml-2">Per Menit</span></div>
+                <div className="space-y-4 mb-12 flex-grow text-white/80">
+                  {plan.features.map((f, j) => (<div key={j} className="flex items-center gap-3 text-xs font-bold uppercase tracking-wider"><Check size={14} className="text-purple-500" strokeWidth={4} /> {f}</div>))}
                 </div>
+                <button onClick={() => handleOrder(plan.title)} className={`w-full py-5 rounded-sm font-black uppercase text-[11px] tracking-[0.3em] transition-all active:scale-95 ${plan.popular ? 'bg-purple-600 text-white' : 'bg-white/10 text-white'}`}>Pesan Sekarang</button>
               </div>
+            ))}
+          </div>
+          <div className="max-w-3xl mx-auto mb-40 text-left">
+            <h2 className="text-4xl md:text-5xl font-black italic uppercase tracking-tighter text-center mb-12">FAQ.</h2>
+            <div className="space-y-4">
+              {faqs.map((faq, index) => (
+                <div key={index} className="rounded-sm border border-white/5 bg-[#0a0a0a] overflow-hidden shadow-lg">
+                  <button onClick={() => setActiveFaq(activeFaq === index ? null : index)} className="w-full px-8 py-6 flex items-center justify-between text-left group text-white">
+                    <span className="font-black italic uppercase tracking-widest text-sm text-white/80 group-hover:text-white">{faq.q}</span>
+                    <ChevronDown className={`transition-transform duration-500 text-purple-500 ${activeFaq === index ? 'rotate-180' : ''}`} />
+                  </button>
+                  {activeFaq === index && <div className="px-8 pb-8 text-white/50 text-sm leading-relaxed">{faq.a}</div>}
+                </div>
+              ))}
             </div>
-          </section>
-          <footer className="py-20 px-6 border-t border-white/5 text-center bg-black text-white text-center">
-            <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 font-mono text-[8px] uppercase tracking-[0.4em] opacity-20 text-white text-center">
-              <span>© 2026 Muhammad Fadlan Iskandar — Faldangg.aep</span>
-              <span className="text-white text-center">{whatsappNumber}</span>
-            </div>
-          </footer>
+          </div>
+          <footer className="py-20 text-center border-t border-white/5 font-mono text-[8px] uppercase tracking-[0.4em] opacity-20">© 2026 Muhammad Fadlan Iskandar — Faldangg.aep</footer>
         </div>
       )}
 
-      {/* MODAL */}
+      {/* VIDEO MODAL */}
       {selectedVideo && (
-        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-10 text-white text-left">
+        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-10 text-white">
           <div className="absolute inset-0 bg-black/98 backdrop-blur-xl animate-fade-in" onClick={() => setSelectedVideo(null)}></div>
           <div className={`relative w-full bg-[#0a0a0a] rounded-sm overflow-hidden shadow-3xl border border-white/10 flex flex-col max-h-[90vh] transition-all duration-300 ${selectedVideo.isVertical ? 'max-w-[400px]' : 'max-w-6xl'}`}>
             <div className="absolute top-0 left-0 w-full h-14 z-[130] flex items-center justify-between px-6 pointer-events-none">
-               <span className="bg-purple-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest shadow-lg pointer-events-auto">{selectedVideo.category}</span>
+               <span className="bg-purple-600 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest pointer-events-auto">{selectedVideo.category}</span>
                <button className="bg-black/50 p-2.5 rounded-full hover:bg-white hover:text-black transition-all shadow-lg active:scale-90 pointer-events-auto" onClick={() => setSelectedVideo(null)}><X size={18} /></button>
             </div>
             <div className={`w-full bg-black flex items-center justify-center relative overflow-hidden ${selectedVideo.isVertical ? 'aspect-[9/16]' : 'aspect-video'}`}>
-              <iframe src={selectedVideo.videoUrl} className="w-full h-full border-0 text-left" title={selectedVideo.title} allowFullScreen></iframe>
+              <iframe src={selectedVideo.videoUrl} className="w-full h-full border-0" title={selectedVideo.title} allowFullScreen></iframe>
             </div>
-            <div className="p-8 md:p-10 bg-[#080808] border-t border-white/5 overflow-y-auto shrink-0 text-left text-white">
-              <div className="flex flex-col text-white">
-                <h2 className={`${selectedVideo.isVertical ? 'text-2xl' : 'text-3xl md:text-5xl'} font-black uppercase italic tracking-tighter text-white mb-4 text-left`}>{selectedVideo.title}</h2>
-                <p className="text-white/40 leading-relaxed text-sm md:text-base max-w-3xl border-l-2 border-white/10 pl-6 text-justify text-white text-left">{selectedVideo.desc}</p>
-              </div>
+            <div className="p-8 md:p-10 bg-[#080808] border-t border-white/5 overflow-y-auto shrink-0 text-left">
+              <h2 className={`${selectedVideo.isVertical ? 'text-2xl' : 'text-3xl md:text-5xl'} font-black uppercase italic tracking-tighter text-white mb-4`}>{selectedVideo.title}</h2>
+              <p className="text-white/40 leading-relaxed text-sm md:text-base max-w-3xl border-l-2 border-white/10 pl-6 text-justify">{selectedVideo.desc}</p>
             </div>
           </div>
         </div>
@@ -431,9 +359,6 @@ const App = () => {
         ::-webkit-scrollbar-thumb { background: #333; border-radius: 0px; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
-        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
-        .animate-marquee { animation: marquee 30s linear infinite; display: inline-block; }
-        .grain-bg { background-image: url("https://www.transparenttextures.com/patterns/carbon-fibre.png"); }
       `}</style>
     </div>
   );
