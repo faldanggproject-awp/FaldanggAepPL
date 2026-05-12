@@ -70,7 +70,7 @@ const App = () => {
   const projects = [
     { id: 1, title: "Social Media Storytelling", category: "Video Editing", isVertical: true, videoUrl: "https://drive.google.com/file/d/19gjVMRb8YBiWmyKqLD0QvE1Asf_aAV8v/preview", desc: "Video Storytelling Edukasi Tentang Berbisnis Di Sosial Media." },
     { id: 2, title: "Marketing Strategy", category: "Video Editing", isVertical: true, videoUrl: "https://drive.google.com/file/d/1uHtsGTRCZMU7dnrcmZU-QFXNtVKQvn87/preview", desc: "Video Storytelling Marketing Untuk @sozmedagency." },
-    { id: 3, title: "Short Clips Edition", category: "Video Editing", isVertical: true, videoUrl: "https://drive.google.com/file/d/1NEHJhGfpC-sSgerLr7IHKpadding-uvrdiaFrp/preview", desc: "Video Storytelling Motivasi Dari Video Panjang Timothy Ronald dan di buat menjadi (CLIP)." },
+    { id: 3, title: "Short Clips Edition", category: "Video Editing", isVertical: true, videoUrl: "https://drive.google.com/file/d/1NEHJhGfpC-sSgerLr7IHKuvrdiaFrp/preview", desc: "Video Storytelling Motivasi Dari Video Panjang Timothy Ronald dan di buat menjadi (CLIP)." },
     { id: 4, title: "Education Series", category: "Video Editing", isVertical: true, videoUrl: "https://drive.google.com/file/d/1NADGk2fXcYkjlwqctPfwRtso37B2HrGt/preview", desc: "Video Storytelling Edukasi Tentang Perbedaan Berserah atau Pasrah." },
     { id: 6, title: "Name Animation AI", category: "Motion Graphics", isVertical: false, videoUrl: "https://drive.google.com/file/d/1J2NQf5ihoyj2TyB2AvyTWq4aj36nFGjs/preview", desc: "Membuat nama di Adobe Illustrator dengan Motion Graphics." },
     { id: 7, title: "Chess Motion Graphic", category: "Motion Graphics", isVertical: false, videoUrl: "https://drive.google.com/file/d/1RX_jaAZEwnDMyt-mIKQSjYnX6_IsjVkJ/preview", desc: "Motion Graphics permainan catur." },
@@ -145,46 +145,43 @@ const App = () => {
 
   const formatTimecode = (date) => date.toLocaleTimeString('en-GB', { hour12: false });
 
-  // --- UI COMPONENTS ---
-  const Navbar = () => (
-    <nav className={`fixed top-0 w-full z-[60] transition-all duration-300 ${isScrolled ? 'bg-black/95 backdrop-blur-md py-4 border-b border-white/5 shadow-2xl' : 'bg-transparent py-8'}`}>
-      <div className="absolute top-0 left-0 h-[2px] bg-purple-600 transition-all duration-150" style={{ width: `${scrollProgress}%` }}></div>
-      <div className="max-w-7xl mx-auto px-6 flex justify-between items-center text-white">
-        <div className="flex items-center gap-4 cursor-pointer group" onClick={() => setCurrentPage('portfolio')}>
-           <div className="w-10 h-10 bg-purple-600 flex items-center justify-center rounded-lg shadow-lg group-hover:rotate-12 transition-transform duration-500">
-              <Monitor size={20} className="text-white" />
-           </div>
-           <div className="hidden sm:block text-left">
-              <span className="text-lg font-black tracking-tighter block leading-none mb-1 text-left">FALDANGG<span className="text-purple-500">.AEP</span></span>
-              <span className="font-mono text-[8px] tracking-wider uppercase opacity-40 block">Video Editor & Motion Designer</span>
-           </div>
-        </div>
-        <div className="flex items-center gap-6 md:gap-12">
-          {currentPage === 'portfolio' ? (
-            <div className="hidden lg:flex gap-10 font-mono text-[10px] tracking-[0.2em] uppercase text-white/50">
-              <a href="#hero" className="hover:text-purple-500 transition-colors text-white">Beranda</a>
-              <a href="#about" className="hover:text-purple-500 transition-colors text-white">Tentang</a>
-              <a href="#work" className="hover:text-purple-500 transition-colors text-white">Karya</a>
-              <button onClick={() => setCurrentPage('prices')} className="hover:text-purple-500 font-bold tracking-widest text-white/40 transition-colors">Daftar Harga</button>
-            </div>
-          ) : (
-            <button onClick={() => setCurrentPage('portfolio')} className="group flex items-center gap-3 text-white/50 hover:text-purple-500 transition-all">
-              <ArrowLeft size={14} /> <span className="font-mono text-[10px] font-black uppercase tracking-[0.4em]">Kembali</span>
-            </button>
-          )}
-          <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noopener noreferrer" 
-             className="group flex items-center gap-2 bg-white text-black px-6 py-2.5 rounded-sm font-mono text-[10px] font-bold uppercase tracking-widest hover:bg-green-500 hover:text-white transition-all shadow-lg active:scale-95">
-            <MessageCircle size={14} /> WhatsApp
-          </a>
-        </div>
-      </div>
-    </nav>
-  );
-
   return (
     <div className="bg-[#050505] text-white min-h-screen selection:bg-purple-600 selection:text-white font-sans overflow-x-hidden relative text-left">
       <div className="fixed inset-0 pointer-events-none opacity-[0.03] z-[100] grain-bg"></div>
-      <Navbar />
+      
+      {/* NAVBAR */}
+      <nav className={`fixed top-0 w-full z-[60] transition-all duration-300 ${isScrolled ? 'bg-black/95 backdrop-blur-md py-4 border-b border-white/5 shadow-2xl' : 'bg-transparent py-8'}`}>
+        <div className="absolute top-0 left-0 h-[2px] bg-purple-600 transition-all duration-150" style={{ width: `${scrollProgress}%` }}></div>
+        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center text-white">
+          <div className="flex items-center gap-4 cursor-pointer group" onClick={() => setCurrentPage('portfolio')}>
+             <div className="w-10 h-10 bg-purple-600 flex items-center justify-center rounded-lg shadow-lg group-hover:rotate-12 transition-transform duration-500">
+                <Monitor size={20} className="text-white" />
+             </div>
+             <div className="hidden sm:block text-left text-white">
+                <span className="text-lg font-black tracking-tighter block leading-none mb-1 text-left">FALDANGG<span className="text-purple-500">.AEP</span></span>
+                <span className="font-mono text-[8px] tracking-wider uppercase opacity-40 block text-left">Video Editor & Motion Designer</span>
+             </div>
+          </div>
+          <div className="flex items-center gap-6 md:gap-12">
+            {currentPage === 'portfolio' ? (
+              <div className="hidden lg:flex gap-10 font-mono text-[10px] tracking-[0.2em] uppercase text-white/50">
+                <a href="#hero" className="hover:text-purple-500 transition-colors text-white">Beranda</a>
+                <a href="#about" className="hover:text-purple-500 transition-colors text-white">Tentang</a>
+                <a href="#work" className="hover:text-purple-500 transition-colors text-white">Karya</a>
+                <button onClick={() => setCurrentPage('prices')} className="hover:text-purple-500 font-bold tracking-widest text-white/40 transition-colors">Daftar Harga</button>
+              </div>
+            ) : (
+              <button onClick={() => setCurrentPage('portfolio')} className="group flex items-center gap-3 text-white/50 hover:text-purple-500 transition-all">
+                <ArrowLeft size={14} /> <span className="font-mono text-[10px] font-black uppercase tracking-[0.4em]">Kembali</span>
+              </button>
+            )}
+            <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noopener noreferrer" 
+               className="group flex items-center gap-2 bg-white text-black px-6 py-2.5 rounded-sm font-mono text-[10px] font-bold uppercase tracking-widest hover:bg-green-500 hover:text-white transition-all shadow-lg active:scale-95">
+              <MessageCircle size={14} /> WhatsApp
+            </a>
+          </div>
+        </div>
+      </nav>
 
       {currentPage === 'portfolio' ? (
         <div className="portfolio-view">
@@ -197,7 +194,7 @@ const App = () => {
                <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-white/20"></div>
             </div>
             
-            <div className="relative z-10 max-w-5xl mx-auto">
+            <div className="relative z-10 text-center max-w-5xl mx-auto">
               <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-purple-500/20 bg-white/5 backdrop-blur-md mb-8 shadow-xl text-white">
                  <div className="flex items-center gap-2 border-r border-white/10 pr-3">
                     <div className="w-2 h-2 rounded-full bg-red-600 animate-pulse shadow-[0_0_8px_rgba(220,38,38,0.8)]"></div>
@@ -213,11 +210,11 @@ const App = () => {
                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-white to-white pb-1">ISKANDAR.</span>
               </h1>
 
-              <p className="max-w-xl mx-auto text-white/40 text-xs md:text-sm lg:text-base tracking-widest font-mono uppercase mb-12 leading-relaxed px-4 text-center">
+              <p className="max-w-xl mx-auto text-white/40 text-xs md:text-sm lg:text-base tracking-widest font-mono uppercase mb-10 leading-relaxed px-4 text-center">
                  Mentransformasi ide menjadi karya visual melalui high-end motion design dan penyuntingan video sinematik.
               </p>
               
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-20 text-white">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16 text-white">
                  <a href="#work" className="bg-purple-600 hover:bg-purple-500 text-white px-10 py-4 rounded-sm font-bold uppercase text-[10px] tracking-[0.3em] transition-all flex items-center gap-3 active:scale-95 shadow-xl shadow-purple-600/20 group">
                     Eksplorasi Karya <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                  </a>
@@ -249,7 +246,7 @@ const App = () => {
             <div className="animate-marquee inline-block">MOTION DESIGN • EDITING VIDEO • EFEK VISUAL • ANIMASI 2D • COLOR GRADING • CERITA SINEMATIK • &nbsp;</div>
           </div>
 
-          {/* ABOUT ME SECTION (Bilingual Toggle) */}
+          {/* ABOUT */}
           <section id="about" className="py-32 px-6 bg-[#080808] text-left">
             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-20 items-center">
               <div className="lg:col-span-7 text-left text-white">
@@ -271,9 +268,9 @@ const App = () => {
                     )}
                  </div>
 
-                 <div className="mb-12 text-left">
+                 <div className="mb-12">
                    <h4 className="text-[10px] font-mono uppercase tracking-[0.4em] text-white/30 mb-6 text-left">Keahlian Utama</h4>
-                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 text-left">
+                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                       {[
                         {name: 'After Effects', icon: <Layers size={14}/>},
                         {name: 'Premiere Pro', icon: <Clapperboard size={14}/>},
@@ -323,7 +320,7 @@ const App = () => {
             </div>
           </section>
 
-          {/* ARCHIVE GRID - ORIGINAL GENERATED STYLE */}
+          {/* ARCHIVE GRID */}
           <section id="work" className="py-32 px-6 border-t border-white/5 text-white text-left">
             <div className="max-w-7xl mx-auto text-left text-left">
               <div className="flex flex-col md:flex-row items-center justify-between mb-16 gap-8 text-white text-left text-left text-left">
