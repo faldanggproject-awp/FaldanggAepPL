@@ -139,6 +139,10 @@ const App = () => {
     window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(msg)}`, '_blank');
   };
 
+  const toggleFaq = (index) => {
+    setActiveFaq(activeFaq === index ? null : index);
+  };
+
   const formatTimecode = (date) => date.toLocaleTimeString('en-GB', { hour12: false });
 
   // --- UI COMPONENTS ---
@@ -184,8 +188,7 @@ const App = () => {
 
       {currentPage === 'portfolio' ? (
         <div className="portfolio-view">
-          {/* HERO */}
-          <section id="hero" className="relative min-h-screen flex items-center justify-center pt-20 px-6 text-center">
+          <section id="hero" className="relative min-h-screen flex items-center justify-center pt-20 px-6 text-center text-white">
             <div className="absolute inset-10 border-white/5 pointer-events-none z-0 opacity-50">
                <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-white/20"></div>
                <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-white/20"></div>
@@ -193,27 +196,25 @@ const App = () => {
                <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-white/20"></div>
             </div>
             
-            <div className="relative z-10 text-center max-w-5xl mx-auto">
+            <div className="relative z-10 max-w-5xl mx-auto">
               <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-purple-500/20 bg-white/5 backdrop-blur-md mb-8 shadow-xl text-white">
                  <div className="flex items-center gap-2 border-r border-white/10 pr-3">
-                    <div className="w-2 h-2 rounded-full bg-red-600 animate-pulse shadow-[0_0_8px_rgba(220,38,38,0.8)]"></div>
-                    <span className="font-mono text-[9px] font-black text-white opacity-80 tracking-tighter uppercase">{formatTimecode(currentTime)}</span>
+                    <div className="w-2 h-2 rounded-full bg-red-600 animate-pulse"></div>
+                    <span className="font-mono text-[9px] font-black text-white opacity-80 uppercase">{formatTimecode(currentTime)}</span>
                  </div>
-                 <span className="font-mono text-[9px] sm:text-[10px] tracking-[0.1em] uppercase text-purple-400 font-black">
-                   FROM RAW TO WOW
-                 </span>
+                 <span className="font-mono text-[9px] sm:text-[10px] tracking-[0.1em] uppercase text-purple-400 font-black">FROM RAW TO WOW</span>
               </div>
               
-              <h1 className="text-[14vw] sm:text-[12vw] md:text-[8vw] font-black leading-[0.82] tracking-tighter uppercase mb-10 italic drop-shadow-2xl text-white">
+              <h1 className="text-[14vw] sm:text-[12vw] md:text-[8vw] font-black leading-[0.82] tracking-tighter uppercase mb-6 italic drop-shadow-2xl text-white">
                 <span className="block opacity-95 mb-1">FADLAN</span>
                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-white to-white pb-1">ISKANDAR.</span>
               </h1>
 
-              <p className="max-w-xl mx-auto text-white/40 text-xs md:text-sm lg:text-base tracking-widest font-mono uppercase mb-12 leading-relaxed px-4 text-center">
+              <p className="max-w-xl mx-auto text-white/40 text-xs md:text-sm lg:text-base tracking-widest font-mono uppercase mb-10 leading-relaxed px-4">
                  Mentransformasi ide menjadi karya visual melalui high-end motion design dan penyuntingan video sinematik.
               </p>
               
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-20 text-white">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16">
                  <a href="#work" className="bg-purple-600 hover:bg-purple-500 text-white px-10 py-4 rounded-sm font-bold uppercase text-[10px] tracking-[0.3em] transition-all flex items-center gap-3 active:scale-95 shadow-xl shadow-purple-600/20 group">
                     Eksplorasi Karya <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                  </a>
@@ -223,87 +224,62 @@ const App = () => {
               </div>
 
               <div className="flex justify-center gap-12 sm:gap-24 py-8 border-y border-white/5">
-                <div className="text-center group">
-                  <span className="block text-2xl font-black italic tracking-tighter text-white group-hover:text-purple-500 transition-colors">50+</span>
-                  <span className="text-[9px] font-mono uppercase tracking-widest text-white/30">Proyek Selesai</span>
-                </div>
-                <div className="text-center group">
-                  <span className="block text-2xl font-black italic tracking-tighter text-white group-hover:text-purple-500 transition-colors">2023</span>
-                  <span className="text-[9px] font-mono uppercase tracking-widest text-white/30">Sejak Memulai</span>
-                </div>
-                <div className="text-center group">
-                  <span className="block text-2xl font-black italic tracking-tighter text-white group-hover:text-purple-500 transition-colors">100%</span>
-                  <span className="text-[9px] font-mono uppercase tracking-widest text-white/30">Kepuasan</span>
-                </div>
+                <div className="text-center group"><span className="block text-2xl font-black italic tracking-tighter text-white group-hover:text-purple-500 transition-colors">50+</span><span className="text-[9px] font-mono uppercase tracking-widest text-white/30">Proyek Selesai</span></div>
+                <div className="text-center group"><span className="block text-2xl font-black italic tracking-tighter text-white group-hover:text-purple-500 transition-colors">2023</span><span className="text-[9px] font-mono uppercase tracking-widest text-white/30">Sejak Memulai</span></div>
+                <div className="text-center group"><span className="block text-2xl font-black italic tracking-tighter text-white group-hover:text-purple-500 transition-colors">100%</span><span className="text-[9px] font-mono uppercase tracking-widest text-white/30">Kepuasan</span></div>
               </div>
             </div>
           </section>
 
           {/* MARQUEE */}
           <div className="bg-white text-black py-4 overflow-hidden flex whitespace-nowrap border-y border-black font-black uppercase italic tracking-tighter text-sm sm:text-xl relative z-20">
-            <div className="animate-marquee inline-block">
-               MOTION DESIGN • EDITING VIDEO • EFEK VISUAL • ANIMASI 2D • COLOR GRADING • CERITA SINEMATIK • &nbsp;
-            </div>
-            <div className="animate-marquee inline-block">
-               MOTION DESIGN • EDITING VIDEO • EFEK VISUAL • ANIMASI 2D • COLOR GRADING • CERITA SINEMATIK • &nbsp;
-            </div>
+            <div className="animate-marquee inline-block">MOTION DESIGN • EDITING VIDEO • EFEK VISUAL • ANIMASI 2D • COLOR GRADING • CERITA SINEMATIK • &nbsp;</div>
+            <div className="animate-marquee inline-block">MOTION DESIGN • EDITING VIDEO • EFEK VISUAL • ANIMASI 2D • COLOR GRADING • CERITA SINEMATIK • &nbsp;</div>
           </div>
 
           {/* ABOUT */}
-          <section id="about" className="py-32 px-6 bg-[#080808] text-left">
+          <section id="about" className="py-32 px-6 bg-[#080808] text-left text-white">
             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-20 items-center">
-              <div className="lg:col-span-7 text-left text-white">
-                 <div className="flex items-center justify-between mb-12 border-b border-white/5 pb-6 text-white text-left">
-                   <div className="flex items-center gap-4 text-white text-left">
+              <div className="lg:col-span-7">
+                 <div className="flex items-center justify-between mb-12 border-b border-white/5 pb-6">
+                   <div className="flex items-center gap-4 text-white">
                       <div className="w-2 h-8 bg-purple-600"></div>
-                      <h2 className="text-4xl md:text-6xl font-black uppercase italic tracking-tighter text-white">
-                         Tentang Saya.
-                      </h2>
+                      <h2 className="text-4xl md:text-6xl font-black uppercase italic tracking-tighter">Tentang Saya.</h2>
                    </div>
                    <button onClick={() => setLangAbout(langAbout === 'ID' ? 'EN' : 'ID')} className="font-mono text-[10px] tracking-widest border border-white/20 hover:bg-white hover:text-black px-4 py-2 rounded-sm transition-all flex items-center gap-2 text-white">
-                     <Languages size={14} /> {langAbout === 'ID' ? 'ID' : 'EN'}
+                     <Languages size={14} /> {langAbout}
                    </button>
                  </div>
-                 
                  <div className="space-y-8 text-white/70 text-lg md:text-xl font-medium leading-relaxed mb-12 text-justify">
                     {langAbout === 'ID' ? (
-                      <p>
-                        Saya <span className="text-white font-black italic">Muhammad Fadlan Iskandar</span>, 
-                        Video Editor & Motion Graphics Designer berbasis di Indonesia. Sejak 2023, saya telah mendedikasikan diri untuk mentransformasi setiap cuplikan video yang awalnya <span className="text-white font-bold underline decoration-purple-600 decoration-2 underline-offset-4 text-white text-left text-white">Raw (mentah)</span> menjadi karya visual yang memberikan kesan <span className="text-purple-500 font-black italic">"Wow"</span>.
-                      </p>
+                      <p>Saya <span className="text-white font-black italic">Muhammad Fadlan Iskandar</span>, Video Editor & Motion Graphics Designer berbasis di Indonesia. Sejak 2023, saya telah mendedikasikan diri untuk mentransformasi setiap cuplikan video yang awalnya <span className="text-white font-bold underline decoration-purple-600 decoration-2 underline-offset-4 text-white text-left text-white">Raw (mentah)</span> menjadi karya visual yang memberikan kesan <span className="text-purple-500 font-black italic">"Wow"</span>.</p>
                     ) : (
-                      <p>
-                        I am <span className="text-white font-black italic text-white">Muhammad Fadlan Iskandar</span>, 
-                        an Indonesia-based Video Editor & Motion Graphics Designer. Since 2023, I have dedicated myself to transforming every piece of <span className="text-white font-bold underline decoration-purple-600 decoration-2 underline-offset-4 text-white text-left text-white">Raw footage</span> into a visual masterpiece with a definitive <span className="text-purple-500 font-black italic text-left text-white">"Wow"</span> factor.</p>
+                      <p>I am <span className="text-white font-black italic text-white">Muhammad Fadlan Iskandar</span>, an Indonesia-based Video Editor & Motion Graphics Designer. Since 2023, I have dedicated myself to transforming every piece of <span className="text-white font-bold underline decoration-purple-600 decoration-2 underline-offset-4 text-white text-left text-white">Raw footage</span> into a visual masterpiece with a definitive <span className="text-purple-500 font-black italic">"Wow"</span> factor.</p>
                     )}
                  </div>
-
-                 <div className="mb-12">
-                   <h4 className="text-[10px] font-mono uppercase tracking-[0.4em] text-white/30 mb-6 text-left">Keahlian Utama</h4>
-                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                      {[
-                        {name: 'After Effects', icon: <Layers size={14}/>},
-                        {name: 'Premiere Pro', icon: <Clapperboard size={14}/>},
-                        {name: 'Illustrator', icon: <Layout size={14}/>},
-                        {name: 'VFX & SFX', icon: <Zap size={14}/>},
-                        {name: 'Typography', icon: <Tv size={14}/>},
-                        {name: 'Storytelling', icon: <Star size={14}/>}
-                      ].map((item, i) => (
-                        <div key={i} className="flex items-center gap-3 p-4 bg-white/5 border border-white/5 rounded-sm hover:border-purple-600/50 hover:bg-purple-600/5 transition-all duration-300 text-left">
-                           <span className="text-purple-500">{item.icon}</span>
-                           <span className="text-[11px] font-bold uppercase tracking-widest text-white/60">{item.name}</span>
-                        </div>
-                      ))}
-                   </div>
+                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                    {[
+                      {name: 'After Effects', icon: <Layers size={14}/>},
+                      {name: 'Premiere Pro', icon: <Clapperboard size={14}/>},
+                      {name: 'Illustrator', icon: <Layout size={14}/>},
+                      {name: 'VFX & SFX', icon: <Zap size={14}/>},
+                      {name: 'Typography', icon: <Tv size={14}/>},
+                      {name: 'Storytelling', icon: <Star size={14}/>}
+                    ].map((item, i) => (
+                      <div key={i} className="flex items-center gap-3 p-4 bg-white/5 border border-white/5 rounded-sm hover:border-purple-600/50 transition-all duration-300">
+                         <span className="text-purple-500">{item.icon}</span>
+                         <span className="text-[11px] font-bold uppercase tracking-widest text-white/60">{item.name}</span>
+                      </div>
+                    ))}
                  </div>
               </div>
-              <div className="lg:col-span-5 relative text-left">
-                 <div className="relative aspect-[4/5] rounded-sm overflow-hidden border border-white/10 grayscale hover:grayscale-0 transition-all duration-1000 bg-neutral-900 shadow-2xl group text-left text-left text-left">
-                    <img src={profilePhoto} alt="Fadlan" className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000 text-left text-left text-left" />
-                    <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent opacity-80 text-left text-left text-left"></div>
+              <div className="lg:col-span-5 relative">
+                 <div className="relative aspect-[4/5] rounded-sm overflow-hidden border border-white/10 grayscale hover:grayscale-0 transition-all duration-1000 bg-neutral-900 shadow-2xl group text-left">
+                    <img src={profilePhoto} alt="Fadlan" className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000" />
+                    <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent opacity-80"></div>
                     <div className="absolute bottom-6 left-6 text-white text-left">
-                      <p className="text-[10px] font-mono uppercase tracking-[0.4em] text-purple-500 mb-2 text-left">Profil Kreatif</p>
-                      <p className="text-2xl font-black italic uppercase tracking-tighter text-white text-left text-left">Fadlan Iskandar</p>
+                      <p className="text-[10px] font-mono uppercase tracking-[0.4em] text-purple-500 mb-2">Profil Kreatif</p>
+                      <p className="text-2xl font-black italic uppercase tracking-tighter">Fadlan Iskandar</p>
                     </div>
                  </div>
               </div>
@@ -313,19 +289,18 @@ const App = () => {
           {/* SHOWREEL */}
           <section id="showreel" className="py-24 px-6 bg-black text-left">
             <div className="max-w-7xl mx-auto">
-              <div className="mb-12 flex flex-col md:flex-row items-end justify-between gap-6 border-l-2 border-purple-600 pl-6 text-white text-left text-left">
-                <h2 className="text-4xl md:text-6xl font-black uppercase italic tracking-tighter text-left text-white text-left text-left">THE MASTER REEL.</h2>
+              <div className="mb-12 flex flex-col md:flex-row items-end justify-between gap-6 border-l-2 border-purple-600 pl-6">
+                <h2 className="text-4xl md:text-6xl font-black uppercase italic tracking-tighter text-white">THE MASTER REEL.</h2>
               </div>
-              <div className="group relative aspect-video w-full rounded-sm overflow-hidden border border-white/5 bg-[#0a0a0a] cursor-pointer shadow-3xl text-left text-left" onClick={() => setSelectedVideo(showreelData)}>
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-900/40 to-black flex items-center justify-center overflow-hidden">
-                   <div className="absolute inset-0 opacity-10 grain-bg"></div>
-                   <Clapperboard size={120} className="text-white/5 transform -rotate-12" />
+              <div className="group relative aspect-video w-full rounded-sm overflow-hidden border border-white/5 bg-[#0a0a0a] cursor-pointer shadow-3xl" onClick={() => setSelectedVideo(showreelData)}>
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 to-black flex items-center justify-center overflow-hidden">
+                   <Clapperboard size={120} className="text-white/5 transform -rotate-12 group-hover:scale-110 transition-transform duration-1000" />
                 </div>
                 <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                   <div className="w-20 h-20 rounded-full border-2 border-white/20 flex items-center justify-center group-hover:bg-purple-600 group-hover:border-purple-600 transition-all duration-300 shadow-2xl text-center">
-                      <Play fill="white" size={28} className="ml-1 text-white text-center" />
+                   <div className="w-20 h-20 rounded-full border-2 border-white/20 flex items-center justify-center group-hover:bg-purple-600 group-hover:border-purple-600 transition-all duration-300 shadow-2xl">
+                      <Play fill="white" size={28} className="ml-1 text-white" />
                    </div>
-                   <span className="mt-6 font-mono text-[9px] tracking-[0.8em] uppercase text-white/40 group-hover:text-white transition-colors text-center text-center">Mulai Tonton</span>
+                   <span className="mt-6 font-mono text-[9px] tracking-[0.8em] uppercase text-white/40 group-hover:text-white transition-colors">Mulai Tonton</span>
                 </div>
               </div>
             </div>
@@ -333,12 +308,12 @@ const App = () => {
 
           {/* ARCHIVE */}
           <section id="work" className="py-32 px-6 border-t border-white/5 text-white text-left">
-            <div className="max-w-7xl mx-auto text-left text-left">
-              <div className="flex flex-col md:flex-row items-center justify-between mb-16 gap-8 text-white text-left text-left">
-                <h2 className="text-5xl font-black uppercase italic tracking-tighter text-left text-white text-left text-left">ARSIP.</h2>
-                <div className="flex flex-wrap justify-center gap-2 p-1.5 bg-white/5 rounded-sm text-left">
+            <div className="max-w-7xl mx-auto">
+              <div className="flex flex-col md:flex-row items-center justify-between mb-16 gap-8 text-white">
+                <h2 className="text-5xl font-black uppercase italic tracking-tighter text-left text-white">ARSIP.</h2>
+                <div className="flex flex-wrap justify-center gap-2 p-1.5 bg-white/5 rounded-sm">
                   {categories.map((cat, idx) => (
-                    <button key={idx} onClick={() => setActiveFilter(cat)} className={`px-6 py-2 rounded-sm text-[9px] font-black uppercase tracking-widest transition-all ${activeFilter === cat ? 'bg-purple-600 text-white shadow-lg shadow-purple-600/20' : 'hover:bg-white/10 text-white/40'}`}>
+                    <button key={idx} onClick={() => setActiveFilter(cat)} className={`px-6 py-2 rounded-sm text-[9px] font-black uppercase tracking-widest transition-all ${activeFilter === cat ? 'bg-purple-600 text-white shadow-lg' : 'hover:bg-white/10 text-white/40'}`}>
                       {cat}
                     </button>
                   ))}
@@ -346,33 +321,21 @@ const App = () => {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left text-white">
                 {filteredProjects.map((project) => (
-                  <div key={project.id} className="group relative aspect-[1.1/1] overflow-hidden border border-white/5 cursor-pointer rounded-sm bg-[#0a0a0a] shadow-xl text-left" onClick={() => setSelectedVideo(project)}>
-                    <div className={`absolute inset-0 z-0 bg-gradient-to-br transition-all duration-700 ${
-                      project.category === 'Video Editing' ? 'from-blue-950/40' : 
-                      project.category === 'Motion Graphics' ? 'from-purple-950/40' : 
-                      'from-emerald-950/40'
-                    } to-black group-hover:opacity-60`}></div>
+                  <div key={project.id} className="group relative aspect-[1.1/1] overflow-hidden border border-white/5 cursor-pointer rounded-sm bg-[#0a0a0a] shadow-xl" onClick={() => setSelectedVideo(project)}>
+                    <div className={`absolute inset-0 z-0 bg-gradient-to-br transition-all duration-700 ${project.category === 'Video Editing' ? 'from-blue-950/40' : project.category === 'Motion Graphics' ? 'from-purple-950/40' : 'from-emerald-950/40'} to-black group-hover:opacity-60`}></div>
                     <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] group-hover:opacity-[0.07] transition-opacity duration-700">
                        {project.category === 'Video Editing' ? <Clapperboard size={120} /> : project.category === 'Motion Graphics' ? <Layers size={120} /> : <Zap size={120} />}
                     </div>
-                    <div className={`w-full h-full flex flex-col items-start justify-end p-8 border-b-4 ${
-                      project.category === 'Video Editing' ? 'border-blue-500/20' : 
-                      project.category === 'Motion Graphics' ? 'border-purple-500/20' : 
-                      'border-emerald-500/20'
-                    } group-hover:border-purple-500 transition-all duration-500 relative z-10 text-left`}>
+                    <div className={`w-full h-full flex flex-col items-start justify-end p-8 border-b-4 ${project.category === 'Video Editing' ? 'border-blue-500/20' : project.category === 'Motion Graphics' ? 'border-purple-500/20' : 'border-emerald-500/20'} group-hover:border-purple-500 transition-all duration-500 relative z-10 text-left`}>
                       <div className="w-full text-left text-white">
                         <div className="flex items-center gap-2 mb-3">
-                           <div className={`w-1 h-1 rounded-full ${
-                             project.category === 'Video Editing' ? 'bg-blue-500' : 
-                             project.category === 'Motion Graphics' ? 'bg-purple-500' : 
-                             'bg-emerald-500'
-                           }`}></div>
+                           <div className={`w-1 h-1 rounded-full ${project.category === 'Video Editing' ? 'bg-blue-500' : project.category === 'Motion Graphics' ? 'bg-purple-500' : 'bg-emerald-500'}`}></div>
                            <span className="text-[8px] font-mono uppercase tracking-[0.3em] opacity-40">{project.category}</span>
                         </div>
                         <h4 className="text-white font-bold uppercase text-lg leading-tight tracking-tight group-hover:text-purple-400 transition-colors text-left">{project.title}</h4>
                         <div className="mt-6 flex items-center gap-2 overflow-hidden text-white">
                            <span className="h-[1px] w-6 bg-purple-500 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-700"></span>
-                           <span className="font-mono text-[8px] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity delay-100 text-left text-left">Buka Arsip</span>
+                           <span className="font-mono text-[8px] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity delay-100">Buka Arsip</span>
                         </div>
                       </div>
                     </div>
@@ -387,105 +350,78 @@ const App = () => {
             </div>
           </section>
 
-          <footer className="py-20 px-6 border-t border-white/5 text-center bg-black text-white text-center text-center">
-            <div className="max-w-4xl mx-auto mb-16 text-white text-center text-center">
-               <h2 className="text-6xl md:text-8xl font-black italic uppercase tracking-tighter mb-12 text-center text-white">HUBUNGI SAYA.</h2>
-               <div className="flex justify-center gap-10">
-                  <a href="https://www.instagram.com/faldangg.aep/" target="_blank" className="p-4 rounded-sm border border-white/5 hover:border-purple-600 hover:text-purple-500 hover:-translate-y-1 transition-all text-white shadow-xl text-center"><Instagram size={28} /></a>
-                  <a href="https://www.tiktok.com/@fadlaniskandarpro" target="_blank" className="p-4 rounded-sm border border-white/5 hover:border-purple-600 hover:text-purple-500 hover:-translate-y-1 transition-all text-white shadow-xl text-center"><TikTokIcon className="w-7 h-7" /></a>
-               </div>
+          {/* FOOTER */}
+          <footer className="py-20 px-6 border-t border-white/5 text-center bg-black text-white">
+            <h2 className="text-6xl md:text-8xl font-black italic uppercase tracking-tighter mb-12 text-center">HUBUNGI SAYA.</h2>
+            <div className="flex justify-center gap-10 mb-12">
+               <a href="https://www.instagram.com/faldangg.aep/" target="_blank" className="p-4 rounded-sm border border-white/5 hover:border-purple-600 hover:text-purple-500 transition-all text-white"><Instagram size={28} /></a>
+               <a href="https://www.tiktok.com/@fadlaniskandarpro" target="_blank" className="p-4 rounded-sm border border-white/5 hover:border-purple-600 hover:text-purple-500 transition-all text-white"><TikTokIcon className="w-7 h-7" /></a>
             </div>
-            <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 font-mono text-[8px] uppercase tracking-[0.4em] opacity-20 text-white text-center">
+            <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 font-mono text-[8px] uppercase tracking-[0.4em] opacity-20">
               <span>© 2026 Muhammad Fadlan Iskandar — Faldangg.aep</span>
-              <div className="flex gap-8 text-white text-center text-center">
-                 <span>UTC+7 Depok</span>
-                 <span>{whatsappNumber}</span>
-              </div>
+              <div className="flex gap-8"><span>UTC+7 Depok</span><span>{whatsappNumber}</span></div>
             </div>
           </footer>
         </div>
       ) : (
-        /* PRICES VIEW (PL) */
-        <div className="prices-page min-h-screen bg-[#050505] text-white text-left animate-fade-in text-left text-left">
-          <section className="pt-40 pb-32 px-6 text-left text-left text-left">
-            <div className="max-w-7xl mx-auto text-white text-left text-white text-left text-left text-left">
-              <div className="flex flex-col items-center text-center mb-20 text-left text-white text-left text-left">
-                 <div className="inline-flex items-center gap-3 px-4 py-2 bg-white/5 rounded-full border border-white/10 text-white/50 text-[10px] font-bold uppercase tracking-[0.4em] mb-6 shadow-xl text-left text-white text-left text-left">
-                    <Tag size={14} className="text-purple-500" /> Panduan Investasi
-                 </div>
-                 <h2 className="text-6xl md:text-8xl font-black uppercase italic tracking-tighter mb-6 text-center text-white text-center text-center text-center">HARGA.</h2>
-                 <p className="text-white/40 font-mono text-xs uppercase tracking-widest max-w-2xl leading-relaxed text-center text-white text-center text-center text-center">
-                    Solusi visual profesional untuk menaikkan level konten Anda. Pilih paket yang paling sesuai dengan visi kreatif Anda.
-                 </p>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-40 text-white text-left text-left text-left text-left">
-                {pricingPlans.map((plan, i) => (
-                  <div key={i} className={`p-10 rounded-sm border transition-all duration-300 flex flex-col relative overflow-hidden text-left text-left text-left text-left ${plan.popular ? 'border-purple-500 bg-[#111] shadow-2xl z-10 scale-105' : 'bg-white/5 border-white/5 opacity-80 hover:opacity-100'}`}>
-                    {plan.popular && <div className="absolute top-0 right-0 bg-gradient-to-r from-purple-600 to-rose-600 text-white text-[9px] font-black px-4 py-1 uppercase tracking-widest shadow-lg text-left text-left text-left">Best Seller</div>}
-                    <div className="mb-8 text-white text-left">{plan.icon} <h3 className={`text-3xl font-black italic mt-4 uppercase tracking-tighter ${plan.popular ? 'text-purple-400' : 'text-white text-left text-left text-left'}`}>{plan.title}</h3></div>
-                    <div className="text-4xl font-black mb-4 tracking-tighter italic text-white text-left text-white text-left text-left text-left">{plan.price}<span className="text-sm font-mono font-normal opacity-40 ml-2 text-white text-left text-left text-left">Per Menit</span></div>
-                    <div className="space-y-4 mb-12 flex-grow text-white text-left text-left text-left text-left">
-                      {plan.features.map((f, j) => (
-                        <div key={j} className="flex items-center gap-3 text-xs font-bold uppercase tracking-wider text-white text-left text-white text-left text-left text-left text-left"><Check size={14} className="text-purple-500" strokeWidth={4} /> {f}</div>
-                      ))}
-                    </div>
-                    <button onClick={() => handleOrder(plan.title)} className={`w-full py-5 rounded-sm font-black uppercase text-[11px] tracking-[0.3em] transition-all shadow-xl active:scale-95 ${plan.popular ? 'bg-purple-600 text-white hover:bg-purple-500' : 'bg-white/10 hover:bg-white/20 text-white'}`}>Pesan Sekarang</button>
-                  </div>
-                ))}
-              </div>
-
-              <div className="max-w-3xl mx-auto mt-32 text-white text-left text-left text-left text-left">
-                <div className="text-center mb-16 text-white text-left text-center text-center text-center">
-                   <p className="font-mono text-[10px] tracking-[0.4em] uppercase text-purple-500 mb-2 text-center text-left text-left text-left text-left text-left">Pertanyaan Umum</p>
-                   <h2 className="text-4xl md:text-5xl font-black italic uppercase tracking-tighter text-center text-white text-center text-center text-center text-center text-center">FAQ.</h2>
+        /* PRICE LIST VIEW */
+        <div className="prices-page min-h-screen pt-32 px-6 bg-[#050505] text-white">
+          <div className="max-w-7xl mx-auto text-center mb-20">
+             <div className="inline-flex items-center gap-3 px-4 py-2 bg-white/5 rounded-full border border-white/10 text-white/50 text-[10px] font-bold uppercase tracking-[0.4em] mb-6"><Tag size={14} className="text-purple-500" /> Panduan Investasi</div>
+             <h2 className="text-6xl md:text-8xl font-black uppercase italic tracking-tighter mb-6">HARGA.</h2>
+             <p className="text-white/40 font-mono text-xs uppercase tracking-widest max-w-2xl mx-auto leading-relaxed">Pilih paket yang paling sesuai dengan visi kreatif Anda.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-40 max-w-7xl mx-auto">
+            {pricingPlans.map((plan, i) => (
+              <div key={i} className={`p-10 rounded-sm border transition-all duration-300 flex flex-col relative overflow-hidden text-left ${plan.popular ? 'border-purple-500 bg-[#111] shadow-2xl z-10 scale-105' : 'bg-white/5 border-white/5 opacity-80 hover:opacity-100'}`}>
+                {plan.popular && <div className="absolute top-0 right-0 bg-gradient-to-r from-purple-600 to-rose-600 text-white text-[9px] font-black px-4 py-1 uppercase tracking-widest shadow-lg">Best Seller</div>}
+                <div className="mb-8">{plan.icon} <h3 className={`text-3xl font-black italic mt-4 uppercase tracking-tighter ${plan.popular ? 'text-purple-400' : 'text-white'}`}>{plan.title}</h3></div>
+                <div className="text-4xl font-black mb-4 tracking-tighter italic">{plan.price}<span className="text-sm font-mono font-normal opacity-40 ml-2">Per Menit</span></div>
+                <div className="space-y-4 mb-12 flex-grow">
+                  {plan.features.map((f, j) => (<div key={j} className="flex items-center gap-3 text-xs font-bold uppercase tracking-wider text-white"><Check size={14} className="text-purple-500" strokeWidth={4} /> {f}</div>))}
                 </div>
-                <div className="space-y-4 text-left text-white text-left text-left text-left text-left">
-                  {faqs.map((faq, index) => (
-                    <div key={index} className="rounded-sm border border-white/5 bg-[#0a0a0a] overflow-hidden transition-all shadow-lg text-left text-white text-left text-left text-left text-left text-left">
-                      <button onClick={() => toggleFaq(index)} className="w-full px-8 py-6 flex items-center justify-between text-left group text-white text-left text-left text-left text-left text-left text-left">
-                        <span className="font-black italic uppercase tracking-widest text-sm text-white/80 group-hover:text-white transition-colors text-left text-white text-left text-left text-left text-left text-left">{faq.q}</span>
-                        <ChevronDown className={`transition-transform duration-500 text-purple-500 ${activeFaq === index ? 'rotate-180' : ''}`} />
-                      </button>
-                      {activeFaq === index && <div className="px-8 pb-8 text-white/50 text-sm leading-relaxed font-medium text-left text-white text-left text-left text-left text-left text-left">{faq.a}</div>}
-                    </div>
-                  ))}
-                </div>
+                <button onClick={() => handleOrder(plan.title)} className={`w-full py-5 rounded-sm font-black uppercase text-[11px] tracking-[0.3em] transition-all active:scale-95 ${plan.popular ? 'bg-purple-600 text-white' : 'bg-white/10 text-white'}`}>Pesan Sekarang</button>
               </div>
+            ))}
+          </div>
+          <div className="max-w-3xl mx-auto mb-40">
+            <h2 className="text-4xl md:text-5xl font-black italic uppercase tracking-tighter text-center mb-12">FAQ.</h2>
+            <div className="space-y-4">
+              {faqs.map((faq, index) => (
+                <div key={index} className="rounded-sm border border-white/5 bg-[#0a0a0a] overflow-hidden shadow-lg">
+                  <button onClick={() => setActiveFaq(activeFaq === index ? null : index)} className="w-full px-8 py-6 flex items-center justify-between text-left group text-white">
+                    <span className="font-black italic uppercase tracking-widest text-sm text-white/80 group-hover:text-white">{faq.q}</span>
+                    <ChevronDown className={`transition-transform duration-500 text-purple-500 ${activeFaq === index ? 'rotate-180' : ''}`} />
+                  </button>
+                  {activeFaq === index && <div className="px-8 pb-8 text-white/50 text-sm leading-relaxed">{faq.a}</div>}
+                </div>
+              ))}
             </div>
-          </section>
-          <footer className="py-20 px-6 border-t border-white/5 text-center bg-black text-white text-center text-center text-center">
-            <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 font-mono text-[8px] uppercase tracking-[0.4em] opacity-20 text-white text-center text-white text-center text-center text-center">
-              <span>© 2026 Muhammad Fadlan Iskandar — Faldangg.aep</span>
-              <span className="text-white text-center text-center text-center text-center">{whatsappNumber}</span>
-            </div>
-          </footer>
+          </div>
+          <footer className="py-20 text-center border-t border-white/5 font-mono text-[8px] uppercase tracking-[0.4em] opacity-20">© 2026 Muhammad Fadlan Iskandar — Faldangg.aep</footer>
         </div>
       )}
 
-      {/* VIDEO MODAL */}
+      {/* MODAL */}
       {selectedVideo && (
-        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-10 text-white text-left text-left text-left">
-          <div className="absolute inset-0 bg-black/98 backdrop-blur-xl animate-fade-in text-left text-left text-left text-left" onClick={() => setSelectedVideo(null)}></div>
-          <div className={`relative w-full bg-[#0a0a0a] rounded-sm overflow-hidden shadow-[0_0_100px_rgba(0,0,0,0.8)] border border-white/10 flex flex-col max-h-[90vh] transition-all duration-300 ${selectedVideo.isVertical ? 'max-w-[400px]' : 'max-w-6xl'}`}>
+        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-10 text-white text-left">
+          <div className="absolute inset-0 bg-black/98 backdrop-blur-xl animate-fade-in" onClick={() => setSelectedVideo(null)}></div>
+          <div className={`relative w-full bg-[#0a0a0a] rounded-sm overflow-hidden shadow-3xl border border-white/10 flex flex-col max-h-[90vh] transition-all duration-300 ${selectedVideo.isVertical ? 'max-w-[400px]' : 'max-w-6xl'}`}>
             <div className="absolute top-0 left-0 w-full h-14 z-[130] flex items-center justify-between px-6 pointer-events-none">
-               <span className="bg-purple-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest shadow-lg pointer-events-auto text-left text-left text-left text-left">{selectedVideo.category}</span>
-               <button className="bg-black/50 p-2.5 rounded-full hover:bg-white hover:text-black transition-all shadow-lg active:scale-90 pointer-events-auto text-left text-left text-left text-left" onClick={() => setSelectedVideo(null)}><X size={18} /></button>
+               <span className="bg-purple-600 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest pointer-events-auto">{selectedVideo.category}</span>
+               <button className="bg-black/50 p-2.5 rounded-full hover:bg-white hover:text-black transition-all shadow-lg active:scale-90 pointer-events-auto" onClick={() => setSelectedVideo(null)}><X size={18} /></button>
             </div>
             <div className={`w-full bg-black flex items-center justify-center relative overflow-hidden ${selectedVideo.isVertical ? 'aspect-[9/16]' : 'aspect-video'}`}>
-              <iframe src={selectedVideo.videoUrl} className="w-full h-full border-0 text-left text-left text-left text-left text-left" title={selectedVideo.title} allowFullScreen></iframe>
+              <iframe src={selectedVideo.videoUrl} className="w-full h-full border-0" title={selectedVideo.title} allowFullScreen></iframe>
             </div>
-            <div className="p-8 md:p-10 bg-[#080808] border-t border-white/5 overflow-y-auto shrink-0 text-left text-white text-left text-left text-left">
-              <div className="flex flex-col text-white text-left text-left text-left text-left text-left">
-                <h2 className={`${selectedVideo.isVertical ? 'text-2xl' : 'text-3xl md:text-5xl'} font-black uppercase italic tracking-tighter text-white mb-4 text-left text-white text-left text-left text-left`}>{selectedVideo.title}</h2>
-                <p className="text-white/40 leading-relaxed text-sm md:text-base max-w-3xl border-l-2 border-white/10 pl-6 text-justify text-white text-left text-left text-left">{selectedVideo.desc}</p>
-              </div>
+            <div className="p-8 md:p-10 bg-[#080808] border-t border-white/5 overflow-y-auto shrink-0 text-left text-white">
+              <h2 className={`${selectedVideo.isVertical ? 'text-2xl' : 'text-3xl md:text-5xl'} font-black uppercase italic tracking-tighter text-white mb-4`}>{selectedVideo.title}</h2>
+              <p className="text-white/40 leading-relaxed text-sm md:text-base max-w-3xl border-l-2 border-white/10 pl-6 text-justify">{selectedVideo.desc}</p>
             </div>
           </div>
         </div>
       )}
 
-      {/* CSS STYLES */}
       <style>{`
         html { scroll-behavior: smooth; }
         body { background-color: #050505; color: white; margin: 0; text-align: left; }
