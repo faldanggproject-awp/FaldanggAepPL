@@ -70,7 +70,7 @@ const App = () => {
   const projects = [
     { id: 1, title: "Social Media Storytelling", category: "Video Editing", isVertical: true, videoUrl: "https://drive.google.com/file/d/19gjVMRb8YBiWmyKqLD0QvE1Asf_aAV8v/preview", desc: "Video Storytelling Edukasi Tentang Berbisnis Di Sosial Media." },
     { id: 2, title: "Marketing Strategy", category: "Video Editing", isVertical: true, videoUrl: "https://drive.google.com/file/d/1uHtsGTRCZMU7dnrcmZU-QFXNtVKQvn87/preview", desc: "Video Storytelling Marketing Untuk @sozmedagency." },
-    { id: 3, title: "Short Clips Edition", category: "Video Editing", isVertical: true, videoUrl: "https://drive.google.com/file/d/1NEHJhGfpC-sSgerLr7IHKpadding-uvrdiaFrp/preview", desc: "Video Storytelling Motivasi Dari Video Panjang Timothy Ronald dan di buat menjadi (CLIP)." },
+    { id: 3, title: "Short Clips Edition", category: "Video Editing", isVertical: true, videoUrl: "https://drive.google.com/file/d/1NEHJhGfpC-sSgerLr7IHKuvrdiaFrp/preview", desc: "Video Storytelling Motivasi Dari Video Panjang Timothy Ronald dan di buat menjadi (CLIP)." },
     { id: 4, title: "Education Series", category: "Video Editing", isVertical: true, videoUrl: "https://drive.google.com/file/d/1NADGk2fXcYkjlwqctPfwRtso37B2HrGt/preview", desc: "Video Storytelling Edukasi Tentang Perbedaan Berserah atau Pasrah." },
     { id: 6, title: "Name Animation AI", category: "Motion Graphics", isVertical: false, videoUrl: "https://drive.google.com/file/d/1J2NQf5ihoyj2TyB2AvyTWq4aj36nFGjs/preview", desc: "Membuat nama di Adobe Illustrator dengan Motion Graphics." },
     { id: 7, title: "Chess Motion Graphic", category: "Motion Graphics", isVertical: false, videoUrl: "https://drive.google.com/file/d/1RX_jaAZEwnDMyt-mIKQSjYnX6_IsjVkJ/preview", desc: "Motion Graphics permainan catur." },
@@ -139,6 +139,10 @@ const App = () => {
     window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(msg)}`, '_blank');
   };
 
+  const toggleFaq = (index) => {
+    setActiveFaq(activeFaq === index ? null : index);
+  };
+
   const formatTimecode = (date) => date.toLocaleTimeString('en-GB', { hour12: false });
 
   // --- UI COMPONENTS ---
@@ -199,7 +203,6 @@ const App = () => {
                     <div className="w-2 h-2 rounded-full bg-red-600 animate-pulse shadow-[0_0_8px_rgba(220,38,38,0.8)]"></div>
                     <span className="font-mono text-[9px] font-black text-white opacity-80 tracking-tighter uppercase">{formatTimecode(currentTime)}</span>
                  </div>
-                 {/* UPDATE: Text changed to FROM RAW TO WOW */}
                  <span className="font-mono text-[9px] sm:text-[10px] tracking-[0.1em] uppercase text-purple-400 font-black">
                    FROM RAW TO WOW
                  </span>
@@ -299,9 +302,9 @@ const App = () => {
                  </div>
               </div>
               <div className="lg:col-span-5 relative text-left">
-                 <div className="relative aspect-[4/5] rounded-sm overflow-hidden border border-white/10 grayscale hover:grayscale-0 transition-all duration-1000 bg-neutral-900 shadow-2xl group text-left">
+                 <div className="relative aspect-[4/5] rounded-sm overflow-hidden border border-white/10 grayscale hover:grayscale-0 transition-all duration-1000 bg-neutral-900 shadow-2xl group text-left text-left text-left">
                     <img src={profilePhoto} alt="Fadlan" className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000 text-left text-left text-left" />
-                    <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent opacity-80 text-left text-left"></div>
+                    <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent opacity-80 text-left text-left text-left"></div>
                     <div className="absolute bottom-6 left-6 text-white text-left">
                       <p className="text-[10px] font-mono uppercase tracking-[0.4em] text-purple-500 mb-2 text-left">Profil Kreatif</p>
                       <p className="text-2xl font-black italic uppercase tracking-tighter text-white text-left">Fadlan Iskandar</p>
@@ -318,7 +321,7 @@ const App = () => {
                 <h2 className="text-4xl md:text-6xl font-black uppercase italic tracking-tighter text-left text-white text-left text-left">THE MASTER REEL.</h2>
               </div>
               <div className="group relative aspect-video w-full rounded-sm overflow-hidden border border-white/5 bg-[#0a0a0a] cursor-pointer shadow-3xl text-left text-left" onClick={() => setSelectedVideo(showreelData)}>
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-900/40 to-black flex items-center justify-center overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-900/40 to-black flex items-center justify-center overflow-hidden text-left">
                    <div className="absolute inset-0 opacity-10 grain-bg"></div>
                    <Clapperboard size={120} className="text-white/5 transform -rotate-12" />
                 </div>
@@ -332,7 +335,7 @@ const App = () => {
             </div>
           </section>
 
-          {/* ARCHIVE GRID - ORIGINAL STYLED THUMBNAILS */}
+          {/* ARCHIVE GRID */}
           <section id="work" className="py-32 px-6 border-t border-white/5 text-white text-left">
             <div className="max-w-7xl mx-auto text-left text-left">
               <div className="flex flex-col md:flex-row items-center justify-between mb-16 gap-8 text-white text-left text-left">
@@ -394,14 +397,14 @@ const App = () => {
           <footer className="py-20 px-6 border-t border-white/5 text-center bg-black text-white text-center text-center">
             <div className="max-w-4xl mx-auto mb-16 text-white text-center text-center">
                <h2 className="text-6xl md:text-8xl font-black italic uppercase tracking-tighter mb-12 text-center text-white">HUBUNGI SAYA.</h2>
-               <div className="flex justify-center gap-10">
+               <div className="flex justify-center gap-10 text-center">
                   <a href="https://www.instagram.com/faldangg.aep/" target="_blank" className="p-4 rounded-sm border border-white/5 hover:border-purple-600 hover:text-purple-500 hover:-translate-y-1 transition-all text-white shadow-xl text-center"><Instagram size={28} /></a>
                   <a href="https://www.tiktok.com/@fadlaniskandarpro" target="_blank" className="p-4 rounded-sm border border-white/5 hover:border-purple-600 hover:text-purple-500 hover:-translate-y-1 transition-all text-white shadow-xl text-center"><TikTokIcon className="w-7 h-7" /></a>
                </div>
             </div>
             <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 font-mono text-[8px] uppercase tracking-[0.4em] opacity-20 text-white text-center">
               <span>© 2026 Muhammad Fadlan Iskandar — Faldangg.aep</span>
-              <div className="flex gap-8 text-white text-center text-center">
+              <div className="flex gap-8 text-white">
                  <span>UTC+7 Depok</span>
                  <span>{whatsappNumber}</span>
               </div>
@@ -427,7 +430,7 @@ const App = () => {
                 {pricingPlans.map((plan, i) => (
                   <div key={i} className={`p-10 rounded-sm border transition-all duration-300 flex flex-col relative overflow-hidden text-left text-left text-left ${plan.popular ? 'border-purple-500 bg-[#111] shadow-2xl z-10 scale-105' : 'bg-white/5 border-white/5 opacity-80 hover:opacity-100'}`}>
                     {plan.popular && <div className="absolute top-0 right-0 bg-gradient-to-r from-purple-600 to-rose-600 text-white text-[9px] font-black px-4 py-1 uppercase tracking-widest shadow-lg text-left">Best Seller</div>}
-                    <div className="mb-8 text-white">{plan.icon} <h3 className={`text-3xl font-black italic mt-4 uppercase tracking-tighter ${plan.popular ? 'text-purple-400' : 'text-white text-left'}`}>{plan.title}</h3></div>
+                    <div className="mb-8 text-white text-left">{plan.icon} <h3 className={`text-3xl font-black italic mt-4 uppercase tracking-tighter ${plan.popular ? 'text-purple-400' : 'text-white text-left'}`}>{plan.title}</h3></div>
                     <div className="text-4xl font-black mb-4 tracking-tighter italic text-white text-left text-white">{plan.price}<span className="text-sm font-mono font-normal opacity-40 ml-2 text-white text-left">Per Menit</span></div>
                     <div className="space-y-4 mb-12 flex-grow text-white text-left">
                       {plan.features.map((f, j) => (
