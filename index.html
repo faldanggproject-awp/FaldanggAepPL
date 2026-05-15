@@ -9,7 +9,7 @@
     <meta name="description" content="Portfolio profesional Fadlan Iskandar. Jasa Video Editing & Motion Graphics tingkat tinggi. From Raw To Wow.">
     
     <!-- FAVICON -->
-    <link rel="icon" type="image/png" href="https://www.dropbox.com/scl/fi/jmp4ktaiadqh4m160o3i0/Muhammad-Fadlan-Iskandar.JPG?rlkey=gsvc80d1a9yzq1wr9bt60u778&raw=1">
+    <link rel="icon" type="image/png" href="https://www.dropbox.com/scl/fi/saszwyagqwbskqp6b301n/Logo-Faldangg-Transparant.png?rlkey=c6f3ekkcyo9dhwqwu6l05m836&raw=1">
     
     <!-- Library Inti -->
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
@@ -107,7 +107,10 @@
             const [activeFaq, setActiveFaq] = useState(null);
 
             const whatsappNumber = "6287713907028";
+            // Foto Muka untuk About Section
             const facePhotoUrl = "https://www.dropbox.com/scl/fi/jmp4ktaiadqh4m160o3i0/Muhammad-Fadlan-Iskandar.JPG?rlkey=gsvc80d1a9yzq1wr9bt60u778&raw=1";
+            // Logo baru untuk Navbar
+            const logoUrl = "https://www.dropbox.com/scl/fi/saszwyagqwbskqp6b301n/Logo-Faldangg-Transparant.png?rlkey=c6f3ekkcyo9dhwqwu6l05m836&raw=1";
             
             const categories = ['All', 'Video Editing', 'Motion Graphics', 'Others'];
 
@@ -180,11 +183,13 @@
                     <div className="grain-overlay"></div>
                     <div className="fixed top-0 left-0 h-1 bg-purple-600 z-[100] transition-all duration-150" style={{ width: `${scrollProgress}%` }}></div>
 
+                    {/* NAVBAR */}
                     <nav className={`fixed top-0 w-full z-[80] transition-all duration-300 ${isScrolled ? 'bg-black/90 backdrop-blur-md py-4 border-b border-white/5 shadow-2xl' : 'bg-transparent py-8'}`}>
                         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center text-white">
                             <div className="flex items-center gap-4 cursor-pointer" onClick={() => setCurrentPage('portfolio')}>
-                                <div className="w-10 h-10 rounded-lg bg-purple-600 flex items-center justify-center shadow-lg">
-                                    <Icon name="monitor" size={20} color="white" />
+                                {/* Logo Box Updated with Image */}
+                                <div className="w-10 h-10 rounded-lg overflow-hidden flex items-center justify-center shadow-lg border border-white/10 bg-black/50">
+                                    <img src={logoUrl} className="w-full h-full object-contain p-1" alt="Faldangg Logo" />
                                 </div>
                                 <div className="hidden sm:block">
                                     <span className="text-lg font-heading block leading-none uppercase tracking-tighter">FALDANGG<span className="text-purple-500">.AEP</span></span>
@@ -197,7 +202,7 @@
                                         <a href="#hero" className="hover:text-purple-500 transition-colors">Home</a>
                                         <a href="#about" className="hover:text-purple-500 transition-colors">About</a>
                                         <a href="#work" className="hover:text-purple-500 transition-colors">Archive</a>
-                                        <button onClick={() => setCurrentPage('prices')} className="hover:text-purple-500 transition-colors">Price List</button>
+                                        <button onClick={() => setCurrentPage('prices')} className="hover:text-purple-500 transition-colors font-bold uppercase text-white">Price List</button>
                                     </div>
                                 ) : (
                                     <button onClick={() => setCurrentPage('portfolio')} className="text-[10px] font-bold uppercase tracking-widest text-white/50 hover:text-white flex items-center gap-2">
@@ -284,7 +289,6 @@
                                 </div>
                             </section>
 
-                            {/* SHOWREEL SECTION */}
                             <section id="showreel" className="py-32 px-6 border-t border-white/5 text-center showreel-gradient">
                                 <div className="max-w-7xl mx-auto">
                                     <div className="mb-16">
@@ -305,7 +309,6 @@
                                 </div>
                             </section>
 
-                            {/* ARCHIVE GRID */}
                             <section id="work" className="py-32 px-6 border-t border-white/5">
                                 <div className="max-w-7xl mx-auto">
                                     <div className="flex flex-col md:flex-row justify-between items-center mb-16 gap-8">
@@ -339,8 +342,8 @@
                             </section>
 
                             <footer className="py-32 px-6 border-t border-white/5 bg-black/60 text-center">
-                                <h2 className="text-6xl md:text-9xl font-heading font-black uppercase italic tracking-tighter mb-16 opacity-90">Let's Connect.</h2>
-                                <div className="flex justify-center gap-12 mb-20">
+                                <h2 className="text-6xl md:text-9xl font-heading font-black uppercase italic tracking-tighter mb-16 opacity-90 text-white">Let's Connect.</h2>
+                                <div className="flex justify-center gap-12 mb-20 text-white">
                                     <a href="https://www.instagram.com/faldangg.aep/" target="_blank" className="hover:text-purple-500 transition-all transform hover:-translate-y-2">
                                         <Icon name="instagram" size={40} />
                                     </a>
@@ -353,7 +356,7 @@
                             </footer>
                         </div>
                     ) : (
-                        <div className="pt-40 px-6 pb-32 animate-fade-in text-center max-w-7xl mx-auto">
+                        <div className="pt-40 px-6 pb-32 animate-fade-in text-center max-w-7xl mx-auto text-white">
                             <h2 className="text-7xl md:text-9xl font-heading uppercase italic tracking-tighter mb-6 glow-text">PRICE LIST.</h2>
                             <p className="text-white/40 font-bold uppercase tracking-widest text-[10px] mb-20">CHOOSE THE BEST PROFESSIONAL VISUAL PACKAGE FOR YOUR NEEDS.</p>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-40 text-left">
@@ -395,6 +398,7 @@
                         </div>
                     )}
 
+                    {/* MODAL VIDEO */}
                     {selectedVideo && (
                         <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-10 bg-black/95 backdrop-blur-2xl animate-fade-in" onClick={() => setSelectedVideo(null)}>
                             <div className="relative w-full max-w-5xl bg-[#0a0a0a] border border-white/10 shadow-3xl overflow-hidden rounded-sm" onClick={e => e.stopPropagation()}>
