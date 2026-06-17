@@ -20,7 +20,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,700;0,900;1,700;1,900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght=0,700;0,900;1,700;1,900&family=Inter:wght=300;400;500;600;700&display=swap" rel="stylesheet">
 
     <script>
       tailwind.config = {
@@ -111,7 +111,6 @@
 
         const logoUrl = "https://www.dropbox.com/scl/fi/qodfqn41nfks88o19uapa/Logo-Faldangg-Transparant.png?rlkey=gihgfqpmdvnji0tw920w0k7th&st=ptpb96ct&raw=1";
 
-        // Komponen SVG Ikon Mandiri
         const MonitorIcon = ({ size = 20, className = "" }) => (
             <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
                 <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
@@ -166,11 +165,9 @@
             </svg>
         );
 
-        const ShoppingBagIcon = ({ size = 20, className = "" }) => (
-            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-                <line x1="3" y1="6" x2="21" y2="6" />
-                <path d="M16 10a4 4 0 0 1-8 0" />
+        const StarIcon = ({ size = 16, className = "" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
             </svg>
         );
 
@@ -272,30 +269,30 @@
                 { q: "Are revisions included?", a: "Yes, each package includes minor revisions as described in the plan." }
             ];
 
-            const indonesianNames = ["Aris", "Dimas", "Gita", "Ilham", "Joko", "Kartika", "Laras", "Rian", "Dewi", "Bayu", "Eko", "Andi", "Putra", "Mega", "Novi", "Wawan", "Yuda", "Siti", "Hendra", "Amel", "Budi", "Reza", "Fajar", "Dina", "Rina", "Ahmad", "Sari"];
-            const cities = ["Jakarta", "Depok", "Bandung", "Surabaya", "Medan", "Semarang", "Yogyakarta", "Tangerang", "Bekasi", "Bali", "Makassar", "Palembang", "Malang", "Solo"];
-            const packagesAvailable = ["PREMIUM", "BUSINESS", "BASIC"];
+            const clientReviews = [
+                { name: "Aris", city: "Jakarta", package: "PREMIUM", text: "Gila worth it parah sih! Hasil transisi dan pacing video storytellingnya rapi bgt, view tiktok gua langsung naik gokil." },
+                { name: "Dimas", city: "Bandung", package: "BUSINESS", text: "Pesen paket business buat video VFX produk, hasilnya clean abis! Bintang lima ga bohong, After Effects-nya jago parah." },
+                { name: "Gita", city: "Surabaya", package: "PREMIUM", text: "Worth every penny! Color gradingnya dapet bgt mood cinematic-nya. Bakal jadi langganan terus sih ini mah." },
+                { name: "Ilham", city: "Yogyakarta", package: "BASIC", text: "Pake paket basic aja tipografinya udah estetik bgt. Sound design / SFX-nya juga dapet vibes-nya. Juara!" },
+                { name: "Kartika", city: "Depok", package: "PREMIUM", text: "Storytelling video marketing olshop aku jadi jauh lebih idup dan ga ngebosenin. Keren banget pengerjaannya cepet." },
+                { name: "Rian", city: "Semarang", package: "BUSINESS", text: "VFX disintegrate & shadow-nya mulus bgt, pengerjaan rapi dan faldangg gampang bgt diajak diskusi. Recommended!" },
+                { name: "Dewi", city: "Bali", package: "PREMIUM", text: "Asli puas bgt! Konsep motion graphic di video penjelasan produk kami jadi kelihatan profesional bgt. Makasih Fadlan!" },
+                { name: "Bayu", city: "Medan", package: "BASIC", text: "Cutting & pacingnya pas bgt di kuping, sound effects-nya juga padet. Hasilnya bener-bener WOW!" }
+            ];
 
             useEffect(() => {
                 const triggerNotification = () => {
-                    const randomName = indonesianNames[Math.floor(Math.random() * indonesianNames.length)];
-                    const randomCity = cities[Math.floor(Math.random() * cities.length)];
-                    const randomPackage = Math.random() > 0.35 ? "PREMIUM" : packagesAvailable[Math.floor(Math.random() * packagesAvailable.length)];
-
-                    setActiveNotification({
-                        name: randomName,
-                        city: randomCity,
-                        package: randomPackage
-                    });
+                    const randomReview = clientReviews[Math.floor(Math.random() * clientReviews.length)];
+                    setActiveNotification(randomReview);
 
                     setTimeout(() => {
                         setActiveNotification(null);
-                    }, 4500);
+                    }, 5000); // Tampil selama 5 detik
                 };
 
                 const initialDelay = setTimeout(() => {
                     triggerNotification();
-                    const interval = setInterval(triggerNotification, 10000);
+                    const interval = setInterval(triggerNotification, 12000); // Berulang setiap 12 detik
                     return () => clearInterval(interval);
                 }, 3000);
 
@@ -323,7 +320,7 @@
                     
                     <div className="fixed top-0 left-0 h-1 bg-purple-600 z-[100] transition-all duration-150" style={{ width: scrollProgress + '%' }}></div>
 
-                    {}
+                    {/* NAVBAR */}
                     <nav className={"fixed top-0 w-full z-[80] transition-all duration-300 " + (isScrolled ? "bg-black/90 backdrop-blur-md py-4 border-b border-white/5 shadow-2xl" : "bg-transparent py-8")}>
                         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center text-white text-left">
                             <div className="flex items-center gap-4 cursor-pointer" onClick={() => setCurrentPage('portfolio')}>
@@ -358,7 +355,7 @@
                         </div>
                     </nav>
 
-                    {}
+                    {/* MAIN PAGES */}
                     {currentPage === 'portfolio' ? (
                         <div className="animate-fade-in text-white text-left">
                             
@@ -538,19 +535,28 @@
                         </div>
                     )}
 
-                    {/* LIVE POPUP NOTIFICATION */}
+                    {/* LIVE POPUP CLIENT REVIEWS TESTIMONIALS */}
                     {activeNotification && (
-                        <div className="fixed bottom-6 left-6 z-[150] bg-black/95 border border-purple-500/30 p-4 rounded-lg shadow-[0_10px_50px_rgba(168,85,247,0.25)] flex items-center gap-4 animate-slide-in-up max-w-sm backdrop-blur-md">
-                            <div className="w-10 h-10 rounded-full bg-purple-600/20 border border-purple-500/50 flex items-center justify-center shrink-0">
-                                <ShoppingBagIcon size={18} className="text-purple-400 animate-pulse" />
+                        <div className="fixed bottom-6 left-6 z-[150] bg-black/95 border border-purple-500/30 p-5 rounded-lg shadow-[0_10px_50px_rgba(168,85,247,0.25)] flex flex-col gap-3 animate-slide-in-up max-w-sm backdrop-blur-md">
+                            <div className="flex items-center justify-between w-full border-b border-white/10 pb-2">
+                                <div className="flex items-center gap-1.5 text-yellow-500">
+                                    <StarIcon size={12} />
+                                    <StarIcon size={12} />
+                                    <StarIcon size={12} />
+                                    <StarIcon size={12} />
+                                    <StarIcon size={12} />
+                                </div>
+                                <span className="text-[8px] font-mono font-black uppercase text-purple-400 bg-purple-950/40 border border-purple-500/20 px-2 py-0.5 rounded-sm">Verified Client</span>
                             </div>
                             <div className="text-left">
-                                <p className="text-[9px] text-white/40 font-mono uppercase tracking-wider text-left">Notifikasi Order</p>
-                                <p className="text-xs font-bold text-white text-left">
-                                    <span className="text-purple-400">{activeNotification.name}</span> dari <span className="text-purple-300">{activeNotification.city}</span>
+                                <p className="text-xs font-bold text-white leading-tight">
+                                    {activeNotification.name} <span className="text-white/40 text-[10px] font-normal font-mono">({activeNotification.city})</span>
                                 </p>
-                                <p className="text-[11px] text-white/70 text-left">
-                                    Baru saja memesan Paket <span className="text-purple-400 font-extrabold italic">{activeNotification.package}</span>
+                                <p className="text-[9px] text-purple-300 font-mono uppercase tracking-wider mt-0.5">
+                                    Paket: {activeNotification.package}
+                                </p>
+                                <p className="text-[11px] text-white/80 mt-2 italic leading-relaxed text-left border-l-2 border-purple-500 pl-2">
+                                    "{activeNotification.text}"
                                 </p>
                             </div>
                         </div>
