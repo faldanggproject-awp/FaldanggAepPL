@@ -8,19 +8,19 @@
     <title>Faldangg.aep | Professional Video Editor & Motion Designer</title>
     <meta name="description" content="Portfolio profesional Fadlan Iskandar. Jasa Video Editing & Motion Graphics tingkat tinggi. From Raw To Wow.">
     
-    <!-- FAVICON (LOGO BARU FALSDANGG TRANSPARAN) -->
+    <!-- FAVICON (LOGO FD) -->
     <link rel="icon" type="image/png" href="https://www.dropbox.com/scl/fi/qodfqn41nfks88o19uapa/Logo-Faldangg-Transparant.png?rlkey=gihgfqpmdvnji0tw920w0k7th&st=ptpb96ct&raw=1">
     
-    <!-- Library Inti (UMD Direct CDN) -->
+    <!-- Library Inti (UMD Direct CDN tanpa MODUL IMPOR untuk Mencegah Error) -->
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone@7.24.0/babel.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght=0,700;0,900;1,700;1,900&family=Inter:wght=300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,700;0,900;1,700;1,900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <script>
       tailwind.config = {
@@ -106,11 +106,10 @@
 <body>
     <div id="root"></div>
 
-    <script type="text/babel" data-presets="env,react">
+    <script type="text/babel">
         const { useState, useEffect } = React;
 
-        const logoUrl = "https://www.dropbox.com/scl/fi/qodfqn41nfks88o19uapa/Logo-Faldangg-Transparant.png?rlkey=gihgfqpmdvnji0tw920w0k7th&st=ptpb96ct&raw=1";
-
+        // Komponen SVG Ikon Mandiri (Bebas dependensi eksternal, anti-crash!)
         const MonitorIcon = ({ size = 20, className = "" }) => (
             <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
                 <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
@@ -171,6 +170,7 @@
             </svg>
         );
 
+        // Ikon grid keahlian About Me
         const LayersIcon = ({ size = 20, className = "" }) => (
             <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
                 <polygon points="12 2 2 7 12 12 22 7 12 2" />
@@ -230,9 +230,13 @@
 
             // --- DATABASE ASSETS ---
             const whatsappNumber = "6287713907028";
+            
+            // FOTO LOGO RESMI TRANS-PURPLE DENGAN DIRECT PARAM
+            const logoUrl = "https://www.dropbox.com/scl/fi/qodfqn41nfks88o19uapa/Logo-Faldangg-Transparant.png?rlkey=gihgfqpmdvnji0tw920w0k7th&st=ptpb96ct&raw=1";
+            
             const categories = ['All', 'Video Editing', 'Motion Graphics', 'Others'];
 
-            // SHOWREEL DENGAN FORMAT DIRECT-STREAM DROPBOX
+            // DIRECT STREAM DROPBOX SHOWREEL MP4
             const showreelData = {
                 id: 'showreel',
                 title: "The Master Reel",
@@ -267,6 +271,19 @@
                 { q: "How long is the process?", a: "Processing usually takes 2-3 working days depending on complexity." },
                 { q: "How to send raw files?", a: "You can send files via Google Drive or Telegram for the best quality." },
                 { q: "Are revisions included?", a: "Yes, each package includes minor revisions as described in the plan." }
+            ];
+
+            // 9 LOGO CLIENTS DROPBOX DIRECT
+            const clientLogos = [
+                "https://www.dropbox.com/scl/fi/fz89c76udtng83a6qldri/sozmed.jpg?rlkey=439zjfa4fobwcj3vixqs4fthf&st=gtfd8n9o&raw=1",
+                "https://www.dropbox.com/scl/fi/72l9f80w30dxbtjmefvlr/Logo-TB-Teks-Putih.png?rlkey=lhsc000wyhtm62nticnlw3hce&st=hlzt0io1&raw=1",
+                "https://www.dropbox.com/scl/fi/ycxk1mfug8smx1kyq9ybi/lentera.jpg?rlkey=uafkxdp45zzr78ky85czkl4v5&st=s6h8gwz8&raw=1",
+                "https://www.dropbox.com/scl/fi/21xehur88sgrs87vglfet/58up.jpg?rlkey=jwbwtu9ifq9a6qdbj8uyi7zqg&st=ym09biyf&raw=1",
+                "https://www.dropbox.com/scl/fi/r8ozok10n8bfmlth0vyfg/hanaskar.jpeg?rlkey=q1evw3qtshfdloy18vhautyzr&st=w3uu7hte&raw=1",
+                "https://www.dropbox.com/scl/fi/iezie8tu4ivgyv76h1gyy/Sigit.png?rlkey=6yvpb7xm376ddxrtv44ewaiok&st=xgfo93sn&raw=1",
+                "https://www.dropbox.com/scl/fi/bqdbldxt2sgcfsrhcuxh9/logo-buriman.jpeg?rlkey=fhlrv3ie76lhwwc74c7ow4ebh&st=50pxb101&raw=1",
+                "https://www.dropbox.com/scl/fi/0s9fng4a48nsjjhk945vb/unknown.jpeg?rlkey=m6n831mir6u9k9nai3212aie5&st=kcv1ong7&raw=1",
+                "https://www.dropbox.com/scl/fi/pt2q0gmhhdvsq5j6azvxf/tfl-Studio.jpg?rlkey=lz5okvpjbaqd35tlxbuqvakoq&st=0sgt2x9t&raw=1"
             ];
 
             const clientReviews = [
@@ -320,7 +337,7 @@
                     
                     <div className="fixed top-0 left-0 h-1 bg-purple-600 z-[100] transition-all duration-150" style={{ width: scrollProgress + '%' }}></div>
 
-                    {/* NAVBAR */}
+                    {/* NAVBAR (CLEAN - TANPA GAMBAR MUKA ATAU LOGO) */}
                     <nav className={"fixed top-0 w-full z-[80] transition-all duration-300 " + (isScrolled ? "bg-black/90 backdrop-blur-md py-4 border-b border-white/5 shadow-2xl" : "bg-transparent py-8")}>
                         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center text-white text-left">
                             <div className="flex items-center gap-4 cursor-pointer" onClick={() => setCurrentPage('portfolio')}>
@@ -355,7 +372,6 @@
                         </div>
                     </nav>
 
-                    {/* MAIN PAGES */}
                     {currentPage === 'portfolio' ? (
                         <div className="animate-fade-in text-white text-left">
                             
@@ -380,7 +396,7 @@
                                     <h1 className="text-[14vw] sm:text-[10vw] font-heading leading-[0.82] uppercase mb-8 italic drop-shadow-2xl glow-text">
                                         FADLAN <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-white">ISKANDAR.</span>
                                     </h1>
-                                    <p className="max-w-xl mx-auto text-white/40 text-xs md:text-sm font-bold uppercase tracking-widest mb-12 leading-relaxed text-center">Transforming ideas into visual masterpieces through high-end motion design and cinematic editing.</p>
+                                    <p className="max-w-xl mx-auto text-white/40 text-xs md:text-sm font-bold uppercase tracking-widest mb-12 leading-relaxed text-center text-white">Transforming ideas into visual masterpieces through high-end motion design and cinematic editing.</p>
                                     <div className="flex flex-col sm:flex-row justify-center gap-4 mb-20 text-white text-center">
                                         <a href="#work" className="bg-purple-600 hover:bg-purple-500 text-white px-8 py-3 rounded-sm font-black uppercase text-[10px] tracking-widest transition-all shadow-xl">Explore Works</a>
                                         <button onClick={() => setCurrentPage('prices')} className="bg-white/5 border border-white/10 hover:bg-white/10 px-8 py-3 rounded-sm font-black uppercase text-[10px] tracking-widest transition-all">Price List</button>
@@ -397,37 +413,59 @@
                                 </div>
                             </div>
 
-                            {/* ABOUT SECTION (100% CLEAN & TYPOGRAPHIC) */}
-                            <section id="about" className="py-32 px-6 bg-black/40 backdrop-blur-sm">
-                                <div className="max-w-4xl mx-auto text-white text-left">
-                                    <div className="flex items-center gap-4 mb-10 text-left">
-                                        <div className="w-2 h-8 bg-purple-600"></div>
-                                        <h2 className="text-4xl md:text-6xl font-heading uppercase italic tracking-tighter">About Me.</h2>
-                                    </div>
-                                    <p className="text-white/70 text-lg md:text-2xl font-medium leading-relaxed mb-16 text-justify">
-                                        I am Muhammad Fadlan Iskandar, a <span className="text-purple-400 font-black italic">Video Editor & Motion Designer</span> based in Indonesia. Since 2023, I have dedicated myself to transforming every piece of raw footage into a visual masterpiece with a definitive Wow factor.
-                                    </p>
-                                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
-                                        {[
-                                            {n: <LayersIcon size={16} />, l:'AE'}, {n: <ClapperboardIcon size={16} />, l:'PR'}, 
-                                            {n: <LayoutIcon size={16} />, l:'AI'}, {n: <TvIcon size={16} />, l:'PS'}, 
-                                            {n: <ZapIcon size={16} />, l:'VFX'}, {n: <CameraIcon size={16} />, l:'CINEMA'}
-                                        ].map((item, idx) => (
-                                            <div key={idx} className="bg-white/5 border border-white/5 p-4 rounded-sm flex flex-col items-center gap-2 group hover:border-purple-600 transition-all text-white animate-fade-in">
-                                                <span className="text-purple-500 group-hover:scale-110 transition-transform">{item.n}</span>
-                                                <span className="text-[10px] font-bold uppercase tracking-widest text-white/50">{item.l}</span>
+                            {}
+                            {/* CLIENT LOGOS TRUST SECTION (9 LOGOS SIMETRIS DARI DROPBOX) */}
+                            <section className="py-16 border-b border-white/5 bg-black/30 relative z-10">
+                                <div className="max-w-7xl mx-auto px-6 text-center">
+                                    <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-white/30 mb-10">Trusted by Leading Creators & Agencies</p>
+                                    <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-8">
+                                        {clientLogos.map((logo, index) => (
+                                            <div key={index} className="flex items-center justify-center bg-white/5 border border-white/10 p-3 rounded-lg w-20 h-20 sm:w-24 sm:h-24 hover:border-purple-600 hover:bg-purple-950/15 transition-all duration-300 hover:scale-105 shadow-md">
+                                                <img 
+                                                    src={logo} 
+                                                    className="max-w-full max-h-full object-contain rounded-md opacity-45 hover:opacity-100 grayscale hover:grayscale-0 transition-all duration-300" 
+                                                    alt={"Client Logo " + index} 
+                                                    onError={(e) => { e.target.src = "https://placehold.co/100x100/1a1a1a/ffffff?text=Logo"; }}
+                                                />
                                             </div>
                                         ))}
                                     </div>
                                 </div>
                             </section>
 
-                            {/* SHOWREEL */}
-                            <section id="showreel" className="py-32 px-6 border-t border-white/5 text-center showreel-gradient text-white text-center">
-                                <div className="max-w-7xl mx-auto text-white text-center">
-                                    <div className="mb-16 text-white text-center">
+                            {}
+                            {/* ABOUT SECTION (CLEAN TYPE-ONLY LAYOUT) */}
+                            <section id="about" className="py-32 px-6 bg-black/40 backdrop-blur-sm text-center border-b border-white/5">
+                                <div className="max-w-4xl mx-auto text-white">
+                                    <div className="flex items-center justify-center gap-4 mb-12">
+                                        <div className="w-8 h-2 bg-purple-600"></div>
+                                        <h2 className="text-4xl md:text-6xl font-heading uppercase italic tracking-tighter">About Me.</h2>
+                                        <div className="w-8 h-2 bg-purple-600"></div>
+                                    </div>
+                                    <p className="text-white/80 text-xl md:text-3xl font-medium leading-relaxed mb-16 text-center">
+                                        I am Muhammad Fadlan Iskandar, a <span className="text-white font-black italic">Video Editor & Motion Designer</span> based in Indonesia. Since 2023, I have dedicated myself to transforming every piece of raw footage into a visual masterpiece with a definitive Wow factor.
+                                    </p>
+                                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 text-white text-center">
+                                        {[
+                                            {n: <LayersIcon size={24} />, l:'AE'}, {n: <ClapperboardIcon size={24} />, l:'PR'}, 
+                                            {n: <LayoutIcon size={24} />, l:'AI'}, {n: <TvIcon size={24} />, l:'PS'}, 
+                                            {n: <ZapIcon size={24} />, l:'VFX'}, {n: <CameraIcon size={24} />, l:'CINEMA'}
+                                        ].map((item, idx) => (
+                                            <div key={idx} className="bg-white/5 border border-white/5 p-6 rounded-sm flex flex-col items-center justify-center gap-3 group hover:border-purple-600 hover:bg-purple-950/10 transition-all">
+                                                <span className="text-purple-500 group-hover:scale-110 transition-transform">{item.n}</span>
+                                                <span className="text-[11px] font-bold uppercase tracking-widest text-white/50">{item.l}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </section>
+
+                            {/* SHOWREEL SECTION */}
+                            <section id="showreel" className="py-32 px-6 text-center showreel-gradient relative z-10">
+                                <div className="max-w-7xl mx-auto">
+                                    <div className="mb-16">
                                         <h2 className="text-5xl md:text-7xl font-heading font-black uppercase italic tracking-tighter mb-4 text-white">The Master Reel.</h2>
-                                        <p className="text-purple-400 font-mono text-[10px] uppercase tracking-[0.4em] text-white text-center">Highlighting Best Creative Projects</p>
+                                        <p className="text-purple-400 font-mono text-[10px] uppercase tracking-[0.4em]">Highlighting Best Creative Projects</p>
                                     </div>
                                     <div className="group relative aspect-video w-full rounded-sm overflow-hidden border border-white/10 bg-black cursor-pointer shadow-3xl text-left" onClick={() => setSelectedVideo(showreelData)}>
                                         <div className="absolute inset-0 bg-purple-900/10 group-hover:bg-purple-900/20 transition-all duration-700 flex items-center justify-center text-center">
@@ -454,7 +492,7 @@
                                             ))}
                                         </div>
                                     </div>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left text-white text-white text-left">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left text-white">
                                         {filteredProjects.map(p => (
                                             <div key={p.id} className="group relative aspect-square bg-[#0a0a0a] border border-white/5 rounded-sm overflow-hidden cursor-pointer shadow-2xl text-white text-left" onClick={() => setSelectedVideo(p)}>
                                                 <div className={"absolute inset-0 z-0 bg-gradient-to-br transition-all duration-700 opacity-60 group-hover:opacity-100 " + (p.category === 'Video Editing' ? 'from-blue-600/40' : p.category === 'Motion Graphics' ? 'from-purple-600/40' : 'from-emerald-600/40') + " to-black text-white"}></div>
@@ -477,7 +515,7 @@
                             </section>
 
                             <footer className="py-32 px-6 border-t border-white/5 bg-black/60 text-center text-white">
-                                <h2 className="text-6xl md:text-9xl font-heading font-black uppercase italic tracking-tighter mb-16 opacity-90 text-center text-white flex justify-center text-white text-center">Let's Connect.</h2>
+                                <h2 className="text-6xl md:text-9xl font-heading font-black uppercase italic tracking-tighter mb-16 opacity-90 text-center text-white flex justify-center">Let's Connect.</h2>
                                 <div className="flex justify-center gap-12 mb-20 text-white text-center">
                                     <a href="https://www.instagram.com/faldangg.aep/" target="_blank" className="hover:text-purple-500 transition-all transform hover:-translate-y-2 text-white text-center">
                                         <InstagramIcon size={40} />
@@ -535,7 +573,7 @@
                         </div>
                     )}
 
-                    {/* LIVE POPUP CLIENT REVIEWS TESTIMONIALS */}
+                    {/* LIVE NOTIFICATION REVIEW (SOCIAL PROOF) */}
                     {activeNotification && (
                         <div className="fixed bottom-6 left-6 z-[150] bg-black/95 border border-purple-500/30 p-5 rounded-lg shadow-[0_10px_50px_rgba(168,85,247,0.25)] flex flex-col gap-3 animate-slide-in-up max-w-sm backdrop-blur-md">
                             <div className="flex items-center justify-between w-full border-b border-white/10 pb-2">
