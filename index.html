@@ -11,7 +11,7 @@
     <!-- FAVICON (LOGO TRANSPARAN FALDANGG RESMI) -->
     <link rel="icon" type="image/png" href="https://www.dropbox.com/scl/fi/qodfqn41nfks88o19uapa/Logo-Faldangg-Transparant.png?rlkey=gihgfqpmdvnji0tw920w0k7th&st=ptpb96ct&raw=1">
     
-    <!-- Library Inti (Gunakan UMD Direct CDN tanpa MODUL IMPOR) -->
+    <!-- Library Inti -->
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone@7.24.0/babel.min.js"></script>
@@ -24,6 +24,7 @@
 
     <script>
       tailwind.config = {
+        darkMode: 'class',
         theme: {
           extend: {
             fontFamily: {
@@ -36,35 +37,50 @@
     </script>
 
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #050505; color: white; margin: 0; overflow-x: hidden; text-align: left; }
-        .font-heading { font-family: 'Archivo', sans-serif; font-weight: 900; letter-spacing: -0.04em; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            margin: 0; 
+            overflow-x: hidden; 
+            text-align: left; 
+            background-color: #050505; 
+            color: #ffffff; 
+        }
+        .font-heading { 
+            font-family: 'Archivo', sans-serif; 
+            font-weight: 900; 
+            letter-spacing: -0.04em; 
+        }
 
-        /* MOVING GRID BACKGROUND (Opacity 30%) */
+        @keyframes grid-scroll-down {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 50px; }
+        }
+
         .moving-grid {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
             height: 100%;
             background-size: 50px 50px;
             background-image:
                 linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
                 linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-            z-index: -1;
-            opacity: 0.3; 
-            animation: grid-scroll 20s linear infinite;
+            z-index: -1; 
             pointer-events: none;
-        }
-
-        @keyframes grid-scroll {
-            from { background-position: 0 0; }
-            to { background-position: 50px 50px; }
+            animation: grid-scroll-down 15s linear infinite;
         }
 
         .grain-overlay { 
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
             background-image: url("https://www.transparenttextures.com/patterns/carbon-fibre.png");
-            opacity: 0.02; pointer-events: none; z-index: 0;
+            opacity: 0.02; 
+            pointer-events: none; 
+            z-index: 0;
         }
 
         @keyframes marquee {
@@ -77,41 +93,40 @@
             animation: marquee 30s linear infinite;
         }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(8px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        .animate-fade-in { 
+            animation: fadeIn 0.3s ease-out forwards; 
+        }
 
-        /* Notification Pop-up Animation */
         @keyframes slideInUp {
-            from { opacity: 0; transform: translateY(50px) scale(0.95); }
+            from { opacity: 0; transform: translateY(40px) scale(0.95); }
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
         .animate-slide-in-up {
-            animation: slideInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: slideInUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-thumb { background: #6b21a8; border-radius: 0px; }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-thumb { background: #8b5cf6; }
 
-        .vf-corner { position: absolute; width: 30px; height: 30px; border-color: rgba(255,255,255,0.1); pointer-events: none; border-style: solid; }
-        
-        .glow-text {
-            text-shadow: 0 0 25px rgba(168, 85, 247, 0.3);
-        }
-
-        .showreel-gradient {
-            background: linear-gradient(135deg, rgba(107, 33, 168, 0.1) 0%, rgba(0, 0, 0, 1) 100%);
-        }
+        .vf-corner { position: absolute; width: 24px; height: 24px; pointer-events: none; border-style: solid; }
+        .glow-text-dark { text-shadow: 0 0 25px rgba(168, 85, 247, 0.35); }
     </style>
 </head>
-<body>
+<body class="bg-[#050505] text-white">
     <div id="root"></div>
 
-    <!-- Gunakan data-presets="env,react" untuk memaksa transpiler mengubah semua ES6 module ke UMD/CJS tanpa eror 'import' -->
     <script type="text/babel" data-presets="env,react">
         const { useState, useEffect } = React;
 
-        // Komponen SVG Ikon Mandiri (Bebas dependensi eksternal, anti-crash!)
-        const PlayIcon = ({ size = 20, className = "", fill = "none" }) => (
+        // SVG Icons
+        const logoUrl = "https://www.dropbox.com/scl/fi/qodfqn41nfks88o19uapa/Logo-Faldangg-Transparant.png?rlkey=gihgfqpmdvnji0tw920w0k7th&st=ptpb96ct&raw=1";
+        const whatsappNumber = "6287713907028";
+
+        const PlayIcon = ({ size = 20, fill = "none", className = "" }) => (
             <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill={fill} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
                 <polygon points="5 3 19 12 5 21 5 3" />
             </svg>
@@ -121,6 +136,13 @@
             <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
                 <line x1="18" y1="6" x2="6" y2="18" />
                 <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+        );
+
+        const ArrowLeftIcon = ({ size = 20, className = "" }) => (
+            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+                <line x1="19" y1="12" x2="5" y2="12" />
+                <polyline points="12 19 5 12 12 5" />
             </svg>
         );
 
@@ -138,14 +160,7 @@
             </svg>
         );
 
-        const ArrowLeftIcon = ({ size = 20, className = "" }) => (
-            <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-                <line x1="19" y1="12" x2="5" y2="12" />
-                <polyline points="12 19 5 12 12 5" />
-            </svg>
-        );
-
-        const CheckIcon = ({ size = 20, className = "", color = "currentColor" }) => (
+        const CheckIcon = ({ size = 20, color = "currentColor", className = "" }) => (
             <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className={className}>
                 <polyline points="20 6 9 17 4 12" />
             </svg>
@@ -165,7 +180,6 @@
             </svg>
         );
 
-        // Ikon grid keahlian About Me
         const LayersIcon = ({ size = 20, className = "" }) => (
             <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
                 <polygon points="12 2 2 7 12 12 22 7 12 2" />
@@ -213,113 +227,100 @@
             </svg>
         );
 
+        const clientLogos = [
+            "https://www.dropbox.com/scl/fi/fz89c76udtng83a6qldri/sozmed.jpg?rlkey=439zjfa4fobwcj3vixqs4fthf&st=gtfd8n9o&raw=1",
+            "https://www.dropbox.com/scl/fi/72l9f80w30dxbtjmefvlr/Logo-TB-Teks-Putih.png?rlkey=lhsc000wyhtm62nticnlw3hce&st=hlzt0io1&raw=1",
+            "https://www.dropbox.com/scl/fi/ycxk1mfug8smx1kyq9ybi/lentera.jpg?rlkey=uafkxdp45zzr78ky85czkl4v5&st=s6h8gwz8&raw=1",
+            "https://www.dropbox.com/scl/fi/21xehur88sgrs87vglfet/58up.jpg?rlkey=jwbwtu9ifq9a6qdbj8uyi7zqg&st=ym09biyf&raw=1",
+            "https://www.dropbox.com/scl/fi/r8ozok10n8bfmlth0vyfg/hanaskar.jpeg?rlkey=q1evw3qtshfdloy18vhautyzr&st=w3uu7hte&raw=1",
+            "https://www.dropbox.com/scl/fi/iezie8tu4ivgyv76h1gyy/Sigit.png?rlkey=6yvpb7xm376ddxrtv44ewaiok&st=xgfo93sn&raw=1",
+            "https://www.dropbox.com/scl/fi/bqdbldxt2sgcfsrhcuxh9/logo-buriman.jpeg?rlkey=fhlrv3ie76lhwwc74c7ow4ebh&st=50pxb101&raw=1",
+            "https://www.dropbox.com/scl/fi/0s9fng4a48nsjjhk945vb/unknown.jpeg?rlkey=m6n831mir6u9k9nai3212aie5&st=kcv1ong7&raw=1",
+            "https://www.dropbox.com/scl/fi/pt2q0gmhhdvsq5j6azvxf/tfl-Studio.jpg?rlkey=lz5okvpjbaqd35tlxbuqvakoq&st=0sgt2x9t&raw=1",
+            "https://www.dropbox.com/scl/fi/meztn4m27f6fniab0zfvr/LOGO-BG-HITAM-RODA-SENSASI-1.png?rlkey=f9110urebyhyw6opetpnw212o&st=7u402r71&raw=1"
+        ];
+
+        const projects = [
+            // Talking Head
+            { id: 1, title: "Social Media Storytelling", category: "Video Editing", subCategory: "Talking Head", videoUrl: "https://drive.google.com/file/d/19gjVMRb8YBiWmyKqLD0QvE1Asf_aAV8v/preview", desc: "Video Storytelling Edukasi Tentang Berbisnis Di Sosial Media." },
+            { id: 2, title: "Marketing Strategy", category: "Video Editing", subCategory: "Talking Head", videoUrl: "https://drive.google.com/file/d/1uHtsGTRCZMU7dnrcmZU-QFXNtVKQvn87/preview", desc: "Video Storytelling Marketing Untuk @sozmedagency." },
+            { id: 3, title: "Short Clips Edition", category: "Video Editing", subCategory: "Talking Head", videoUrl: "https://drive.google.com/file/d/1NEHJhGfpC-sSgerLr7IHKq-uvrdiaFrp/preview", desc: "Video Storytelling Motivasi Dari Video Panjang Timothy Ronald." },
+            { id: 4, title: "Education Series", category: "Video Editing", subCategory: "Talking Head", videoUrl: "https://drive.google.com/file/d/1NADGk2fXcYkjlwqctPfwRtso37B2HrGt/preview", desc: "Video Storytelling Edukasi Tentang Perbedaan Berserah atau Pasrah." },
+            { id: 5, title: "Education Series Vol. 2", category: "Video Editing", subCategory: "Talking Head", videoUrl: "https://www.dropbox.com/scl/fi/prxghpwsj03memdooghwe/Ajeng-Talks-Final.mp4?rlkey=rnh7zfjfgg8r7vaof7irbwna5&st=qwsbv80o&raw=1", desc: "Video Talking Head Edukasi Membahas 5 Negara Dengan Pertumbuhan Tercepat." },
+
+            // VFX
+            { id: 6, title: "VFX Disappear Dunk", category: "Video Editing", subCategory: "VFX", videoUrl: "https://drive.google.com/file/d/17I58XTHkoQ1EmylnVKKHFxX3n4ogC9RC/preview", desc: "VFX Basket: Orang menghilang lalu melakukan dunk." },
+            { id: 7, title: "Split Ball VFX", category: "Video Editing", subCategory: "VFX", videoUrl: "https://drive.google.com/file/d/1bAwEDHVYzMhEwYrOO5LUdbsUfOVF8lVQ/preview", desc: "VFX Tembakan Basket: Satu bola menjadi tiga sebelum masuk ke ring." },
+            { id: 8, title: "Color Grading Power", category: "Video Editing", subCategory: "VFX", videoUrl: "https://drive.google.com/file/d/17nj_Cfub9kc9T7Iqm92ptaFmJh-vVSFY/preview", desc: "Mengubah footage pagi menjadi suasana malam dengan color grading." },
+            { id: 9, title: "Short Movie Trailer", category: "Video Editing", subCategory: "VFX", videoUrl: "https://drive.google.com/file/d/18UtGI0K4x77KGJOdmqUuDPvrlOok5blS/preview", desc: "Trailer animasi untuk film pendek 'One More Day'." },
+            { id: 10, title: "Short Movie Akhir Sekolah", category: "Video Editing", subCategory: "VFX", videoUrl: "https://drive.google.com/file/d/162dFyDgQ3IZpyxm1b4nEjSSutF3TIRpF/preview", desc: "Short Movie sinematik perpisahan sekolah dengan komposisi efek visual." },
+            { id: 11, title: "Before After VFX Film Roda Sensasi", category: "Video Editing", subCategory: "VFX", videoUrl: "https://drive.google.com/file/d/1ITCdl1swTvTpe8T-6xd9m5qk0c7R4Osg/preview", desc: "Breakdown Before/After pembuatan Visual Effects pada film Roda Sensasi." },
+
+            // Motion Graphics
+            { id: 12, title: "Name Animation AI", category: "Animasi", subCategory: "Motion Graphics", videoUrl: "https://drive.google.com/file/d/1J2NQf5ihoyj2TyB2AvyTWq4aj36nFGjs/preview", desc: "Membuat nama di Adobe Illustrator dengan Motion Graphics." },
+            { id: 13, title: "Chess Motion Graphic", category: "Animasi", subCategory: "Motion Graphics", videoUrl: "https://drive.google.com/file/d/1RX_jaAZEwnDMyt-mIKQSjYnX6_IsjVkJ/preview", desc: "Motion Graphics permainan catur." },
+            { id: 14, title: "Stream Overlay Design", category: "Animasi", subCategory: "Motion Graphics", videoUrl: "https://drive.google.com/file/d/1xgV2RXS0hSGP1Dfej8M68w84nH9yJd2W/preview", desc: "Motion Graphics overlay untuk streaming @HiddemGame Store." },
+            { id: 15, title: "Messi Smart Brain", category: "Animasi", subCategory: "Motion Graphics", videoUrl: "https://drive.google.com/file/d/1JMDnrv3YSL-0kJImd_Ad_oBTa1a7gKbo/preview", desc: "Motion Graphics Messi bermain bola dengan kecerdasan otaknya di lapangan." },
+            { id: 16, title: "Wedding Invitations", category: "Animasi", subCategory: "Motion Graphics", videoUrl: "https://drive.google.com/file/d/1t_7pS0vVxNsRiir_7rDVnmGPUs49lG4A/preview", desc: "Undangan pernikahan untuk Gen-Z dengan Motion Graphics." },
+            { id: 17, title: "SMK Taruna Bhakti Promosi", category: "Animasi", subCategory: "Motion Graphics", videoUrl: "https://drive.google.com/file/d/1B0ZaTNEBPlNn5rZamLLXXFShcEufN_Yh/preview", desc: "Video animasi promosi interaktif untuk SMK Taruna Bhakti." },
+            { id: 18, title: "Animasi Logo Hanaskar", category: "Animasi", subCategory: "Motion Graphics", videoUrl: "https://drive.google.com/file/d/1PGaD_2uWvO44PbH3MBPXjKwNL9KlrLUd/preview", desc: "Animasi logo sting bumper profesional untuk Hanaskar Team." }
+        ];
+
+        const pricingPlans = [
+            {
+                title: "BASIC",
+                price: "Rp 119rb",
+                features: ["Teks Tipografi", "Cutting & Pacing", "Efek Suara & Musik", "Motion Dasar", "Format Vertikal (9:16)", "Revisi 2x"],
+                popular: false
+            },
+            {
+                title: "PREMIUM",
+                price: "Rp 169rb",
+                features: ["Teks Tipografi", "Cutting Profesional", "Efek Suara & Musik", "Advanced Motion", "Color Grading", "Format Vertikal (9:16)", "Revisi 3x"],
+                popular: true
+            },
+            {
+                title: "BUSINESS",
+                price: "Rp 249rb",
+                features: ["Teks Tipografi", "Visual Effects (VFX)", "SFX Lanjutan", "Advanced Motion", "Cinematic Grading", "Request Resolusi", "Revisi 3x"],
+                popular: false
+            }
+        ];
+
+        const faqs = [
+            { q: "Berapa lama proses pengerjaannya?", a: "Proses pengerjaan biasanya selesai dalam 2-3 hari kerja ya brow." },
+            { q: "Bagaimana cara mengirim file mentahnya?", a: "Anda bisa mengirimkan file Raw melalui link folder pribadi. Pastikan file aman dan lengkap ya Brow." },
+            { q: "Apakah sudah termasuk revisi?", a: "Ya, setiap paket sudah termasuk kuota revisi Minor gratis sesuai deskripsi paket." }
+        ];
+
+        const verifiedReviews = [
+            { name: "Andra Kurnia", city: "Jakarta", review: "Pesen paket Premium, hasilnya beneran gokil dan tajam banget. Bikin engagement IG naik!" },
+            { name: "Rian Prasetya", city: "Bandung", review: "Pengerjaan kilat cuma 2 hari. Motion graphics-nya rapi pol. Worth it banget!" },
+            { name: "Dion Febrian", city: "Surabaya", review: "Sound effect sama pacing editan Bro Fadlan pas banget. Konten TikTok langsung FYP!" },
+            { name: "Bagus Setiawan", city: "Medan", review: "Paket Business worth it parah. VFX-nya mulus kaya film bioskop. Next order lagi!" }
+        ];
+
         const App = () => {
             const [currentPage, setCurrentPage] = useState('portfolio');
             const [selectedVideo, setSelectedVideo] = useState(null);
             
-            // State Filter Bertingkat (Hierarkis)
+            // State Filter Bertingkat
             const [activeCategory, setActiveCategory] = useState('All');
             const [activeSubCategory, setActiveSubCategory] = useState('All');
             
             const [isScrolled, setIsScrolled] = useState(false);
-            const [currentTime, setCurrentTime] = useState(new Date());
-            const [scrollProgress, setScrollProgress] = useState(0);
             const [activeFaq, setActiveFaq] = useState(null);
             const [activeNotification, setActiveNotification] = useState(null);
 
-            // --- DATABASE ASSETS ---
-            const whatsappNumber = "6287713907028";
-            
-            // LOGO BRAND TRANSPARAN RESMI DARI DROPBOX
-            const logoUrl = "https://www.dropbox.com/scl/fi/qodfqn41nfks88o19uapa/Logo-Faldangg-Transparant.png?rlkey=gihgfqpmdvnji0tw920w0k7th&st=ptpb96ct&raw=1";
-
-            // DATABASE 10 LOGO CLIENT VERIFIED DARI DROPBOX
-            const clientLogos = [
-                "https://www.dropbox.com/scl/fi/fz89c76udtng83a6qldri/sozmed.jpg?rlkey=439zjfa4fobwcj3vixqs4fthf&st=gtfd8n9o&raw=1",
-                "https://www.dropbox.com/scl/fi/72l9f80w30dxbtjmefvlr/Logo-TB-Teks-Putih.png?rlkey=lhsc000wyhtm62nticnlw3hce&st=hlzt0io1&raw=1",
-                "https://www.dropbox.com/scl/fi/ycxk1mfug8smx1kyq9ybi/lentera.jpg?rlkey=uafkxdp45zzr78ky85czkl4v5&st=s6h8gwz8&raw=1",
-                "https://www.dropbox.com/scl/fi/21xehur88sgrs87vglfet/58up.jpg?rlkey=jwbwtu9ifq9a6qdbj8uyi7zqg&st=ym09biyf&raw=1",
-                "https://www.dropbox.com/scl/fi/r8ozok10n8bfmlth0vyfg/hanaskar.jpeg?rlkey=q1evw3qtshfdloy18vhautyzr&st=w3uu7hte&raw=1",
-                "https://www.dropbox.com/scl/fi/iezie8tu4ivgyv76h1gyy/Sigit.png?rlkey=6yvpb7xm376ddxrtv44ewaiok&st=xgfo93sn&raw=1",
-                "https://www.dropbox.com/scl/fi/bqdbldxt2sgcfsrhcuxh9/logo-buriman.jpeg?rlkey=fhlrv3ie76lhwwc74c7ow4ebh&st=50pxb101&raw=1",
-                "https://www.dropbox.com/scl/fi/0s9fng4a48nsjjhk945vb/unknown.jpeg?rlkey=m6n831mir6u9k9nai3212aie5&st=kcv1ong7&raw=1",
-                "https://www.dropbox.com/scl/fi/pt2q0gmhhdvsq5j6azvxf/tfl-Studio.jpg?rlkey=lz5okvpjbaqd35tlxbuqvakoq&st=0sgt2x9t&raw=1",
-                "https://www.dropbox.com/scl/fi/meztn4m27f6fniab0zfvr/LOGO-BG-HITAM-RODA-SENSASI-1.png?rlkey=f9110urebyhyw6opetpnw212o&st=7u402r71&raw=1"
-            ];
-
-            // SHOWREEL DENGAN FORMAT DIRECT-STREAM DROPBOX
-            const showreelData = {
-                id: 'showreel',
-                title: "The Master Reel",
-                category: "Showreel",
-                videoUrl: "https://www.dropbox.com/scl/fi/1532m4sq2kiz3zdibsh4x/Showreel-Portofolio.mp4?rlkey=n6p135i2icoerh8uj9oj3l0dj&st=lxbo3umv&raw=1",
-                desc: "Kompilasi karya editing premium, motion graphics tingkat tinggi, dan efek visual sinematik terbaik (VFX)."
-            };
-
-            const projects = [
-                // === VIDEO EDITING - TALKING HEAD ===
-                { id: 1, title: "Social Media Storytelling", category: "Video Editing", subCategory: "Talking Head", videoUrl: "https://drive.google.com/file/d/19gjVMRb8YBiWmyKqLD0QvE1Asf_aAV8v/preview", desc: "Professional storytelling for social media growth." },
-                { id: 2, title: "Marketing Strategy", category: "Video Editing", subCategory: "Talking Head", videoUrl: "https://drive.google.com/file/d/1uHtsGTRCZMU7dnrcmZU-QFXNtVKQvn87/preview", desc: "High-end marketing visual strategy for agencies." },
-                { id: 3, title: "Short Clips Edition", category: "Video Editing", subCategory: "Talking Head", videoUrl: "https://drive.google.com/file/d/1NEHJhGfpC-sSgerLr7IHKq-uvrdiaFrp/preview", desc: "Viral-ready short clips with punchy editing." },
-                { id: 4, title: "Education Series", category: "Video Editing", subCategory: "Talking Head", videoUrl: "https://drive.google.com/file/d/1NADGk2fXcYkjlwqctPfwRtso37B2HrGt/preview", desc: "Engaging educational content production." },
-                { id: 17, title: "5 Negara Pertumbuhan Tercepat", category: "Video Editing", subCategory: "Talking Head", videoUrl: "https://www.dropbox.com/scl/fi/prxghpwsj03memdooghwe/Ajeng-Talks-Final.mp4?rlkey=rnh7zfjfgg8r7vaof7irbwna5&st=qwsbv80o&raw=1", desc: "Talking head video editing discussing the 5 fastest-growing countries in the world." },
-                
-                // === VIDEO EDITING - VFX ===
-                { id: 5, title: "Short Movie Akhir Sekolah", category: "Video Editing", subCategory: "VFX", videoUrl: "https://drive.google.com/file/d/162dFyDgQ3IZpyxm1b4nEjSSutF3TIRpF/preview", desc: "Visual effects and cinematography in a graduation short film." },
-                { id: 6, title: "Before After VFX Roda Sensasi", category: "Video Editing", subCategory: "VFX", videoUrl: "https://drive.google.com/file/d/1ITCdl1swTvTpe8T-6xd9m5qk0c7R4Osg/preview", desc: "Breakdown of VFX composite scenes from Film Roda Sensasi." },
-                { id: 11, title: "VFX Disappear Dunk", category: "Video Editing", subCategory: "VFX", videoUrl: "https://drive.google.com/file/d/17I58XTHkoQ1EmylnVKKHFxX3n4ogC9RC/preview", desc: "Complex VFX integration of a player disappearing during a basketball dunk." },
-                { id: 12, title: "Split Ball VFX", category: "Video Editing", subCategory: "VFX", videoUrl: "https://drive.google.com/file/d/1bAwEDHVYzMhEwYrOO5LUdbsUfOVF8lVQ/preview", desc: "Creative visual effects of a basketball splitting into multiple ones mid-air." },
-                
-                // === ANIMASI - MOTION GRAPHICS ===
-                { id: 7, title: "SMK Taruna Bhakti Promosi", category: "Animasi", subCategory: "Motion Graphics", videoUrl: "https://drive.google.com/file/d/1B0ZaTNEBPlNn5rZamLLXXFShcEufN_Yh/preview", desc: "High-energy promotional motion graphics for SMK Taruna Bhakti." },
-                { id: 8, title: "Animasi Logo Hanaskar", category: "Animasi", subCategory: "Motion Graphics", videoUrl: "https://drive.google.com/file/d/1PGaD_2uWvO44PbH3MBPXjKwNL9KlrLUd/preview", desc: "Dynamic and premium logo intro animation for Hanaskar Team." },
-                { id: 9, title: "Name Animation AI", category: "Animasi", subCategory: "Motion Graphics", videoUrl: "https://drive.google.com/file/d/1J2NQf5ihoyj2TyB2AvyTWq4aj36nFGjs/preview", desc: "AI-powered custom typography animation." },
-                { id: 10, title: "Chess Motion Graphic", category: "Animasi", subCategory: "Motion Graphics", videoUrl: "https://drive.google.com/file/d/1RX_jaAZEwnDMyt-mIKQSjYnX6_IsjVkJ/preview", desc: "Premium aesthetic chess game concept animation." },
-                { id: 13, title: "Stream Overlay Design", category: "Animasi", subCategory: "Motion Graphics", videoUrl: "https://drive.google.com/file/d/1xgV2RXS0hSGP1Dfej8M68w84nH9yJd2W/preview", desc: "Professional animated streaming overlays." },
-                { id: 14, title: "Messi Smart Brain", category: "Animasi", subCategory: "Motion Graphics", videoUrl: "https://drive.google.com/file/d/1JMDnrv3YSL-0kJImd_Ad_oBTa1a7gKbo/preview", desc: "Tactical match analytics overlay graphics." },
-                { id: 15, title: "Wedding Invitations", category: "Animasi", subCategory: "Motion Graphics", videoUrl: "https://drive.google.com/file/d/1t_7pS0vVxNsRiir_7rDVnmGPUs49lG4A/preview", desc: "Modern aesthetic digital motion invitations for Gen-Z." },
-                
-                // === ANIMASI - ANIMASI ===
-                { id: 16, title: "Short Movie Trailer", category: "Animasi", subCategory: "Animasi", videoUrl: "https://drive.google.com/file/d/18UtGI0K4x77KGJOdmqUuDPvrlOok5blS/preview", desc: "Dramatic and cinematic 2D animated movie trailer." }
-            ];
-
-            const pricingPlans = [
-                { title: "BASIC", price: "Rp 119k", features: ["Text Typography", "Cutting & Pacing", "Sound Effects", "Basic Motion", "9:16 Vertical", "2x Revisions"] },
-                { title: "PREMIUM", price: "Rp 169k", popular: true, features: ["Text Typography", "Pro Cutting", "Sound & Music", "Advanced Motion", "Color Grading", "3x Revisions"] },
-                { title: "BUSINESS", price: "Rp 249k", features: ["VFX Integration", "Advanced SFX", "Custom Motion", "Cinematic Grading", "Custom Resolution", "3x Revisions"] }
-            ];
-
-            const faqs = [
-                { q: "How long is the process?", a: "Processing usually takes 2-3 working days depending on complexity." },
-                { q: "How to send raw files?", a: "You can send files via Google Drive or Telegram for the best quality." },
-                { q: "Are revisions included?", a: "Yes, each package includes minor revisions as described in the plan." }
-            ];
-
-            const verifiedReviews = [
-                { name: "Dimas", city: "Jakarta", package: "PREMIUM", review: "Gokil bener-bener worthit parah bro! Rapi abis motion-nya!" },
-                { name: "Rian", city: "Bandung", package: "PREMIUM", review: "Hasil gradingnya sinematik abis, gak nyesel mesen di faldangg." },
-                { name: "Gita", city: "Surabaya", package: "BUSINESS", review: "VFX-nya mulus gila! Worth it banget buat naikin branding." },
-                { name: "Siti", city: "Yogyakarta", package: "BASIC", review: "Cutting-nya presisi, pacing storytelling-nya dapet banget." },
-                { name: "Hendra", city: "Depok", package: "BUSINESS", review: "Revisinya cepet, komunikatif, dan hasil renderannya tajem parah." },
-                { name: "Amel", city: "Medan", package: "PREMIUM", review: "Langganan di sini untuk konten tiktok agency. Rekomen bgt!" },
-                { name: "Reza", city: "Tangerang", package: "PREMIUM", review: "Worth it 100%, motion logo Hanaskar kemarin jadinya keren parah!" }
-            ];
-
             useEffect(() => {
-                const triggerNotification = () => {
-                    const randomReview = verifiedReviews[Math.floor(Math.random() * verifiedReviews.length)];
-                    setActiveNotification(randomReview);
-
-                    // Sembunyikan setelah 5 detik
-                    setTimeout(() => {
-                        setActiveNotification(null);
-                    }, 5000);
-                };
-
-                // Trigger notifikasi hanya jika berada di halaman 'prices' (Daftar Harga)
                 let interval;
                 if (currentPage === 'prices') {
-                    // Mulai setelah 2 detik pertama
+                    const triggerNotification = () => {
+                        const randomReview = verifiedReviews[Math.floor(Math.random() * verifiedReviews.length)];
+                        setActiveNotification(randomReview);
+                        setTimeout(() => setActiveNotification(null), 4500);
+                    };
+
                     const timeout = setTimeout(() => {
                         triggerNotification();
                         interval = setInterval(triggerNotification, 12000);
@@ -336,14 +337,10 @@
 
             useEffect(() => {
                 const handleScroll = () => {
-                    setIsScrolled(window.scrollY > 50);
-                    const winScroll = document.documentElement.scrollTop;
-                    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                    setScrollProgress((winScroll / height) * 100);
+                    setIsScrolled(window.scrollY > 40);
                 };
-                const timer = setInterval(() => setCurrentTime(new Date()), 1000);
-                window.addEventListener('scroll', handleScroll);
-                return () => { window.removeEventListener('scroll', handleScroll); clearInterval(timer); };
+                window.addEventListener('scroll', handleScroll, { passive: true });
+                return () => window.removeEventListener('scroll', handleScroll);
             }, []);
 
             const filteredProjects = projects.filter(p => {
@@ -355,97 +352,95 @@
 
             const handleCategoryChange = (cat) => {
                 setActiveCategory(cat);
-                setActiveSubCategory('All'); // Reset sub-kategori saat kategori utama ganti
+                setActiveSubCategory('All');
             };
 
             return (
-                <div className="relative min-h-screen">
+                <div className="relative min-h-screen bg-[#050505] text-white">
+                    {/* Background Moving Grid Meluncur ke Bawah */}
                     <div className="moving-grid"></div>
                     <div className="grain-overlay"></div>
-                    
-                    {/* Progress scroll bar */}
-                    <div className="fixed top-0 left-0 h-1 bg-purple-600 z-[100] transition-all duration-150" style={{ width: scrollProgress + '%' }}></div>
 
-                    {/* NAVBAR (CLEAN - TRANSPARENT BRAND LOGO) */}
-                    <nav className={"fixed top-0 w-full z-[80] transition-all duration-300 " + (isScrolled ? "bg-black/90 backdrop-blur-md py-4 border-b border-white/5 shadow-2xl" : "bg-transparent py-8")}>
-                        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center text-white text-left">
+                    {/* NAVBAR */}
+                    <nav className={"fixed top-0 w-full z-[80] transition-all duration-300 " + (isScrolled ? "bg-black/90 py-4 border-b border-white/10 shadow-2xl backdrop-blur-md" : "bg-transparent py-8")}>
+                        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
                             <div className="flex items-center gap-4 cursor-pointer" onClick={() => setCurrentPage('portfolio')}>
                                 <div className="w-10 h-10 rounded-lg overflow-hidden flex items-center justify-center">
                                     <img src={logoUrl} alt="Faldangg Logo" className="w-full h-full object-contain" />
                                 </div>
-                                <div className="hidden sm:block text-left text-white">
-                                    <span className="text-lg font-heading block leading-none uppercase tracking-tighter">FALDANGG<span className="text-purple-500">.AEP</span></span>
-                                    <span className="text-[8px] opacity-40 uppercase tracking-widest font-bold">Video & Motion Designer</span>
+                                <div className="hidden sm:block text-left">
+                                    <span className="text-lg font-heading block leading-none uppercase tracking-tighter text-white">FALDANGG<span className="text-purple-600">.AEP</span></span>
+                                    <span className="text-[8px] uppercase tracking-widest font-bold opacity-40 text-white">Video & Motion Designer</span>
                                 </div>
                             </div>
-                            <div className="flex items-center gap-6">
+
+                            <div className="flex items-center gap-4 sm:gap-6">
                                 {currentPage === 'portfolio' ? (
-                                    <div className="hidden md:flex gap-8 text-[10px] uppercase font-bold text-white/50 tracking-widest text-white">
-                                        <a href="#hero" className="hover:text-purple-500 transition-colors">Home</a>
-                                        <a href="#about" className="hover:text-purple-500 transition-colors">About</a>
-                                        <a href="#work" className="hover:text-purple-500 transition-colors">Archive</a>
-                                        <button onClick={() => setCurrentPage('prices')} className="hover:text-purple-500 transition-colors font-bold uppercase text-white">Price List</button>
+                                    <div className="hidden md:flex gap-8 text-[10px] uppercase font-bold tracking-widest text-white/50">
+                                        <a href="#hero" className="hover:text-purple-600 transition-colors">Home</a>
+                                        <a href="#about" className="hover:text-purple-600 transition-colors">About</a>
+                                        <a href="#work" className="hover:text-purple-600 transition-colors">Archive</a>
+                                        <button onClick={() => setCurrentPage('prices')} className="hover:text-purple-600 transition-colors font-bold uppercase">Price List</button>
                                     </div>
                                 ) : (
-                                    <button onClick={() => setCurrentPage('portfolio')} className="text-[10px] font-bold uppercase tracking-widest text-white/50 hover:text-white flex items-center gap-2">
+                                    <button onClick={() => setCurrentPage('portfolio')} className="text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 text-white/50 hover:text-white">
                                         <ArrowLeftIcon size={14} /> Back
                                     </button>
                                 )}
-                                <a href={"https://wa.me/" + whatsappNumber} target="_blank" className="bg-white text-black px-5 py-2 rounded-sm text-[10px] font-bold uppercase tracking-widest hover:bg-green-500 hover:text-white transition-all shadow-xl">WhatsApp</a>
+                                <a href={"https://wa.me/" + whatsappNumber} target="_blank" className="bg-purple-600 text-white px-5 py-2.5 rounded-sm text-[10px] font-bold uppercase tracking-widest hover:bg-purple-500 transition-all shadow-lg">WhatsApp</a>
                             </div>
                         </div>
                     </nav>
 
                     {currentPage === 'portfolio' ? (
-                        <div className="animate-fade-in text-white text-left">
+                        <div className="animate-fade-in text-left">
                             
                             {/* HERO SECTION */}
                             <section id="hero" className="min-h-screen flex items-center justify-center pt-20 px-6 text-center relative overflow-hidden">
-                                <div className="absolute inset-10 pointer-events-none opacity-40 z-0">
-                                    <div className="vf-corner top-0 left-0 border-t-2 border-l-2"></div>
-                                    <div className="vf-corner top-0 right-0 border-t-2 border-r-2"></div>
-                                    <div className="vf-corner bottom-0 left-0 border-b-2 border-l-2"></div>
-                                    <div className="vf-corner bottom-0 right-0 border-b-2 border-r-2"></div>
+                                <div className="absolute inset-10 pointer-events-none opacity-30 z-0">
+                                    <div className="vf-corner top-0 left-0 border-t-2 border-l-2 border-white/20"></div>
+                                    <div className="vf-corner top-0 right-0 border-t-2 border-r-2 border-white/20"></div>
+                                    <div className="vf-corner bottom-0 left-0 border-b-2 border-l-2 border-white/20"></div>
+                                    <div className="vf-corner bottom-0 right-0 border-b-2 border-r-2 border-white/20"></div>
                                 </div>
 
                                 <div className="relative z-10 max-w-5xl mx-auto flex flex-col items-center">
                                     {/* HERO BADGE */}
-                                    <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-8 shadow-xl">
-                                        <div className="flex items-center gap-2 border-r border-white/10 pr-3">
-                                            <div className="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse"></div>
-                                            <span className="text-[9px] font-bold text-white/80 font-mono tracking-tight uppercase">{currentTime.toLocaleTimeString('en-GB')}</span>
-                                        </div>
-                                        <span className="text-[9px] uppercase font-black tracking-[0.2em] text-purple-400">• FROM RAW TO WOW</span>
+                                    <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-white/10 bg-white/5 text-purple-400 mb-8 shadow-md">
+                                        <div className="w-2 h-2 rounded-full bg-red-600 animate-pulse"></div>
+                                        <span className="text-[9px] uppercase font-black tracking-[0.2em]">• FROM RAW TO WOW</span>
                                     </div>
 
-                                    <h1 className="text-[14vw] sm:text-[10vw] font-heading leading-[0.82] uppercase mb-8 italic drop-shadow-2xl glow-text">
-                                        FADLAN <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-white">ISKANDAR.</span>
+                                    <h1 className="text-[14vw] sm:text-[10vw] font-heading leading-[0.82] uppercase mb-8 italic drop-shadow-2xl glow-text-dark text-white">
+                                        FADLAN <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-purple-800">ISKANDAR.</span>
                                     </h1>
-                                    <p className="max-w-xl mx-auto text-white/40 text-xs md:text-sm font-bold uppercase tracking-widest mb-12 leading-relaxed text-center">Transforming ideas into visual masterpieces through high-end motion design and cinematic editing.</p>
-                                    <div className="flex flex-col sm:flex-row justify-center gap-4 mb-20 text-white text-center">
-                                        <a href="#work" className="bg-purple-600 hover:bg-purple-500 text-white px-8 py-3 rounded-sm font-black uppercase text-[10px] tracking-widest transition-all shadow-xl">Explore Works</a>
-                                        <button onClick={() => setCurrentPage('prices')} className="bg-white/5 border border-white/10 hover:bg-white/10 px-8 py-3 rounded-sm font-black uppercase text-[10px] tracking-widest transition-all text-white">Price List</button>
+                                    <p className="max-w-xl mx-auto text-xs md:text-sm font-bold uppercase tracking-widest mb-12 leading-relaxed text-center text-white/40">
+                                        Transforming ideas into visual masterpieces through high-end motion design and cinematic editing.
+                                    </p>
+                                    <div className="flex flex-col sm:flex-row justify-center gap-4 mb-20 text-center">
+                                        <a href="#work" className="bg-purple-600 hover:bg-purple-500 text-white px-8 py-3.5 rounded-sm font-black uppercase text-[10px] tracking-widest transition-all shadow-xl">Explore Works</a>
+                                        <button onClick={() => setCurrentPage('prices')} className="border border-white/10 bg-white/5 hover:bg-white/10 text-white px-8 py-3.5 rounded-sm font-black uppercase text-[10px] tracking-widest transition-all">Price List</button>
                                     </div>
                                 </div>
                             </section>
 
-                            <div className="bg-white text-black py-3 overflow-hidden border-y border-black relative z-20 flex">
-                                <div className="animate-marquee flex items-center text-black">
+                            <div className="py-3.5 overflow-hidden border-y border-black bg-white text-black relative z-20 flex">
+                                <div className="animate-marquee flex items-center">
                                     <span className="font-heading uppercase italic tracking-tighter text-lg sm:text-2xl mx-4">VIDEO EDITING • MOTION GRAPHICS • VISUAL EFFECTS • 2D ANIMATION • COLOR GRADING • CINEMATIC STORYTELLING •</span>
                                 </div>
-                                <div className="animate-marquee flex items-center text-black">
+                                <div className="animate-marquee flex items-center">
                                     <span className="font-heading uppercase italic tracking-tighter text-lg sm:text-2xl mx-4">VIDEO EDITING • MOTION GRAPHICS • VISUAL EFFECTS • 2D ANIMATION • COLOR GRADING • CINEMATIC STORYTELLING •</span>
                                 </div>
                             </div>
 
                             {}
-                            {/* TRUSTED LOGO CLIENTS DECK (10 BRAND LOGOS - NO TEXT - PREMIUM HOVER EFFECT) */}
+                            {/* TRUSTED LOGO CLIENTS DECK */}
                             <section className="py-20 border-b border-white/5 bg-[#070707]/60">
                                 <div className="max-w-7xl mx-auto px-6">
-                                    <p className="font-mono text-[9px] text-white/30 tracking-[0.4em] uppercase text-center mb-12">TRUSTED BY INDUSTRY PARTNERS</p>
+                                    <p className="font-mono text-[9px] tracking-[0.4em] uppercase text-center mb-12 text-white/30">TRUSTED BY INDUSTRY PARTNERS</p>
                                     <div className="grid grid-cols-2 sm:grid-cols-5 md:grid-cols-10 gap-6 items-center justify-items-center">
                                         {clientLogos.map((logo, index) => (
-                                            <div key={index} className="w-16 h-16 md:w-20 md:h-20 rounded-2xl overflow-hidden border border-white/5 bg-[#0a0a0a] flex items-center justify-center p-3 transition-all duration-500 opacity-45 grayscale hover:opacity-100 hover:grayscale-0 hover:scale-105 hover:border-purple-600/30">
+                                            <div key={index} className="w-16 h-16 md:w-20 md:h-20 rounded-2xl overflow-hidden border border-white/5 bg-[#0a0a0a] hover:border-purple-600/40 flex items-center justify-center p-3 transition-all duration-300 opacity-60 hover:opacity-100 hover:scale-105">
                                                 <img src={logo} alt="Client Brand" className="w-full h-full object-contain" />
                                             </div>
                                         ))}
@@ -453,27 +448,27 @@
                                 </div>
                             </section>
 
-                            {/* ABOUT ME SECTION (SUPER CLEAN TYPOGRAPHIC TEMA BARU - NO PHOTO) */}
-                            <section id="about" className="py-32 px-6 bg-black/40 backdrop-blur-sm text-center">
+                            {/* ABOUT ME SECTION */}
+                            <section id="about" className="py-32 px-6 text-center bg-black/40">
                                 <div className="max-w-4xl mx-auto">
                                     <div className="flex items-center justify-center gap-4 mb-10">
                                         <div className="w-2 h-8 bg-purple-600"></div>
                                         <h2 className="text-4xl md:text-6xl font-heading uppercase italic tracking-tighter">About Me.</h2>
                                         <div className="w-2 h-8 bg-purple-600"></div>
                                     </div>
-                                    <p className="text-white/70 text-lg md:text-2xl font-medium leading-relaxed mb-16 text-center">
-                                        I am Muhammad Fadlan Iskandar, a <span className="text-white font-black italic">Video Editor & Motion Designer</span> based in Indonesia. Since 2023, I have dedicated myself to transforming every piece of raw footage into a visual masterpiece with a definitive Wow factor.
+                                    <p className="text-lg md:text-2xl font-medium leading-relaxed mb-16 text-center text-white/70">
+                                        I am Muhammad Fadlan Iskandar, a <span className="font-black italic text-white">Video Editor & Motion Designer</span> based in Indonesia. Since 2023, I have dedicated myself to transforming every piece of raw footage into a visual masterpiece with a definitive Wow factor.
                                     </p>
                                     
-                                    {/* GRID SKILLS (HORIZONTAL DECK 6 COLUMN) */}
+                                    {/* GRID SKILLS */}
                                     <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
                                         {[
                                             {n: <LayersIcon size={20} />, l:'AE'}, {n: <ClapperboardIcon size={20} />, l:'PR'}, 
                                             {n: <LayoutIcon size={20} />, l:'AI'}, {n: <TvIcon size={20} />, l:'PS'}, 
                                             {n: <ZapIcon size={20} />, l:'VFX'}, {n: <CameraIcon size={20} />, l:'CINEMA'}
                                         ].map((item, idx) => (
-                                            <div key={idx} className="bg-[#0b0b0b] border border-white/5 p-6 rounded-xl flex flex-col items-center gap-3 group hover:border-purple-600/50 hover:bg-purple-600/5 transition-all">
-                                                <span className="text-purple-500 group-hover:scale-110 transition-transform">{item.n}</span>
+                                            <div key={idx} className="border border-white/5 bg-[#0b0b0b] hover:border-purple-600/50 hover:bg-purple-600/5 p-6 rounded-xl flex flex-col items-center gap-3 group transition-all">
+                                                <span className="text-purple-600 group-hover:scale-110 transition-transform">{item.n}</span>
                                                 <span className="text-[11px] font-bold uppercase tracking-widest text-white/50">{item.l}</span>
                                             </div>
                                         ))}
@@ -481,44 +476,23 @@
                                 </div>
                             </section>
 
-                            {/* SHOWREEL */}
-                            <section id="showreel" className="py-32 px-6 border-t border-white/5 text-center showreel-gradient">
-                                <div className="max-w-7xl mx-auto">
-                                    <div className="mb-16">
-                                        <h2 className="text-5xl md:text-7xl font-heading font-black uppercase italic tracking-tighter mb-4">The Master Reel.</h2>
-                                        <p className="text-purple-400 font-mono text-[10px] uppercase tracking-[0.4em]">Highlighting Best Creative Projects</p>
-                                    </div>
-                                    <div className="group relative aspect-video w-full rounded-sm overflow-hidden border border-white/10 bg-black cursor-pointer shadow-3xl text-left" onClick={() => setSelectedVideo(showreelData)}>
-                                        <div className="absolute inset-0 bg-purple-900/10 group-hover:bg-purple-900/20 transition-all duration-700 flex items-center justify-center text-center">
-                                            <div className="w-24 h-24 rounded-full border border-white/20 flex items-center justify-center group-hover:scale-110 group-hover:bg-purple-600 group-hover:border-purple-600 transition-all duration-500 shadow-2xl">
-                                                <PlayIcon size={32} fill="white" className="text-white ml-1" />
-                                            </div>
-                                        </div>
-                                        <div className="absolute bottom-10 left-10 text-left text-white">
-                                            <span className="bg-white text-black px-4 py-1 text-[9px] font-bold uppercase tracking-widest mb-4 inline-block">Featured</span>
-                                            <h3 className="text-3xl font-heading uppercase italic tracking-tight">Project Showcase 2024-2026</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-
                             {}
-                            {/* ARCHIVE GRID (NESTEAD FILTER SYSTEM) */}
-                            <section id="work" className="py-32 px-6 border-t border-white/5 text-left">
+                            {/* WORK ARCHIVE SECTION */}
+                            <section id="work" className="py-32 px-6 border-t border-white/5">
                                 <div className="max-w-7xl mx-auto">
-                                    <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-16 gap-8">
+                                    <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
                                         <div>
-                                            <h2 className="text-5xl font-heading font-extrabold uppercase italic tracking-tighter">Archive.</h2>
-                                            <p className="font-mono text-[9px] text-white/30 tracking-widest uppercase mt-2">EXPLORE CATEGORIES & SUB-TAGS</p>
+                                            <span className="font-mono text-[9px] text-purple-500 uppercase tracking-[0.4em] block mb-2">CURATED ARCHIVE</span>
+                                            <h2 className="text-5xl md:text-7xl font-heading uppercase italic tracking-tighter">Selected Works.</h2>
                                         </div>
-                                        
-                                        {/* FILTER LEVEL 1: CATEGORY UTAMA */}
-                                        <div className="flex flex-wrap gap-2 p-1 bg-white/5 rounded-sm">
+
+                                        {/* FILTER LEVEL 1 */}
+                                        <div className="flex flex-wrap gap-2 p-1 rounded-sm bg-white/5 border border-white/5">
                                             {['All', 'Video Editing', 'Animasi'].map(c => (
                                                 <button 
                                                     key={c} 
                                                     onClick={() => handleCategoryChange(c)} 
-                                                    className={"text-[10px] font-bold uppercase tracking-widest px-6 py-2 transition-all " + (activeCategory === c ? "bg-purple-600 text-white shadow-lg" : "hover:bg-white/10 text-white/40")}
+                                                    className={"text-[10px] font-bold uppercase tracking-widest px-6 py-2 transition-all rounded-sm " + (activeCategory === c ? "bg-purple-600 text-white shadow-lg" : "hover:bg-white/10 text-white/40")}
                                                 >
                                                     {c}
                                                 </button>
@@ -526,12 +500,12 @@
                                         </div>
                                     </div>
 
-                                    {/* FILTER LEVEL 2: SUB-CATEGORY (Hanya render jika Kategori Utama dipilih & bukan 'All') */}
+                                    {/* FILTER LEVEL 2 */}
                                     {activeCategory !== 'All' && (
-                                        <div className="flex flex-wrap gap-2 mb-12 p-1 bg-[#0b0b0b] border border-white/5 rounded-lg max-w-max animate-fade-in">
+                                        <div className="flex flex-wrap gap-2 mb-12 p-1 border border-white/5 rounded-lg max-w-max animate-fade-in bg-[#0b0b0b]">
                                             <button 
                                                 onClick={() => setActiveSubCategory('All')} 
-                                                className={"text-[9px] font-bold uppercase tracking-wider px-4 py-1.5 rounded-md transition-all " + (activeSubCategory === 'All' ? "bg-white/10 text-white" : "text-white/40 hover:text-white")}
+                                                className={"text-[9px] font-bold uppercase tracking-wider px-4 py-1.5 rounded-md transition-all " + (activeSubCategory === 'All' ? "bg-white/10 text-white" : "text-slate-400 hover:text-purple-600")}
                                             >
                                                 Show All
                                             </button>
@@ -539,13 +513,13 @@
                                                 <React.Fragment>
                                                     <button 
                                                         onClick={() => setActiveSubCategory('Talking Head')} 
-                                                        className={"text-[9px] font-bold uppercase tracking-wider px-4 py-1.5 rounded-md transition-all " + (activeSubCategory === 'Talking Head' ? "bg-purple-600/20 border border-purple-500/30 text-purple-400" : "text-white/40 hover:text-white")}
+                                                        className={"text-[9px] font-bold uppercase tracking-wider px-4 py-1.5 rounded-md transition-all " + (activeSubCategory === 'Talking Head' ? "bg-purple-600/20 border border-purple-500/30 text-purple-400 font-extrabold" : "text-slate-400 hover:text-purple-600")}
                                                     >
                                                         Talking Head
                                                     </button>
                                                     <button 
                                                         onClick={() => setActiveSubCategory('VFX')} 
-                                                        className={"text-[9px] font-bold uppercase tracking-wider px-4 py-1.5 rounded-md transition-all " + (activeSubCategory === 'VFX' ? "bg-purple-600/20 border border-purple-500/30 text-purple-400" : "text-white/40 hover:text-white")}
+                                                        className={"text-[9px] font-bold uppercase tracking-wider px-4 py-1.5 rounded-md transition-all " + (activeSubCategory === 'VFX' ? "bg-purple-600/20 border border-purple-500/30 text-purple-400 font-extrabold" : "text-slate-400 hover:text-purple-600")}
                                                     >
                                                         VFX
                                                     </button>
@@ -555,15 +529,9 @@
                                                 <React.Fragment>
                                                     <button 
                                                         onClick={() => setActiveSubCategory('Motion Graphics')} 
-                                                        className={"text-[9px] font-bold uppercase tracking-wider px-4 py-1.5 rounded-md transition-all " + (activeSubCategory === 'Motion Graphics' ? "bg-purple-600/20 border border-purple-500/30 text-purple-400" : "text-white/40 hover:text-white")}
+                                                        className={"text-[9px] font-bold uppercase tracking-wider px-4 py-1.5 rounded-md transition-all " + (activeSubCategory === 'Motion Graphics' ? "bg-purple-600/20 border border-purple-500/30 text-purple-400 font-extrabold" : "text-slate-400 hover:text-purple-600")}
                                                     >
                                                         Motion Graphics
-                                                    </button>
-                                                    <button 
-                                                        onClick={() => setActiveSubCategory('Animasi')} 
-                                                        className={"text-[9px] font-bold uppercase tracking-wider px-4 py-1.5 rounded-md transition-all " + (activeSubCategory === 'Animasi' ? "bg-purple-600/20 border border-purple-500/30 text-purple-400" : "text-white/40 hover:text-white")}
-                                                    >
-                                                        2D Animasi
                                                     </button>
                                                 </React.Fragment>
                                             )}
@@ -573,17 +541,17 @@
                                     {/* GRID OUTPUT */}
                                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                                         {filteredProjects.map(p => (
-                                            <div key={p.id} className="group relative aspect-square bg-[#0a0a0a] border border-white/5 rounded-sm overflow-hidden cursor-pointer shadow-2xl text-white text-left" onClick={() => setSelectedVideo(p)}>
-                                                <div className={"absolute inset-0 z-0 bg-gradient-to-br transition-all duration-700 opacity-60 group-hover:opacity-100 " + (p.category === 'Video Editing' ? 'from-blue-600/40' : 'from-purple-600/40') + " to-black"}></div>
-                                                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 scale-75 group-hover:scale-100">
+                                            <div key={p.id} className="group relative aspect-square border rounded-sm overflow-hidden cursor-pointer shadow-xl text-left bg-[#0a0a0a] border-white/5" onClick={() => setSelectedVideo(p)}>
+                                                <div className={"absolute inset-0 z-0 bg-gradient-to-br transition-all duration-500 opacity-60 group-hover:opacity-100 " + (p.category === 'Video Editing' ? 'from-blue-600/40' : 'from-purple-600/40') + " to-black"}></div>
+                                                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 scale-75 group-hover:scale-100">
                                                     <div className="bg-white text-black p-4 rounded-full shadow-2xl">
                                                         <PlayIcon size={30} fill="black" className="text-black ml-0.5" />
                                                     </div>
                                                 </div>
                                                 <div className="absolute bottom-8 left-8 text-left text-white">
-                                                    <div className="flex items-center gap-2 mb-2 text-white">
+                                                    <div className="flex items-center gap-2 mb-2">
                                                         <div className={"w-1.5 h-1.5 rounded-full " + (p.category === 'Video Editing' ? 'bg-blue-500' : 'bg-purple-500')}></div>
-                                                        <span className="text-[9px] uppercase font-bold text-white/40 tracking-[0.2em]">{p.subCategory}</span>
+                                                        <span className="text-[9px] uppercase font-bold text-white/60 tracking-[0.2em]">{p.subCategory}</span>
                                                     </div>
                                                     <h3 className="text-xl font-heading uppercase italic tracking-tight">{p.title}</h3>
                                                 </div>
@@ -593,34 +561,35 @@
                                 </div>
                             </section>
 
-                            <footer className="py-32 px-6 border-t border-white/5 bg-black/60 text-center text-white">
+                            <footer className="py-32 px-6 border-t text-center border-white/5 bg-black/60 text-white">
                                 <h2 className="text-6xl md:text-9xl font-heading font-black uppercase italic tracking-tighter mb-16 opacity-90 flex justify-center">Let's Connect.</h2>
-                                <div className="flex justify-center gap-12 mb-20 text-white">
+                                <div className="flex justify-center gap-12 mb-20">
                                     <a href="https://www.instagram.com/faldangg.aep/" target="_blank" className="hover:text-purple-500 transition-all transform hover:-translate-y-2">
                                         <InstagramIcon size={40} />
                                     </a>
                                     <a href="https://www.tiktok.com/@fadlaniskandarpro" target="_blank" className="hover:text-purple-500 transition-all transform hover:-translate-y-2 flex items-center"><TikTokIcon size={40} /></a>
                                 </div>
-                                <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 font-mono text-[9px] uppercase font-bold tracking-[0.4em] opacity-20 text-white">
+                                <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 font-mono text-[9px] uppercase font-bold tracking-[0.4em] opacity-30">
                                     <span>© 2026 MUHAMMAD FADLAN ISKANDAR</span>
-                                    <div className="flex gap-8 text-white"><span>UTC+7 DEPOK</span><span>{whatsappNumber}</span></div>
+                                    <div className="flex gap-8"><span>UTC+7 DEPOK</span><span>{whatsappNumber}</span></div>
                                 </div>
                             </footer>
                         </div>
                     ) : (
                         /* PRICES PAGE */
-                        <div className="pt-40 px-6 pb-32 animate-fade-in text-center max-w-7xl mx-auto text-white">
-                            <h2 className="text-7xl md:text-9xl font-heading uppercase italic tracking-tighter mb-6 text-center glow-text">PRICE LIST.</h2>
-                            <p className="text-white/40 font-bold uppercase tracking-widest text-[10px] mb-20 text-center">Choose the best professional visual package for your needs.</p>
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-40 text-left text-white">
+                        <div className="pt-40 px-6 pb-32 animate-fade-in text-center max-w-7xl mx-auto">
+                            <h2 className="text-7xl md:text-9xl font-heading uppercase italic tracking-tighter mb-6 text-center glow-text-dark text-white">PRICE LIST.</h2>
+                            <p className="font-bold uppercase tracking-widest text-[10px] mb-20 text-center text-white/40">Choose the best professional visual package for your needs.</p>
+                            
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-40 text-left">
                                 {pricingPlans.map(plan => (
-                                    <div key={plan.title} className={"p-10 border relative overflow-hidden transition-all duration-500 " + (plan.popular ? "border-purple-600 bg-[#0c0c0c]/80 shadow-2xl scale-105 z-10" : "border-white/5 bg-white/5 opacity-80") + " text-white text-left"}>
-                                        {plan.popular && <div className="absolute top-0 right-0 bg-purple-600 text-white text-[9px] font-bold px-4 py-1 uppercase tracking-widest text-white">BEST SELLER</div>}
-                                        <h3 className="text-3xl font-heading uppercase italic mb-2 tracking-tighter text-white">{plan.title}</h3>
-                                        <div className="text-4xl font-bold text-purple-500 mb-10 tracking-tighter">{plan.price}<span className="text-xs text-white/30 font-bold ml-2">/ MIN</span></div>
-                                        <div className="space-y-4 mb-12 text-white">
+                                    <div key={plan.title} className={"p-10 border relative overflow-hidden transition-all duration-300 rounded-sm " + (plan.popular ? "border-purple-600 bg-purple-900/10 shadow-2xl scale-105 z-10" : "border-white/5 bg-white/5 opacity-80")}>
+                                        {plan.popular && <div className="absolute top-0 right-0 bg-purple-600 text-white text-[9px] font-bold px-4 py-1 uppercase tracking-widest">BEST SELLER</div>}
+                                        <h3 className="text-3xl font-heading uppercase italic mb-2 tracking-tighter">{plan.title}</h3>
+                                        <div className="text-4xl font-bold text-purple-600 mb-10 tracking-tighter">{plan.price}<span className="text-xs opacity-40 font-bold ml-2">/ MIN</span></div>
+                                        <div className="space-y-4 mb-12">
                                             {plan.features.map(f => (
-                                                <div key={f} className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-white/70 text-white"><CheckIcon size={14} color="#a855f7" /> {f}</div>
+                                                <div key={f} className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest opacity-80"><CheckIcon size={14} color="#a855f7" /> {f}</div>
                                             ))}
                                         </div>
                                         <button onClick={() => window.open("https://wa.me/" + whatsappNumber + "?text=Hi Fadlan, I want to book the " + plan.title + " package.")} className="w-full bg-purple-600 hover:bg-purple-500 py-5 font-bold uppercase text-[11px] tracking-widest transition-all text-white text-center">Book Now</button>
@@ -629,33 +598,33 @@
                             </div>
 
                             {/* FAQ */}
-                            <div className="max-w-3xl mx-auto mt-40 text-left text-white">
-                                <div className="text-center mb-16 text-white">
-                                   <p className="font-heading text-purple-500 text-xs uppercase tracking-[0.4em] mb-4 text-center">INVESTMENT GUIDE</p>
+                            <div className="max-w-3xl mx-auto mt-40 text-left">
+                                <div className="text-center mb-16">
+                                   <p className="font-heading text-purple-600 text-xs uppercase tracking-[0.4em] mb-4 text-center">INVESTMENT GUIDE</p>
                                    <h2 className="text-5xl md:text-6xl font-heading uppercase italic tracking-tighter text-center">FAQ.</h2>
                                 </div>
-                                <div className="space-y-4 text-white text-left">
+                                <div className="space-y-4 text-left">
                                   {faqs.map((faq, index) => (
-                                    <div key={index} className="rounded-sm border border-white/5 bg-black/40 backdrop-blur-md overflow-hidden transition-all shadow-lg text-white">
-                                      <button onClick={() => setActiveFaq(activeFaq === index ? null : index)} className="w-full px-8 py-6 flex items-center justify-between text-left group text-white">
-                                        <span className="font-heading italic uppercase tracking-widest text-sm text-white/80 group-hover:text-white transition-colors text-white">{faq.q}</span>
-                                        <ChevronDownIcon size={18} className={"transition-transform duration-500 text-purple-500 " + (activeFaq === index ? "rotate-180" : "")} />
+                                    <div key={index} className="rounded-sm border border-white/5 bg-black/40 overflow-hidden transition-all shadow-sm">
+                                      <button onClick={() => setActiveFaq(activeFaq === index ? null : index)} className="w-full px-8 py-6 flex items-center justify-between text-left group">
+                                        <span className="font-heading italic uppercase tracking-widest text-sm opacity-80 group-hover:opacity-100 transition-colors">{faq.q}</span>
+                                        <ChevronDownIcon size={18} className={"transition-transform duration-300 text-purple-600 " + (activeFaq === index ? "rotate-180" : "")} />
                                       </button>
                                       {activeFaq === index && (
-                                        <div className="px-8 pb-8 text-white/50 text-sm leading-relaxed font-medium animate-fade-in text-left">{faq.a}</div>
+                                        <div className="px-8 pb-8 opacity-60 text-sm leading-relaxed font-medium animate-fade-in text-left">{faq.a}</div>
                                       )}
                                     </div>
                                   ))}
                                 </div>
                             </div>
-                            <footer className="mt-40 pt-20 border-t border-white/5 opacity-20 font-mono text-[9px] uppercase tracking-[0.4em] text-white">© 2026 MUHAMMAD FADLAN ISKANDAR — DEPOK</footer>
+                            <footer className="mt-40 pt-20 border-t border-white/5 opacity-30 font-mono text-[9px] uppercase tracking-[0.4em]">© 2026 MUHAMMAD FADLAN ISKANDAR — DEPOK</footer>
                         </div>
                     )}
 
                     {}
-                    {/* LIVE POPUP NOTIFICATION (VERIFIED WORTH-IT REVIEWS - PRICES PAGE ONLY) */}
+                    {/* LIVE POPUP NOTIFICATION (PRICES PAGE ONLY) */}
                     {currentPage === 'prices' && activeNotification && (
-                        <div className="fixed bottom-6 left-6 z-[150] bg-black/95 border border-purple-500/30 p-4 rounded-lg shadow-[0_10px_50px_rgba(168,85,247,0.25)] flex items-center gap-4 animate-slide-in-up max-w-sm backdrop-blur-md">
+                        <div className="fixed bottom-6 left-6 z-[150] bg-black/95 border border-purple-500/30 p-4 rounded-lg shadow-[0_10px_50px_rgba(168,85,247,0.25)] flex items-center gap-4 animate-slide-in-up max-w-sm backdrop-blur-md text-white">
                             <div className="w-10 h-10 rounded-full bg-purple-600/20 border border-purple-500/50 flex items-center justify-center shrink-0">
                                 <ShoppingBagIcon size={18} className="text-purple-400 animate-pulse" />
                             </div>
@@ -678,7 +647,7 @@
 
                     {/* MODAL VIDEO PLAYBACK */}
                     {selectedVideo && (
-                        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-10 bg-black/95 backdrop-blur-2xl animate-fade-in text-white text-left" onClick={() => setSelectedVideo(null)}>
+                        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-10 bg-black/95 backdrop-blur-md animate-fade-in text-white text-left" onClick={() => setSelectedVideo(null)}>
                             <div className="relative w-full max-w-5xl bg-[#0a0a0a] border border-white/10 shadow-3xl overflow-hidden rounded-sm text-white" onClick={e => e.stopPropagation()}>
                                 <button className="absolute top-6 right-6 text-white hover:text-purple-500 z-50 transition-colors" onClick={() => setSelectedVideo(null)}><XIcon size={30} /></button>
                                 <div className="aspect-video bg-black flex items-center justify-center">
@@ -694,7 +663,7 @@
                                     )}
                                 </div>
                                 <div className="p-10 text-left text-white">
-                                    <span className="text-[10px] font-bold uppercase tracking-widest text-purple-500 mb-2 block">{selectedVideo.category}</span>
+                                    <span className="text-[10px] font-bold uppercase tracking-widest text-purple-400 mb-2 block">{selectedVideo.category}</span>
                                     <h2 className="text-3xl md:text-5xl font-heading uppercase italic tracking-tighter mb-4 text-white">{selectedVideo.title}</h2>
                                     <p className="text-white/50 text-lg font-medium leading-relaxed max-w-3xl border-l-2 border-purple-600 pl-6 text-justify">{selectedVideo.desc}</p>
                                 </div>
