@@ -6,7 +6,7 @@
     <title>Portofolio Fadlan Iskandar — Video Editor & Motion Designer</title>
     
     <!-- Favicon Direct Stream -->
-    <link rel="icon" type="image/png" href="https://www.dropbox.com/scl/fi/qodfqn41nfks88o19uapa/Logo-Faldangg-Transparant.png?rlkey=gihgfqpmdvnji0tw920w0k7th&st=ge7ww976&raw=1">
+    <link rel="icon" type="image/png" href="https://dl.dropboxusercontent.com/scl/fi/qodfqn41nfks88o19uapa/Logo-Faldangg-Transparant.png?rlkey=gihgfqpmdvnji0tw920w0k7th&st=ge7ww976&raw=1">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -116,16 +116,8 @@
             <svg className="w-4 h-4 stroke-current fill-none" strokeWidth="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
         );
 
-        const StarIcon = () => (
-            <svg className="w-5 h-5 fill-purple-400" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-        );
-
         const TagIcon = () => (
             <svg className="w-4 h-4 stroke-current fill-none" strokeWidth="2" viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82zM7 7h.01"/></svg>
-        );
-
-        const ShoppingBagIcon = () => (
-            <svg className="w-4 h-4 stroke-current fill-none" strokeWidth="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
         );
 
         const ChevronDownIcon = ({ className }) => (
@@ -151,6 +143,7 @@
             const [langAbout, setLangAbout] = useState('ID');
             const [activeFaq, setActiveFaq] = useState(null);
             const [activeNotification, setActiveNotification] = useState(null);
+            const [activeScope, setActiveScope] = useState(null);
 
             /* --- CONFIG DATA --- */
             const whatsappNumber = "6287713907028";
@@ -158,6 +151,33 @@
             // DIRECT CDN LOGO URL WITH FALLBACK
             const logoHeader = "https://dl.dropboxusercontent.com/scl/fi/qodfqn41nfks88o19uapa/Logo-Faldangg-Transparant.png?rlkey=gihgfqpmdvnji0tw920w0k7th&st=ge7ww976&raw=1";
             const logoHeaderFallback = "https://www.dropbox.com/scl/fi/qodfqn41nfks88o19uapa/Logo-Faldangg-Transparant.png?rlkey=gihgfqpmdvnji0tw920w0k7th&st=ge7ww976&raw=1";
+
+            // SOFTWARE LOGOS (DIRECT CDN)
+            const softwareLogos = [
+                { name: "Premiere Pro", url: "https://dl.dropboxusercontent.com/scl/fi/ci3w8ob3742dvd8cw6adh/premiere-pro.png?rlkey=vckg9sp66xemx4wndk5fr447a&st=dmon5xiy&raw=1" },
+                { name: "After Effects", url: "https://dl.dropboxusercontent.com/scl/fi/z8mcozu8ld8l28q9h3l1d/after-effects.png?rlkey=72exbicwbhhato05akkbiq2g3&st=yh1083zc&raw=1" },
+                { name: "Capcut", url: "https://dl.dropboxusercontent.com/scl/fi/gflj483h8amx6k4ev8a01/Capcut.png?rlkey=bdjk6kf9npr1z578r0pq2nlxi&st=d8sko5k2&raw=1" },
+                { name: "Photoshop", url: "https://dl.dropboxusercontent.com/scl/fi/k3tht14hoj3x8ht4yh8dc/Photoshop.png?rlkey=pr4t58ytvko82icpikr1tqwcs&st=1vpc3nz4&raw=1" },
+                { name: "Illustrator", url: "https://dl.dropboxusercontent.com/scl/fi/zpqzz2acu4iel908nvhoa/illustrator.png?rlkey=k7e2t0pvjptqoq2la70cbsjlh&st=0a6reqc6&raw=1" }
+            ];
+
+            // PRODUCTION SCOPES DATA
+            const productionScopes = [
+                { id: 'reels', title: "Reels", desc: "Video pendek Instagram/Facebook" },
+                { id: 'ytshorts', title: "Yt Shorts", desc: "YouTube Shorts" },
+                { id: 'youtube', title: "Youtube", desc: "Video format panjang/standar YouTube" },
+                { id: 'tiktok', title: "Tiktok", desc: "Video pendek TikTok" },
+                { id: 'education', title: "Education", desc: "Konten edukasi/pembelajaran" },
+                { id: 'vlog', title: "Vlog", desc: "Video dokumentasi harian/vlog" },
+                { id: 'advertising', title: "Advertising", desc: "Iklan/promosi" },
+                { id: 'documentation', title: "Documentation", desc: "Dokumentasi acara atau kegiatan" },
+                { id: 'shortmovie', title: "Short Movie", desc: "Film pendek" },
+                { id: 'webseries', title: "Web Series", desc: "Serial web" },
+                { id: 'bumper', title: "Bumper", desc: "Video transisi pendek/pembuka" },
+                { id: 'intros', title: "Intros", desc: "Video pembuka/intro video" },
+                { id: 'vfx', title: "Visual Effects", desc: "Efek visual/VFX" },
+                { id: 'motiongraphics', title: "Motion Graphics", desc: "Grafis bergerak/animasi teks dan elemen" }
+            ];
 
             // 10 CLIENT LOGOS WITH OFFICIAL DIRECT CDN LINKS
             const clientLogos = [
@@ -266,12 +286,6 @@
                 return p.subCategory === activeSubCategory;
             });
 
-            const handleOrder = (planTitle) => {
-                const msg = `Halo Fadlan, aku mau pesan paket ${planTitle}`;
-                window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(msg)}`, '_blank');
-            };
-
-            // Helper to check if URL is a direct video (.mp4)
             const isDirectVideo = (url) => {
                 return url.includes('.mp4') || url.includes('raw=1') || url.includes('dl.dropbox');
             };
@@ -370,7 +384,6 @@
                                 </div>
                                 <div className="flex overflow-hidden">
                                     <div className="animate-marquee flex items-center gap-12 sm:gap-16">
-                                        {}
                                         {clientLogos.concat(clientLogos).map((logo, idx) => (
                                             <div key={idx} className="flex items-center gap-3 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300 shrink-0">
                                                 <img 
@@ -418,210 +431,325 @@
                                     </h2>
                                 )}
 
-                                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 font-mono text-xs uppercase tracking-wider">
-                                    {['After Effects', 'Premiere Pro', 'Illustrator', 'VFX & SFX', 'Typography', 'Storytelling'].map((skill, idx) => (
-                                        <div key={idx} className="p-4 bg-white/5 border border-white/10 rounded-xl hover:border-purple-500/50 hover:bg-purple-500/10 transition-all">
-                                            {skill}
+                                {/* SOFTWARE LOGOS (PURE LOGOS - NO TEXT) */}
+                                <div className="mb-14">
+                                    <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/40 block mb-6">SOFTWARE & TOOLS</span>
+                                    <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
+                                        {softwareLogos.map((sw, idx) => (
+                                            <div key={idx} className="w-16 h-16 sm:w-20 sm:h-20 bg-white/5 border border-white/10 rounded-2xl p-3.5 flex items-center justify-center hover:border-purple-500/60 hover:bg-purple-500/10 hover:scale-105 transition-all duration-300 shadow-lg group">
+                                                <img 
+                                                    src={sw.url} 
+                                                    alt={sw.name} 
+                                                    title={sw.name}
+                                                    referrerPolicy="no-referrer"
+                                                    className="w-full h-full object-contain filter drop-shadow group-hover:brightness-110 transition-all"
+                                                />
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* PRODUCTION SCOPE SECTION */}
+                                <div className="border-t border-white/10 pt-10">
+                                    <div className="mb-6">
+                                        <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-purple-400 block mb-1">• CRITICAL CAPABILITIES</span>
+                                        <h3 className="text-2xl font-black italic uppercase tracking-tight">PRODUCTION SCOPE.</h3>
+                                        <p className="font-mono text-[11px] text-white/40 uppercase tracking-wider mt-1">Klik pada topik untuk melihat detail ringkasnya.</p>
+                                    </div>
+
+                                    <div className="flex flex-wrap justify-center gap-2.5 max-w-4xl mx-auto mb-6">
+                                        {productionScopes.map((scope) => {
+                                            const isActive = activeScope?.id === scope.id;
+                                            return (
+                                                <button
+                                                    key={scope.id}
+                                                    onClick={() => setActiveScope(isActive ? null : scope)}
+                                                    className={`px-4 py-2 rounded-xl font-mono text-xs uppercase tracking-wider transition-all border flex items-center gap-2 active:scale-95 ${
+                                                        isActive 
+                                                            ? 'bg-purple-600 text-white border-purple-400 shadow-lg shadow-purple-600/30 font-bold' 
+                                                            : 'bg-white/5 border-white/10 text-white/80 hover:text-white hover:border-purple-500/50 hover:bg-white/10'
+                                                    }`}
+                                                >
+                                                    <span>{scope.title}</span>
+                                                    <span className={`text-[10px] transition-transform ${isActive ? 'rotate-180 text-white' : 'text-purple-400'}`}>▾</span>
+                                                </button>
+                                            );
+                                        })}
+                                    </div>
+
+                                    {/* ACTIVE SCOPE EXPLANATION BOX */}
+                                    {activeScope && (
+                                        <div className="bg-purple-950/30 border border-purple-500/40 rounded-2xl p-5 max-w-xl mx-auto backdrop-blur-md animate-fade-in shadow-xl text-center">
+                                            <span className="font-mono text-[10px] text-purple-400 uppercase tracking-widest block mb-1">
+                                                Scope: <span className="text-white font-bold">{activeScope.title}</span>
+                                            </span>
+                                            <p className="font-mono text-sm text-purple-200 font-semibold">
+                                                ({activeScope.desc})
+                                            </p>
                                         </div>
-                                    ))}
+                                    )}
                                 </div>
                             </section>
 
                             {/* PORTFOLIO GALLERY ARCHIVE */}
-                            <section id="work" className="py-20 px-6 max-w-7xl mx-auto border-t border-white/10">
-                                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-                                    <div>
-                                        <span className="font-mono text-xs text-purple-400 uppercase tracking-widest block mb-2">• KARYA ARSIP</span>
-                                        <h2 className="text-4xl sm:text-5xl font-black italic uppercase tracking-tighter">PORTFOLIO.</h2>
-                                    </div>
-
-                                    {/* LEVEL 1: MAIN CATEGORY TABS */}
-                                    <div className="flex flex-wrap gap-2 bg-white/5 p-1.5 rounded-xl border border-white/10">
-                                        {['Semua', 'Video Editing', 'Animasi'].map((cat) => (
-                                            <button 
-                                                key={cat}
-                                                onClick={() => handleMainCategoryChange(cat)}
-                                                className={`px-5 py-2 rounded-lg font-mono text-xs uppercase tracking-wider transition-all ${activeCategory === cat ? 'bg-purple-600 text-white font-bold shadow-lg shadow-purple-600/30' : 'text-white/60 hover:text-white'}`}
-                                            >
-                                                {cat}
-                                            </button>
-                                        ))}
-                                    </div>
-                                </div>
-
-                                {/* LEVEL 2: NESTED SUB-CATEGORY TABS */}
-                                {activeCategory === 'Video Editing' && (
-                                    <div className="flex gap-3 mb-10 overflow-x-auto pb-2 border-b border-white/5">
-                                        {['Semua', 'Talking Head', 'VFX'].map((sub) => (
-                                            <button
-                                                key={sub}
-                                                onClick={() => setActiveSubCategory(sub)}
-                                                className={`px-4 py-1.5 rounded-full text-xs font-mono uppercase tracking-wider transition-all border ${activeSubCategory === sub ? 'bg-purple-500/20 border-purple-500 text-purple-300' : 'border-white/10 text-white/40 hover:text-white'}`}
-                                            >
-                                                {sub === 'Semua' ? 'Semua Video Editing' : sub}
-                                            </button>
-                                        ))}
-                                    </div>
-                                )}
-
-                                {activeCategory === 'Animasi' && (
-                                    <div className="flex gap-3 mb-10 overflow-x-auto pb-2 border-b border-white/5">
-                                        {['Semua', 'Motion Graphics'].map((sub) => (
-                                            <button
-                                                key={sub}
-                                                onClick={() => setActiveSubCategory(sub)}
-                                                className={`px-4 py-1.5 rounded-full text-xs font-mono uppercase tracking-wider transition-all border ${activeSubCategory === sub ? 'bg-purple-500/20 border-purple-500 text-purple-300' : 'border-white/10 text-white/40 hover:text-white'}`}
-                                            >
-                                                {sub === 'Semua' ? 'Semua Animasi' : sub}
-                                            </button>
-                                        ))}
-                                    </div>
-                                )}
-
-                                {/* VIDEO GRID */}
-                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                                    {filteredProjects.map((project) => (
-                                        <div 
-                                            key={project.id} 
-                                            onClick={() => setSelectedVideo(project)}
-                                            className="group relative bg-white/5 border border-white/10 rounded-2xl overflow-hidden cursor-pointer hover:border-purple-500/50 transition-all duration-300 flex flex-col"
-                                        >
-                                            <div className={`relative w-full overflow-hidden bg-black flex items-center justify-center ${project.isVertical ? 'aspect-[9/16] max-h-[420px]' : 'aspect-video'}`}>
-                                                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent z-10 opacity-80 group-hover:opacity-40 transition-opacity"></div>
-                                                
-                                                <div className="w-14 h-14 rounded-full bg-purple-600/80 border border-purple-400 flex items-center justify-center text-white z-20 group-hover:scale-110 transition-transform shadow-xl shadow-purple-600/40">
-                                                    <PlayIcon />
-                                                </div>
-
-                                                <span className="absolute top-4 left-4 z-20 bg-black/60 backdrop-blur-md text-white/80 font-mono text-[10px] px-3 py-1 rounded-full border border-white/10 uppercase">
-                                                    {project.subCategory}
-                                                </span>
-                                            </div>
-
-                                            <div className="p-5 flex-1 flex flex-col justify-between">
-                                                <div>
-                                                    <h3 className="font-bold text-lg group-hover:text-purple-400 transition-colors mb-2">{project.title}</h3>
-                                                    <p className="text-xs text-white/50 leading-relaxed line-clamp-2">{project.desc}</p>
-                                                </div>
-
-                                                <div className="mt-4 pt-4 border-t border-white/5 flex items-center justify-between font-mono text-[10px] text-purple-400 uppercase tracking-widest font-bold">
-                                                    <span>Putar Video</span>
-                                                    <ArrowRightIcon />
-                                                </div>
-                                            </div>
+                            <section id="work" className="py-24 px-6 border-t border-white/10 bg-black/40">
+                                <div className="max-w-7xl mx-auto">
+                                    
+                                    {/* FILTER HEADER (MAIN CATEGORY & NESTED SUB-CATEGORY UNDERNEATH) */}
+                                    <div className="flex flex-col md:flex-row md:items-start justify-between mb-12 gap-6">
+                                        <div>
+                                            <span className="font-mono text-xs text-purple-400 uppercase tracking-widest block mb-2">• KARYA ARSIP</span>
+                                            <h2 className="text-4xl sm:text-6xl font-black uppercase italic tracking-tighter">PORTFOLIO.</h2>
                                         </div>
-                                    ))}
+
+                                        <div className="flex flex-col items-start md:items-end gap-3">
+                                            {/* FILTER LEVEL 1: MAIN CATEGORIES */}
+                                            <div className="flex flex-wrap gap-2 bg-white/5 p-1.5 rounded-2xl border border-white/10">
+                                                {['Semua', 'Video Editing', 'Animasi'].map((cat) => (
+                                                    <button
+                                                        key={cat}
+                                                        onClick={() => handleMainCategoryChange(cat)}
+                                                        className={`px-5 py-2.5 rounded-xl font-mono text-xs uppercase tracking-wider font-bold transition-all ${
+                                                            activeCategory === cat 
+                                                                ? 'bg-purple-600 text-white shadow-lg shadow-purple-600/30' 
+                                                                : 'text-white/60 hover:text-white hover:bg-white/5'
+                                                        }`}
+                                                    >
+                                                        {cat}
+                                                    </button>
+                                                ))}
+                                            </div>
+
+                                            {/* FILTER LEVEL 2: SUB-CATEGORIES UNDERNEATH RIGHT */}
+                                            {activeCategory === 'Video Editing' && (
+                                                <div className="flex flex-wrap gap-2 animate-fade-in">
+                                                    {['Semua', 'Talking Head', 'VFX'].map((sub) => (
+                                                        <button
+                                                            key={sub}
+                                                            onClick={() => setActiveSubCategory(sub)}
+                                                            className={`px-4 py-1.5 rounded-xl font-mono text-[11px] uppercase tracking-wider transition-all border ${
+                                                                activeSubCategory === sub
+                                                                    ? 'bg-purple-500/20 text-purple-300 border-purple-500/60 font-bold'
+                                                                    : 'bg-white/5 border-white/10 text-white/50 hover:text-white'
+                                                            }`}
+                                                        >
+                                                            {sub === 'Semua' ? 'Semua Video Editing' : sub}
+                                                        </button>
+                                                    ))}
+                                                </div>
+                                            )}
+
+                                            {activeCategory === 'Animasi' && (
+                                                <div className="flex flex-wrap gap-2 animate-fade-in">
+                                                    {['Semua', 'Motion Graphics'].map((sub) => (
+                                                        <button
+                                                            key={sub}
+                                                            onClick={() => setActiveSubCategory(sub)}
+                                                            className={`px-4 py-1.5 rounded-xl font-mono text-[11px] uppercase tracking-wider transition-all border ${
+                                                                activeSubCategory === sub
+                                                                    ? 'bg-purple-500/20 text-purple-300 border-purple-500/60 font-bold'
+                                                                    : 'bg-white/5 border-white/10 text-white/50 hover:text-white'
+                                                            }`}
+                                                        >
+                                                            {sub === 'Semua' ? 'Semua Animasi' : sub}
+                                                        </button>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+
+                                    {/* VIDEO GRID ARCHIVE */}
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                                        {filteredProjects.map((p) => (
+                                            <div 
+                                                key={p.id} 
+                                                onClick={() => setSelectedVideo(p)}
+                                                className="group relative bg-white/5 border border-white/10 rounded-2xl overflow-hidden cursor-pointer hover:border-purple-500/50 transition-all duration-300 hover:-translate-y-1 shadow-lg"
+                                            >
+                                                <div className="aspect-video w-full bg-neutral-900 relative overflow-hidden flex items-center justify-center">
+                                                    {/* VIDEO THUMBNAIL BACKDROP */}
+                                                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10"></div>
+                                                    
+                                                    {/* CATEGORY BADGE */}
+                                                    <span className="absolute top-4 left-4 z-20 font-mono text-[10px] uppercase tracking-wider px-3 py-1 rounded-full bg-black/60 border border-white/10 backdrop-blur-md text-purple-300 font-semibold">
+                                                        {p.category} • {p.subCategory}
+                                                    </span>
+
+                                                    {/* PLAY OVERLAY BUTTON */}
+                                                    <div className="z-20 w-12 h-12 rounded-full bg-purple-600/90 text-white flex items-center justify-center group-hover:scale-110 transition-transform shadow-xl shadow-purple-600/40">
+                                                        <PlayIcon />
+                                                    </div>
+                                                </div>
+
+                                                <div className="p-5">
+                                                    <h3 className="font-extrabold text-lg tracking-tight mb-2 group-hover:text-purple-400 transition-colors">{p.title}</h3>
+                                                    <p className="font-mono text-xs text-white/50 line-clamp-2 leading-relaxed">{p.desc}</p>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
                             </section>
-
                         </main>
                     ) : (
-                        /* PRICE LIST PAGE */
-                        <main className="pt-32 pb-20 px-6 max-w-7xl mx-auto">
+                        /* --- PRICING PAGE VIEW --- */
+                        <main className="pt-32 pb-24 px-6 max-w-7xl mx-auto">
                             <div className="text-center max-w-3xl mx-auto mb-16">
-                                <span className="font-mono text-xs uppercase tracking-widest text-purple-400 block mb-3">• PANDUAN INVESTASI</span>
-                                <h1 className="text-5xl sm:text-6xl font-black italic uppercase tracking-tighter mb-6">DAFTAR HARGA.</h1>
-                                <p className="text-white/60 font-mono text-xs uppercase tracking-widest leading-relaxed">
-                                    Solusi visual profesional untuk menaikkan kelas konten Anda.
+                                <span className="font-mono text-xs text-purple-400 uppercase tracking-widest block mb-3">• PRICING & PACKAGES</span>
+                                <h1 className="text-5xl sm:text-7xl font-black uppercase italic tracking-tighter mb-6">DAFTAR HARGA.</h1>
+                                <p className="font-mono text-xs sm:text-sm text-white/60 uppercase tracking-widest leading-relaxed">
+                                    Investasikan pada kualitas visual profesional yang dikerjakan secara teliti, cepat, dan presisi.
                                 </p>
                             </div>
 
+                            {/* PRICING CARDS */}
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
                                 {pricingPlans.map((plan, idx) => (
-                                    <div key={idx} className={`p-8 rounded-2xl border flex flex-col justify-between relative bg-white/5 ${plan.popular ? 'border-purple-500 bg-purple-950/20 shadow-2xl shadow-purple-600/20' : 'border-white/10'}`}>
+                                    <div 
+                                        key={idx} 
+                                        className={`rounded-3xl p-8 border flex flex-col justify-between relative transition-all duration-300 ${
+                                            plan.popular 
+                                                ? 'bg-gradient-to-b from-purple-950/40 via-black to-black border-purple-500 shadow-2xl shadow-purple-600/20 md:-translate-y-2' 
+                                                : 'bg-white/5 border-white/10 hover:border-white/20'
+                                        }`}
+                                    >
                                         {plan.popular && (
-                                            <span className="absolute -top-3 right-6 bg-purple-600 text-white font-mono text-[10px] px-3 py-1 rounded-full font-bold uppercase tracking-widest">
-                                                Paling Populer
+                                            <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-purple-600 text-white font-mono text-[10px] font-bold uppercase tracking-widest px-4 py-1 rounded-full shadow-lg">
+                                                MOST POPULAR
                                             </span>
                                         )}
+
                                         <div>
-                                            <h3 className="text-xl font-bold italic uppercase tracking-wider mb-2">{plan.title}</h3>
-                                            <div className="text-3xl font-black mb-6 text-purple-400">{plan.price} <span className="text-xs font-normal text-white/40 font-mono">/ Menit</span></div>
-                                            <ul className="space-y-3 mb-8 font-mono text-xs text-white/70">
+                                            <h3 className="font-mono text-sm uppercase tracking-widest text-white/60 mb-2">{plan.title}</h3>
+                                            <div className="text-4xl font-black tracking-tight italic mb-8">{plan.price}</div>
+
+                                            <div className="space-y-3 border-t border-white/10 pt-6 mb-8">
                                                 {plan.features.map((feat, fIdx) => (
-                                                    <li key={fIdx} className="flex items-center gap-2">
-                                                        <span className="text-purple-400">✓</span> {feat}
-                                                    </li>
+                                                    <div key={fIdx} className="flex items-center gap-3 font-mono text-xs text-white/80">
+                                                        <span className="text-purple-400 font-bold">•</span>
+                                                        <span>{feat}</span>
+                                                    </div>
                                                 ))}
-                                            </ul>
+                                            </div>
                                         </div>
 
-                                        <button onClick={() => handleOrder(plan.title)} className={`w-full py-4 rounded-xl font-mono text-xs font-bold uppercase tracking-widest transition-all ${plan.popular ? 'bg-purple-600 hover:bg-purple-500 text-white shadow-lg shadow-purple-600/30' : 'bg-white/10 hover:bg-white/20 text-white'}`}>
-                                            Pesan Sekarang
+                                        <button 
+                                            onClick={() => handleOrder(plan.title)}
+                                            className={`w-full py-4 rounded-xl font-mono text-xs font-bold uppercase tracking-widest transition-all active:scale-95 ${
+                                                plan.popular 
+                                                    ? 'bg-purple-600 hover:bg-purple-500 text-white shadow-lg shadow-purple-600/30' 
+                                                    : 'bg-white/10 hover:bg-white/20 text-white'
+                                            }`}
+                                        >
+                                            Pesan Paket
                                         </button>
                                     </div>
                                 ))}
                             </div>
 
-                            {/* FAQ ACCORDION */}
-                            <div className="max-w-3xl mx-auto border-t border-white/10 pt-16">
-                                <h2 className="text-3xl font-black italic uppercase tracking-tight text-center mb-10">FREQUENTLY ASKED QUESTIONS.</h2>
+                            {/* FAQ SECTION */}
+                            <section className="max-w-3xl mx-auto border-t border-white/10 pt-16">
+                                <div className="text-center mb-10">
+                                    <span className="font-mono text-xs text-purple-400 uppercase tracking-widest block mb-2">• FREQUENTLY ASKED QUESTIONS</span>
+                                    <h2 className="text-3xl font-black italic uppercase tracking-tight">FAQ.</h2>
+                                </div>
+
                                 <div className="space-y-4">
-                                    {faqs.map((faq, index) => (
-                                        <div key={index} className="border border-white/10 rounded-xl overflow-hidden bg-white/5">
-                                            <button onClick={() => setActiveFaq(activeFaq === index ? null : index)} className="w-full p-5 text-left font-bold flex justify-between items-center hover:text-purple-400 transition-colors">
+                                    {faqs.map((faq, idx) => (
+                                        <div key={idx} className="border border-white/10 rounded-2xl bg-white/5 overflow-hidden">
+                                            <button 
+                                                onClick={() => setActiveFaq(activeFaq === idx ? null : idx)}
+                                                className="w-full p-5 text-left font-bold text-sm sm:text-base flex justify-between items-center gap-4 hover:text-purple-300 transition-colors"
+                                            >
                                                 <span>{faq.q}</span>
-                                                <ChevronDownIcon className={activeFaq === index ? 'rotate-180 transition-transform' : 'transition-transform'} />
+                                                <ChevronDownIcon className={`transition-transform duration-300 ${activeFaq === idx ? 'rotate-180 text-purple-400' : 'text-white/40'}`} />
                                             </button>
-                                            {activeFaq === index && (
-                                                <div className="p-5 border-t border-white/5 text-sm text-white/60 leading-relaxed font-mono">
+                                            {activeFaq === idx && (
+                                                <div className="px-5 pb-5 text-xs sm:text-sm font-mono text-white/60 border-t border-white/5 pt-3 leading-relaxed">
                                                     {faq.a}
                                                 </div>
                                             )}
                                         </div>
                                     ))}
                                 </div>
-                            </div>
+                            </section>
                         </main>
                     )}
 
                     {/* --- FOOTER --- */}
-                    <footer className="border-t border-white/10 py-12 px-6 text-center text-white/40 font-mono text-xs uppercase tracking-widest">
-                        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-                            <span>© 2026 Muhammad Fadlan Iskandar — Faldangg.aep</span>
-                            <div className="flex gap-6">
-                                <a href="https://www.instagram.com/faldangg.aep/" target="_blank" rel="noopener noreferrer" className="hover:text-purple-400"><InstagramIcon /></a>
-                                <a href="https://www.tiktok.com/@fadlaniskandarpro" target="_blank" rel="noopener noreferrer" className="hover:text-purple-400"><TikTokIcon className="w-6 h-6" /></a>
+                    <footer className="border-t border-white/10 py-12 px-6 text-center bg-black/80">
+                        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-6">
+                            <div>
+                                <span className="font-black text-lg block tracking-tight">FALDANGG<span className="text-purple-500">.AEP</span></span>
+                                <span className="font-mono text-[10px] text-white/40 uppercase tracking-widest block mt-1">© 2026 Muhammad Fadlan Iskandar. All rights reserved.</span>
+                            </div>
+
+                            <div className="flex items-center gap-6">
+                                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-purple-400 transition-colors">
+                                    <InstagramIcon />
+                                </a>
+                                <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-purple-400 transition-colors">
+                                    <TikTokIcon className="w-6 h-6" />
+                                </a>
                             </div>
                         </div>
                     </footer>
 
-                    {/* --- VIDEO PLAYBACK MODAL --- */}
+                    {/* --- HYBRID VIDEO MODAL --- */}
                     {selectedVideo && (
-                        <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex items-center justify-center p-4 sm:p-8 animate-fade-in">
-                            <div className={`relative w-full bg-[#0a0a0a] border border-white/10 rounded-2xl overflow-hidden shadow-2xl flex flex-col ${selectedVideo.isVertical ? 'max-w-md' : 'max-w-5xl'}`}>
-                                <div className="p-4 border-b border-white/10 flex justify-between items-center bg-black/50">
-                                    <span className="font-mono text-xs uppercase text-purple-400 font-bold tracking-wider">{selectedVideo.category} • {selectedVideo.subCategory}</span>
-                                    <button onClick={() => setSelectedVideo(null)} className="p-2 hover:bg-white/10 rounded-full transition-colors text-white">
+                        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/90 backdrop-blur-md animate-fade-in">
+                            <div className="bg-[#0f0f0f] border border-white/10 rounded-3xl overflow-hidden max-w-4xl w-full max-h-[90vh] flex flex-col relative shadow-2xl">
+                                
+                                <div className="flex justify-between items-center p-5 border-b border-white/10 bg-black/40">
+                                    <div>
+                                        <span className="font-mono text-[10px] text-purple-400 uppercase tracking-widest block">{selectedVideo.category} • {selectedVideo.subCategory}</span>
+                                        <h3 className="font-extrabold text-lg sm:text-xl tracking-tight">{selectedVideo.title}</h3>
+                                    </div>
+                                    <button 
+                                        onClick={() => setSelectedVideo(null)}
+                                        className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-all active:scale-90"
+                                    >
                                         <XIcon />
                                     </button>
                                 </div>
 
-                                <div className={`w-full bg-black flex items-center justify-center ${selectedVideo.isVertical ? 'aspect-[9/16] max-h-[75vh]' : 'aspect-video'}`}>
+                                <div className="flex-1 bg-black flex items-center justify-center overflow-hidden">
                                     {isDirectVideo(selectedVideo.videoUrl) ? (
-                                        <video src={selectedVideo.videoUrl} controls autoPlay className="w-full h-full object-contain"></video>
+                                        <video 
+                                            src={selectedVideo.videoUrl} 
+                                            controls 
+                                            autoPlay 
+                                            className="w-full max-h-[70vh] object-contain"
+                                        />
                                     ) : (
-                                        <iframe src={selectedVideo.videoUrl} className="w-full h-full border-0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
+                                        <iframe 
+                                            src={selectedVideo.videoUrl} 
+                                            className="w-full h-[60vh] sm:h-[70vh]" 
+                                            allow="autoplay"
+                                            title={selectedVideo.title}
+                                        ></iframe>
                                     )}
                                 </div>
 
-                                <div className="p-6 bg-[#0a0a0a]">
-                                    <h3 className="text-xl font-bold uppercase tracking-tight mb-2">{selectedVideo.title}</h3>
-                                    <p className="text-xs text-white/60 font-mono">{selectedVideo.desc}</p>
+                                <div className="p-5 border-t border-white/10 bg-black/40 font-mono text-xs text-white/60">
+                                    {selectedVideo.desc}
                                 </div>
                             </div>
                         </div>
                     )}
 
-                    {/* --- SOCIAL PROOF NOTIFICATION POPUP (PRICES PAGE ONLY) --- */}
-                    {currentPage === 'prices' && activeNotification && (
-                        <div className="fixed bottom-6 left-6 z-50 bg-[#111] border border-purple-500/40 p-4 rounded-xl shadow-2xl flex items-center gap-4 animate-fade-in max-w-xs">
-                            <div className="w-10 h-10 rounded-full bg-purple-600/20 text-purple-400 flex items-center justify-center font-bold">
-                                <ShoppingBagIcon />
-                            </div>
-                            <div className="font-mono text-xs">
-                                <span className="font-bold text-white block">{activeNotification.name} dari {activeNotification.city}</span>
-                                <span className="text-white/60 text-[10px]">Baru saja memesan Paket <span className="text-purple-400 font-bold">{activeNotification.package}</span></span>
+                    {/* --- SOCIAL PROOF POPUP (PRICES PAGE ONLY) --- */}
+                    {activeNotification && (
+                        <div className="fixed bottom-6 right-6 z-50 bg-black/90 border border-purple-500/40 rounded-2xl p-4 shadow-2xl backdrop-blur-md flex items-center gap-3 animate-fade-in max-w-xs">
+                            <div className="w-3 h-3 rounded-full bg-purple-500 animate-ping shrink-0"></div>
+                            <div>
+                                <p className="font-mono text-xs font-bold text-white">
+                                    {activeNotification.name} dari {activeNotification.city}
+                                </p>
+                                <p className="font-mono text-[10px] text-purple-300">
+                                    Baru saja memesan paket <span className="font-bold underline">{activeNotification.package}</span>!
+                                </p>
                             </div>
                         </div>
                     )}
