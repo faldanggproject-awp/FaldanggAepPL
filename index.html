@@ -54,6 +54,7 @@
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 6px;
+            height: 6px;
         }
         ::-webkit-scrollbar-track {
             background: #050505;
@@ -86,6 +87,14 @@
         .animate-fade-in {
             animation: fadeIn 0.3s ease-out forwards;
         }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
     </style>
 </head>
 <body class="bg-[#050505] text-white">
@@ -93,9 +102,9 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        const { useState, useEffect } = React;
+        const { useState, useEffect, useRef } = React;
 
-        // --- INLINE SVG ICONS FOR HIGH RELIABILITY ---
+        // --- INLINE SVG ICONS ---
         const PlayIcon = () => (
             <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
         );
@@ -144,15 +153,18 @@
             const [activeFaq, setActiveFaq] = useState(null);
             const [activeNotification, setActiveNotification] = useState(null);
             const [activeScope, setActiveScope] = useState(null);
+            const [selectedPriceCategory, setSelectedPriceCategory] = useState(0);
+
+            const categoryNavRef = useRef(null);
 
             /* --- CONFIG DATA --- */
             const whatsappNumber = "6287713907028";
             
-            // DIRECT CDN LOGO URL WITH FALLBACK
+            // LOGO URL
             const logoHeader = "https://dl.dropboxusercontent.com/scl/fi/qodfqn41nfks88o19uapa/Logo-Faldangg-Transparant.png?rlkey=gihgfqpmdvnji0tw920w0k7th&st=ge7ww976&raw=1";
             const logoHeaderFallback = "https://www.dropbox.com/scl/fi/qodfqn41nfks88o19uapa/Logo-Faldangg-Transparant.png?rlkey=gihgfqpmdvnji0tw920w0k7th&st=ge7ww976&raw=1";
 
-            // SOFTWARE LOGOS (DIRECT CDN)
+            // SOFTWARE LOGOS
             const softwareLogos = [
                 { name: "Premiere Pro", url: "https://dl.dropboxusercontent.com/scl/fi/ci3w8ob3742dvd8cw6adh/premiere-pro.png?rlkey=vckg9sp66xemx4wndk5fr447a&st=dmon5xiy&raw=1" },
                 { name: "After Effects", url: "https://dl.dropboxusercontent.com/scl/fi/z8mcozu8ld8l28q9h3l1d/after-effects.png?rlkey=72exbicwbhhato05akkbiq2g3&st=yh1083zc&raw=1" },
@@ -179,7 +191,7 @@
                 { id: 'motiongraphics', title: "Motion Graphics", desc: "Grafis bergerak/animasi teks dan elemen" }
             ];
 
-            // 10 CLIENT LOGOS WITH OFFICIAL DIRECT CDN LINKS
+            // 10 CLIENT LOGOS
             const clientLogos = [
                 { name: "SMK Taruna Bhakti", url: "https://dl.dropboxusercontent.com/scl/fi/72l9f80w30dxbtjmefvlr/Logo-TB-Teks-Putih.png?rlkey=lhsc000wyhtm62nticnlw3hce&st=0702mjcn&raw=1" },
                 { name: "Sozmed Agency", url: "https://dl.dropboxusercontent.com/scl/fi/fz89c76udtng83a6qldri/sozmed.jpg?rlkey=439zjfa4fobwcj3vixqs4fthf&st=cgywrslp&raw=1" },
@@ -220,24 +232,109 @@
                 { id: 18, title: "Animasi Logo Hanaskar", category: "Animasi", subCategory: "Motion Graphics", isVertical: false, videoUrl: "https://www.dropbox.com/scl/fi/2yqyfsvgcal77shvfdsl5/Hanaskar-Animate-WS.mp4?rlkey=tpsqaw0lharta2xt7366qrkwm&st=llf4d6vi&raw=1", desc: "Sting bumper dan logo reveal animation untuk Hanaskar." }
             ];
 
-            const pricingPlans = [
+            /* --- NEW CATEGORIZED PRICING DATA --- */
+            const priceCategories = [
                 {
-                    title: "BASIC",
-                    price: "Rp 119rb",
-                    features: ["Teks Tipografi", "Cutting & Pacing", "Efek Suara & Musik", "Motion Dasar", "Format Vertikal (9:16)", "Revisi 2x"],
-                    popular: false
+                    id: 'short-video',
+                    title: "Short Video",
+                    scopes: ["Reels", "Yt Shorts", "Tiktok", "Advertising"],
+                    desc: "Kategori khusus video vertikal durasi pendek (di bawah 60 detik) untuk meningkatkan interaksi media sosial.",
+                    plans: [
+                        {
+                            title: "BASIC",
+                            duration: "/ 30-90s",
+                            price: "Rp 119rb",
+                            features: ["Teks Tipografi", "Cutting & Pacing", "Efek Suara & Musik", "Motion Dasar", "Format Vertikal (9:16)", "Revisi 2x"],
+                            popular: false
+                        },
+                        {
+                            title: "PREMIUM",
+                            duration: "/ 30-90s",
+                            price: "Rp 169rb",
+                            features: ["Teks Tipografi", "Cutting Profesional", "Efek Suara & Musik", "Advanced Motion", "Color Grading", "Format Vertikal (9:16)", "Revisi 3x"],
+                            popular: true
+                        },
+                        {
+                            title: "BUSINESS",
+                            duration: "/ 30-90s",
+                            price: "Rp 249rb",
+                            features: ["Teks Tipografi", "Visual Effects (VFX)", "SFX Lanjutan", "Advanced Motion", "Cinematic Grading", "Request Resolusi", "Revisi 3x"],
+                            popular: false
+                        }
+                    ]
                 },
                 {
-                    title: "PREMIUM",
-                    price: "Rp 169rb",
-                    features: ["Teks Tipografi", "Cutting Profesional", "Efek Suara & Musik", "Advanced Motion", "Color Grading", "Format Vertikal (9:16)", "Revisi 3x"],
-                    popular: true
+                    id: 'motion-branding',
+                    title: "Motion Branding",
+                    scopes: ["Bumper", "Motion Graphics", "Intros"],
+                    desc: "Kategori ini fokus pada pembuatan aset animasi grafis digital, animasi teks, logo pembuka, dan transisi profesional.",
+                    plans: [
+                        {
+                            title: "BASIC",
+                            duration: "/ 3-10s",
+                            price: "Rp 129rb",
+                            features: ["Animasi Logo Simple", "Sound Effect", "Custom Request Motion", "Full Custom Asset Vector", "Resolusi Full HD (1080p)", "Revisi 2x"],
+                            popular: false
+                        },
+                        {
+                            title: "BUSINESS",
+                            duration: "/ 3-15s",
+                            price: "Rp 269rb",
+                            features: ["Animasi Logo Advanced", "Sound Effect", "Background Music", "Custom Request Motion", "Full Custom Asset Vector", "Dubbing/Voice Over Sync", "Resolusi 4K", "Revisi 3x"],
+                            popular: true
+                        },
+                        {
+                            title: "CUSTOM MOTION GRAPHICS",
+                            duration: "/ 3-15s",
+                            price: "Rp 500rb",
+                            features: ["Dubbing/Voice Over Sync", "Create New Custom Logo", "Animasi Logo Advanced", "Sound Effect", "Background Music", "Custom Request Motion", "Full Custom Asset Vector", "Resolusi 4K", "Revisi 3x"],
+                            popular: false
+                        }
+                    ]
                 },
                 {
-                    title: "BUSINESS",
-                    price: "Rp 249rb",
-                    features: ["Teks Tipografi", "Visual Effects (VFX)", "SFX Lanjutan", "Advanced Motion", "Cinematic Grading", "Request Resolusi", "Revisi 3x"],
-                    popular: false
+                    id: 'long-form',
+                    title: "Long-Form & Event Video",
+                    scopes: ["YouTube", "Documentation", "Commercial Ads"],
+                    desc: "Kategori untuk format video horizontal (16:9) dengan durasi menengah hingga panjang (3 hingga 15+ menit).",
+                    plans: [
+                        {
+                            title: "YOUTUBE STANDARD",
+                            duration: "Vlog / Podcast / Edukasi / 3-15m",
+                            price: "Rp 300rb - 700rb",
+                            features: ["Multi-cam Cutting", "Noise Reduction Audio", "Animasi Text", "Simple Motion Graphics", "Background Music", "Revisi 2x"],
+                            popular: false
+                        },
+                        {
+                            title: "EVENT DOCUMENTATION",
+                            duration: "Aftermovie / Liputan / 3-10m",
+                            price: "Rp 479rb - 1.5jt",
+                            features: ["Selection Footage Terbaik", "Music Beat-Sync", "Color Grading Sinematik", "Visual Effect", "Multi-cam Cutting", "Noise Reduction Audio", "Animasi Text", "Simple Motion Graphics", "Background Music", "Revisi 3x"],
+                            popular: true
+                        },
+                        {
+                            title: "CORPORATE ADS",
+                            duration: "Iklan Utama / 1-5m",
+                            price: "Rp 700rb - 1.3jt",
+                            features: ["Selection Footage Terbaik", "Audio Mixing", "Music Beat-Sync", "Color Grading Sinematik", "Visual Effect", "Multi-cam Cutting", "Noise Reduction Audio", "Animasi Text", "Simple Motion Graphics", "Background Music", "Revisi 3x"],
+                            popular: false
+                        }
+                    ]
+                },
+                {
+                    id: 'cinematic-narrative',
+                    title: "Cinematic Narrative",
+                    scopes: ["Short Films", "Web Series"],
+                    desc: "Kategori editing tingkat lanjut berskala proyek besar yang membutuhkan teknik penceritaan visual (storytelling) dan kesinambungan alur film.",
+                    plans: [
+                        {
+                            title: "PAKET NARRATIVE",
+                            duration: "Per Episode / Film Pendek / 5-20m",
+                            price: "Rp 1.3jt - 4jt",
+                            features: ["Rough Cut ke Final Cut Narrative", "Sound Design & Scoring Placement", "Color Correction & Grading Khusus (LUT Sesuai Genre)", "Pembuatan Subtitle (jika diminta)", "Visual Effect", "Revisi 3x"],
+                            popular: true
+                        }
+                    ]
                 }
             ];
 
@@ -254,7 +351,20 @@
                 { name: "Budi", city: "Depok", package: "PREMIUM" }
             ];
 
-            /* --- SOCIAL PROOF POPUP LOGIC (ONLY ON PRICES PAGE) --- */
+            const handleOrder = (categoryTitle, planTitle) => {
+                const message = `Halo Fadlan, saya mau pesan paket ${planTitle} untuk kategori ${categoryTitle}. Boleh diskusi lebih lanjut?`;
+                window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');
+            };
+
+            const scrollNav = (direction) => {
+                if (direction === 'left') {
+                    setSelectedPriceCategory((prev) => (prev > 0 ? prev - 1 : priceCategories.length - 1));
+                } else {
+                    setSelectedPriceCategory((prev) => (prev < priceCategories.length - 1 ? prev + 1 : 0));
+                }
+            };
+
+            /* --- SOCIAL PROOF POPUP LOGIC --- */
             useEffect(() => {
                 if (currentPage !== 'prices') {
                     setActiveNotification(null);
@@ -407,7 +517,7 @@
                                 </div>
                             </section>
 
-                            {/* ABOUT ME SECTION (CLEAN TEXT-ONLY) */}
+                            {/* ABOUT ME SECTION */}
                             <section id="about" className="py-28 px-6 max-w-5xl mx-auto text-center">
                                 <div className="flex justify-center items-center gap-4 mb-6">
                                     <div className="w-12 h-[2px] bg-purple-500"></div>
@@ -431,7 +541,7 @@
                                     </h2>
                                 )}
 
-                                {/* SOFTWARE LOGOS (PURE LOGOS - NO TEXT) */}
+                                {/* SOFTWARE LOGOS (PURE LOGOS) */}
                                 <div className="mb-14">
                                     <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/40 block mb-6">SOFTWARE & TOOLS</span>
                                     <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
@@ -495,7 +605,7 @@
                             <section id="work" className="py-24 px-6 border-t border-white/10 bg-black/40">
                                 <div className="max-w-7xl mx-auto">
                                     
-                                    {/* FILTER HEADER (MAIN CATEGORY & NESTED SUB-CATEGORY UNDERNEATH) */}
+                                    {/* FILTER HEADER */}
                                     <div className="flex flex-col md:flex-row md:items-start justify-between mb-12 gap-6">
                                         <div>
                                             <span className="font-mono text-xs text-purple-400 uppercase tracking-widest block mb-2">• KARYA ARSIP</span>
@@ -520,7 +630,7 @@
                                                 ))}
                                             </div>
 
-                                            {/* FILTER LEVEL 2: SUB-CATEGORIES UNDERNEATH RIGHT */}
+                                            {/* FILTER LEVEL 2: SUB-CATEGORIES */}
                                             {activeCategory === 'Video Editing' && (
                                                 <div className="flex flex-wrap gap-2 animate-fade-in">
                                                     {['Semua', 'Talking Head', 'VFX'].map((sub) => (
@@ -568,15 +678,12 @@
                                                 className="group relative bg-white/5 border border-white/10 rounded-2xl overflow-hidden cursor-pointer hover:border-purple-500/50 transition-all duration-300 hover:-translate-y-1 shadow-lg"
                                             >
                                                 <div className="aspect-video w-full bg-neutral-900 relative overflow-hidden flex items-center justify-center">
-                                                    {/* VIDEO THUMBNAIL BACKDROP */}
                                                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10"></div>
                                                     
-                                                    {/* CATEGORY BADGE */}
                                                     <span className="absolute top-4 left-4 z-20 font-mono text-[10px] uppercase tracking-wider px-3 py-1 rounded-full bg-black/60 border border-white/10 backdrop-blur-md text-purple-300 font-semibold">
                                                         {p.category} • {p.subCategory}
                                                     </span>
 
-                                                    {/* PLAY OVERLAY BUTTON */}
                                                     <div className="z-20 w-12 h-12 rounded-full bg-purple-600/90 text-white flex items-center justify-center group-hover:scale-110 transition-transform shadow-xl shadow-purple-600/40">
                                                         <PlayIcon />
                                                     </div>
@@ -593,9 +700,8 @@
                             </section>
                         </main>
                     ) : (
-                        /* --- PRICING PAGE VIEW --- */
                         <main className="pt-32 pb-24 px-6 max-w-7xl mx-auto">
-                            <div className="text-center max-w-3xl mx-auto mb-16">
+                            <div className="text-center max-w-3xl mx-auto mb-12">
                                 <span className="font-mono text-xs text-purple-400 uppercase tracking-widest block mb-3">• PRICING & PACKAGES</span>
                                 <h1 className="text-5xl sm:text-7xl font-black uppercase italic tracking-tighter mb-6">DAFTAR HARGA.</h1>
                                 <p className="font-mono text-xs sm:text-sm text-white/60 uppercase tracking-widest leading-relaxed">
@@ -603,9 +709,68 @@
                                 </p>
                             </div>
 
-                            {/* PRICING CARDS */}
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
-                                {pricingPlans.map((plan, idx) => (
+                            {/* CATEGORY SLIDER WITH LEFT & RIGHT ARROWS */}
+                            <div className="relative mb-12 max-w-5xl mx-auto flex items-center gap-2">
+                                <button 
+                                    onClick={() => scrollNav('left')}
+                                    className="p-3 bg-white/5 border border-white/10 rounded-2xl text-white/80 hover:text-purple-400 hover:border-purple-500/50 hover:bg-white/10 transition-all shrink-0 active:scale-90"
+                                    title="Kategori Sebelumnya"
+                                >
+                                    <ArrowLeftIcon />
+                                </button>
+
+                                <div className="flex-1 overflow-x-auto no-scrollbar flex items-center justify-start md:justify-center gap-3 py-2 px-1">
+                                    {priceCategories.map((cat, idx) => {
+                                        const isSelected = selectedPriceCategory === idx;
+                                        return (
+                                            <button
+                                                key={cat.id}
+                                                onClick={() => setSelectedPriceCategory(idx)}
+                                                className={`px-5 py-3 rounded-2xl font-mono text-xs uppercase tracking-wider font-bold transition-all whitespace-nowrap shrink-0 border ${
+                                                    isSelected 
+                                                        ? 'bg-purple-600 text-white border-purple-400 shadow-xl shadow-purple-600/30' 
+                                                        : 'bg-white/5 border-white/10 text-white/60 hover:text-white hover:bg-white/10'
+                                                }`}
+                                            >
+                                                {cat.title}
+                                            </button>
+                                        );
+                                    })}
+                                </div>
+
+                                <button 
+                                    onClick={() => scrollNav('right')}
+                                    className="p-3 bg-white/5 border border-white/10 rounded-2xl text-white/80 hover:text-purple-400 hover:border-purple-500/50 hover:bg-white/10 transition-all shrink-0 active:scale-90"
+                                    title="Kategori Selanjutnya"
+                                >
+                                    <ArrowRightIcon />
+                                </button>
+                            </div>
+
+                            {/* ACTIVE CATEGORY HEADER & SCOPES */}
+                            <div className="bg-white/5 border border-white/10 rounded-3xl p-6 sm:p-8 mb-12 text-center backdrop-blur-md">
+                                <span className="font-mono text-[10px] text-purple-400 uppercase tracking-widest block mb-2">
+                                    Kategori {selectedPriceCategory + 1} Dari {priceCategories.length}
+                                </span>
+                                <h2 className="text-3xl sm:text-4xl font-black italic uppercase tracking-tight mb-3">
+                                    {priceCategories[selectedPriceCategory].title}
+                                </h2>
+                                <p className="font-mono text-xs sm:text-sm text-white/70 max-w-2xl mx-auto mb-6 leading-relaxed">
+                                    {priceCategories[selectedPriceCategory].desc}
+                                </p>
+
+                                <div className="flex flex-wrap justify-center gap-2">
+                                    {priceCategories[selectedPriceCategory].scopes.map((s, sIdx) => (
+                                        <span key={sIdx} className="font-mono text-[10px] uppercase tracking-wider px-3 py-1 rounded-full bg-purple-500/20 border border-purple-500/40 text-purple-300">
+                                            #{s}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* PRICING CARDS DISPLAY */}
+                            <div className={`grid grid-cols-1 ${priceCategories[selectedPriceCategory].plans.length === 1 ? 'max-w-md mx-auto' : priceCategories[selectedPriceCategory].plans.length === 2 ? 'md:grid-cols-2 max-w-4xl mx-auto' : 'md:grid-cols-3'} gap-8 mb-24`}>
+                                {priceCategories[selectedPriceCategory].plans.map((plan, idx) => (
                                     <div 
                                         key={idx} 
                                         className={`rounded-3xl p-8 border flex flex-col justify-between relative transition-all duration-300 ${
@@ -616,17 +781,18 @@
                                     >
                                         {plan.popular && (
                                             <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-purple-600 text-white font-mono text-[10px] font-bold uppercase tracking-widest px-4 py-1 rounded-full shadow-lg">
-                                                MOST POPULAR
+                                                RECOMMENDED
                                             </span>
                                         )}
 
                                         <div>
-                                            <h3 className="font-mono text-sm uppercase tracking-widest text-white/60 mb-2">{plan.title}</h3>
-                                            <div className="text-4xl font-black tracking-tight italic mb-8">{plan.price}</div>
+                                            <h3 className="font-mono text-xs uppercase tracking-widest text-purple-400 font-bold mb-1">{plan.title}</h3>
+                                            <span className="font-mono text-[10px] text-white/40 block mb-4">{plan.duration}</span>
+                                            <div className="text-3xl sm:text-4xl font-black tracking-tight italic mb-8">{plan.price}</div>
 
                                             <div className="space-y-3 border-t border-white/10 pt-6 mb-8">
                                                 {plan.features.map((feat, fIdx) => (
-                                                    <div key={fIdx} className="flex items-center gap-3 font-mono text-xs text-white/80">
+                                                    <div key={fIdx} className="flex items-start gap-3 font-mono text-xs text-white/80">
                                                         <span className="text-purple-400 font-bold">•</span>
                                                         <span>{feat}</span>
                                                     </div>
@@ -635,7 +801,7 @@
                                         </div>
 
                                         <button 
-                                            onClick={() => handleOrder(plan.title)}
+                                            onClick={() => handleOrder(priceCategories[selectedPriceCategory].title, plan.title)}
                                             className={`w-full py-4 rounded-xl font-mono text-xs font-bold uppercase tracking-widest transition-all active:scale-95 ${
                                                 plan.popular 
                                                     ? 'bg-purple-600 hover:bg-purple-500 text-white shadow-lg shadow-purple-600/30' 
@@ -681,7 +847,6 @@
                     <footer className="border-t border-white/10 py-12 px-6 text-center bg-black/80">
                         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-6">
                             <div>
-                                <span className="font-black text-lg block tracking-tight">FALDANGG<span className="text-purple-500">.AEP</span></span>
                                 <span className="font-mono text-[10px] text-white/40 uppercase tracking-widest block mt-1">© 2026 Muhammad Fadlan Iskandar. All rights reserved.</span>
                             </div>
 
